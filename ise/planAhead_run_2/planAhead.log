@@ -1,0 +1,27 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7
+# Build 321239 by xbuild on Fri Sep 27 19:31:35 MDT 2013
+# Start of session at: Thu Nov 02 04:06:28 2023
+# Process ID: 928
+# Log file: Z:/P/ise/TrafficLight/ise/planAhead_run_2/planAhead.log
+# Journal file: Z:/P/ise/TrafficLight/ise/planAhead_run_2/planAhead.jou
+#-----------------------------------------------------------
+INFO: [Common 17-78] Attempting to get a license: PlanAhead
+INFO: [Common 17-290] Got license for PlanAhead
+INFO: [Common 17-86] Your PlanAhead license expires in -2497 day(s)
+INFO: [Device 21-36] Loading parts and site information from C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/arch.xml
+Parsing RTL primitives file [C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+Finished parsing RTL primitives file [C:/Xilinx/14.7/ISE_DS/PlanAhead/data/parts/xilinx/rtl/prims/rtl_prims.xml]
+start_gui
+source Z:/P/ise/TrafficLight/ise/pa.fromNetlist.tcl
+# create_project -name TrafficLight -dir "Z:/P/ise/TrafficLight/ise/planAhead_run_2" -part xc3s50antqg144-4
+ERROR: [Common 17-53] User Exception: Project already exists on disk, please use '-force' option to overwrite: 
+     Z:/P/ise/TrafficLight/ise/planAhead_run_2/TrafficLight.ppr
+     Z:/P/ise/TrafficLight/ise/planAhead_run_2/TrafficLight.data
+
+    while executing
+"create_project -name TrafficLight -dir "Z:/P/ise/TrafficLight/ise/planAhead_run_2" -part xc3s50antqg144-4"
+    (file "Z:/P/ise/TrafficLight/ise/pa.fromNetlist.tcl" line 4)
+exit
+INFO: [Common 17-206] Exiting PlanAhead at Thu Nov 02 04:22:52 2023...
+INFO: [Common 17-83] Releasing license: PlanAhead

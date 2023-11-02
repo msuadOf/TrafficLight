@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=Z:\P\ise\TrafficLight\ise\top.ncd
+OUTFILE=Z:\P\ise\TrafficLight\ise\top.bit
+FAMILY=Spartan3A and Spartan3AN
+PART=xc3s50an-4tqg144
+WORKINGDIR=Z:\P\ise\TrafficLight\ise
+LICENSE=WebPack
+USER_INFO=135256_15690819_173552794_661

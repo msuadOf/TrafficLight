@@ -1,0 +1,4 @@
+verilog work "../src/numlight.v"
+verilog work "../src/clk_div.v"
+verilog work "../src/bin2bcd.v"
+verilog work "../src/top.v"
