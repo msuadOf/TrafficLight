@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Thu Nov 02 17:23:07 2023
+Thu Nov 02 22:46:25 2023
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -70,11 +70,11 @@ Pinout by Pin Number:
 |P48       |            |DIFFSTB   |IO_L05N_2/D7          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |P49       |            |DIFFSTB   |IO_L06N_2/D6          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |P50       |            |DIFFMTB   |IO_L07P_2/D5          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P51       |debug<0>    |IOB       |IO_L07N_2/D4          |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
+|P51       |            |DIFFSTB   |IO_L07N_2/D4          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |P52       |            |          |VCCINT                |         |           |              |          |         |           |         |1.2      |          |           |                |
 |P53       |            |IBUF      |IP_2/VREF_2           |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P54       |            |DIFFMTB   |IO_L08P_2/GCLK14      |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P55       |debug<1>    |IOB       |IO_L08N_2/GCLK15      |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
+|P54       |debug<1>    |IOB       |IO_L08P_2/GCLK14      |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
+|P55       |debug<0>    |IOB       |IO_L08N_2/GCLK15      |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
 |P56       |            |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
 |P57       |clk         |IBUF      |IO_L09P_2/GCLK0       |INPUT    |LVCMOS33   |2             |          |         |           |IBUF     |         |LOCATED   |NO         |NONE            |
 |P58       |            |DIFFMTB   |IO_L10P_2/GCLK2       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |

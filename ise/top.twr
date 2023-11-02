@@ -44,10 +44,10 @@ Setup/Hold to clock clk
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-Key_plus    |    0.386(R)|    0.519(R)|debug_1_OBUF      |   0.000|
-Key_state<0>|    4.777(R)|   -1.004(R)|debug_1_OBUF      |   0.000|
-Key_state<1>|    4.472(R)|   -0.760(R)|debug_1_OBUF      |   0.000|
-Key_sub     |    1.058(R)|   -0.055(R)|debug_1_OBUF      |   0.000|
+Key_plus    |    0.476(R)|    0.413(R)|debug_1_OBUF      |   0.000|
+Key_state<0>|    4.967(R)|   -0.818(R)|debug_1_OBUF      |   0.000|
+Key_state<1>|    4.560(R)|   -0.832(R)|debug_1_OBUF      |   0.000|
+Key_sub     |    0.904(R)|    0.099(R)|debug_1_OBUF      |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock clk to Pad
@@ -55,13 +55,13 @@ Clock clk to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-G1          |    8.888(R)|debug_1_OBUF      |   0.000|
-G2          |    8.790(R)|debug_1_OBUF      |   0.000|
-R1          |   10.611(R)|debug_1_OBUF      |   0.000|
-R2          |   11.581(R)|debug_1_OBUF      |   0.000|
-Y1          |   10.265(R)|debug_1_OBUF      |   0.000|
-Y2          |   10.370(R)|debug_1_OBUF      |   0.000|
-debug<0>    |    8.817(R)|debug_1_OBUF      |   0.000|
+G1          |    9.027(R)|debug_1_OBUF      |   0.000|
+G2          |    9.078(R)|debug_1_OBUF      |   0.000|
+R1          |   11.384(R)|debug_1_OBUF      |   0.000|
+R2          |   10.605(R)|debug_1_OBUF      |   0.000|
+Y1          |   10.056(R)|debug_1_OBUF      |   0.000|
+Y2          |    9.701(R)|debug_1_OBUF      |   0.000|
+debug<0>    |    8.848(R)|debug_1_OBUF      |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock clk
@@ -69,18 +69,18 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |   11.979|         |         |         |
+clk            |   11.489|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-clk            |debug<1>       |    6.007|
+clk            |debug<1>       |    5.947|
 ---------------+---------------+---------+
 
 
-Analysis completed Thu Nov 02 17:23:11 2023 
+Analysis completed Thu Nov 02 22:35:18 2023 
 --------------------------------------------------------------------------------
 
 Trace Settings:

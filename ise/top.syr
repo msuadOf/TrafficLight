@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.13 secs
+Total CPU time to Xst completion: 0.41 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.13 secs
+Total CPU time to Xst completion: 0.42 secs
  
 --> Reading design: top.prj
 
@@ -255,7 +255,6 @@ Unit <numlight> synthesized.
 Synthesizing Unit <top>.
     Related source file is "../src/top.v".
 WARNING:Xst:1780 - Signal <none> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
-WARNING:Xst:646 - Signal <isRun> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
 WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
     Found finite state machine <FSM_0> for signal <RYG_state>.
     -----------------------------------------------------------------------
@@ -264,7 +263,7 @@ WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected 
     | Inputs             | 0                                              |
     | Outputs            | 9                                              |
     | Clock              | clk                       (rising_edge)        |
-    | Clock enable       | RYG_state$not0000         (negative)           |
+    | Clock enable       | RYG_state$not0000         (positive)           |
     | Reset              | isNight                   (positive)           |
     | Reset type         | synchronous                                    |
     | Reset State        | 0000000                                        |
@@ -279,7 +278,7 @@ WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected 
     Found 1-bit register for signal <Key_sub_r>.
     Found 1-bit register for signal <Key_sub_rr>.
     Found 11-bit down counter for signal <RYG_cnt>.
-    Found 11-bit comparator greater for signal <RYG_cnt$cmp_gt0000> created at line 159.
+    Found 11-bit comparator greater for signal <RYG_cnt$cmp_gt0000> created at line 168.
     Found 11-bit updown counter for signal <setRGCnt_r>.
     Found 11-bit updown counter for signal <setYCnt_r>.
     Found 1-bit register for signal <SinglePeriod_start_pulse>.
@@ -440,15 +439,15 @@ Design Statistics
 # IOs                              : 24
 
 Cell Usage :
-# BELS                             : 764
+# BELS                             : 781
 #      GND                         : 1
 #      INV                         : 22
 #      LUT1                        : 6
-#      LUT2                        : 21
-#      LUT3                        : 194
-#      LUT4                        : 96
+#      LUT2                        : 18
+#      LUT3                        : 200
+#      LUT4                        : 106
 #      MUXCY                       : 242
-#      MUXF5                       : 18
+#      MUXF5                       : 22
 #      MUXF6                       : 2
 #      VCC                         : 1
 #      XORCY                       : 161
@@ -456,10 +455,10 @@ Cell Usage :
 #      FD                          : 7
 #      FD_1                        : 14
 #      FDC                         : 128
-#      FDE                         : 1
+#      FDE                         : 23
 #      FDR                         : 12
 #      FDR_1                       : 3
-#      FDRE                        : 37
+#      FDRE                        : 15
 #      FDS_1                       : 6
 #      FDSE                        : 1
 # Clock Buffers                    : 2
@@ -474,9 +473,9 @@ Device utilization summary:
 
 Selected Device : 3s50antqg144-4 
 
- Number of Slices:                      205  out of    704    29%  
+ Number of Slices:                      209  out of    704    29%  
  Number of Slice Flip Flops:            209  out of   1408    14%  
- Number of 4 input LUTs:                339  out of   1408    24%  
+ Number of 4 input LUTs:                352  out of   1408    25%  
  Number of IOs:                          24
  Number of bonded IOBs:                  24  out of    108    22%  
  Number of GCLKs:                         2  out of     24     8%  
@@ -522,7 +521,7 @@ Timing Summary:
 Speed Grade: -4
 
    Minimum period: 11.741ns (Maximum Frequency: 85.174MHz)
-   Minimum input arrival time before clock: 5.670ns
+   Minimum input arrival time before clock: 9.904ns
    Maximum output required time after clock: 7.524ns
    Maximum combinational path delay: 5.816ns
 
@@ -664,24 +663,48 @@ Delay:               4.049ns (Levels of Logic = 2)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 102 / 52
+  Total number of paths / destination ports: 68 / 35
 -------------------------------------------------------------------------
-Offset:              5.670ns (Levels of Logic = 3)
-  Source:            Key_state<1> (PAD)
-  Destination:       setRGCnt_r_0 (FF)
+Offset:              4.210ns (Levels of Logic = 2)
+  Source:            Key_state<0> (PAD)
+  Destination:       RYG_state_FSM_FFd4 (FF)
   Destination Clock: clk rising
 
-  Data Path: Key_state<1> to setRGCnt_r_0
+  Data Path: Key_state<0> to RYG_state_FSM_FFd4
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             4   0.849   0.730  Key_state_1_IBUF (Key_state_1_IBUF)
-     LUT2:I0->O           12   0.648   0.993  isSetRGCnt_cmp_eq00001 (isSetRGCnt)
-     LUT4:I2->O           11   0.648   0.933  setRGCnt_r_and00001 (setRGCnt_r_and0000)
-     FDRE:R                    0.869          setRGCnt_r_0
+     IBUF:I->O            18   0.849   1.211  Key_state_0_IBUF (Key_state_0_IBUF)
+     LUT2:I0->O            5   0.648   0.633  isNight_cmp_eq00001 (isNight)
+     FDRE:R                    0.869          RYG_state_FSM_FFd4
     ----------------------------------------
-    Total                      5.670ns (3.014ns logic, 2.656ns route)
-                                       (53.2% logic, 46.8% route)
+    Total                      4.210ns (2.366ns logic, 1.844ns route)
+                                       (56.2% logic, 43.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'c2/div_clk1'
+  Total number of paths / destination ports: 2602 / 20
+-------------------------------------------------------------------------
+Offset:              9.904ns (Levels of Logic = 7)
+  Source:            Key_state<0> (PAD)
+  Destination:       seg1/thireg_3 (FF)
+  Destination Clock: c2/div_clk1 falling
+
+  Data Path: Key_state<0> to seg1/thireg_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            18   0.849   1.211  Key_state_0_IBUF (Key_state_0_IBUF)
+     LUT3:I0->O            2   0.648   0.479  seg71_disp_bin_0_mux0000<3>_SW0 (N30)
+     LUT3:I2->O           15   0.648   1.097  seg71_disp_bin_0_mux0000<3> (seg71_disp_bin<0><3>)
+     LUT4:I1->O            2   0.643   0.590  b2b1_0/bcd<1>51 (b2b1_0/bcd<1>_bdd1)
+     LUT3:I0->O            1   0.648   0.000  b2b1_0/bcd<4>_G (N35)
+     MUXF5:I1->O           7   0.276   0.851  b2b1_0/bcd<4> (seg71_disp_bcd<0><4>)
+     LUT4:I0->O            2   0.648   0.447  seg1/Mrom_thireg_mux000061 (seg1/Mrom_thireg_mux00006)
+     FDS_1:S                   0.869          seg1/thireg_3
+    ----------------------------------------
+    Total                      9.904ns (5.229ns logic, 4.675ns route)
+                                       (52.8% logic, 47.2% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
@@ -743,14 +766,14 @@ Delay:               5.816ns (Levels of Logic = 2)
 =========================================================================
 
 
-Total REAL time to Xst completion: 3.00 secs
-Total CPU time to Xst completion: 3.50 secs
+Total REAL time to Xst completion: 4.00 secs
+Total CPU time to Xst completion: 4.28 secs
  
 --> 
 
 Total memory usage is 157848 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   15 (   0 filtered)
+Number of warnings :   14 (   0 filtered)
 Number of infos    :    5 (   0 filtered)
 

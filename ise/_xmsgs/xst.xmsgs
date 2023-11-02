@@ -5,16 +5,16 @@
      behavior or data corruption.  It is strongly advised that
      users do not edit the contents of this file. -->
 <messages>
-<msg type="warning" file="HDLCompilers" num="259" delta="old" ><arg fmt="%s" index="1">&quot;../src/top.v&quot; line 42 </arg>Connection to input port &apos;<arg fmt="%s" index="2">rst_n</arg>&apos; does not match port size
+<msg type="warning" file="HDLCompilers" num="259" delta="old" ><arg fmt="%s" index="1">&quot;../src/top.v&quot; line 48 </arg>Connection to input port &apos;<arg fmt="%s" index="2">rst_n</arg>&apos; does not match port size
 </msg>
 
-<msg type="warning" file="HDLCompilers" num="259" delta="old" ><arg fmt="%s" index="1">&quot;../src/top.v&quot; line 50 </arg>Connection to input port &apos;<arg fmt="%s" index="2">rst_n</arg>&apos; does not match port size
+<msg type="warning" file="HDLCompilers" num="259" delta="old" ><arg fmt="%s" index="1">&quot;../src/top.v&quot; line 56 </arg>Connection to input port &apos;<arg fmt="%s" index="2">rst_n</arg>&apos; does not match port size
 </msg>
 
-<msg type="warning" file="HDLCompilers" num="261" delta="old" ><arg fmt="%s" index="1">&quot;../src/top.v&quot; line 69 </arg>Connection to output port &apos;<arg fmt="%s" index="2">bcd</arg>&apos; does not match port size
+<msg type="warning" file="HDLCompilers" num="261" delta="old" ><arg fmt="%s" index="1">&quot;../src/top.v&quot; line 75 </arg>Connection to output port &apos;<arg fmt="%s" index="2">bcd</arg>&apos; does not match port size
 </msg>
 
-<msg type="warning" file="HDLCompilers" num="261" delta="old" ><arg fmt="%s" index="1">&quot;../src/top.v&quot; line 73 </arg>Connection to output port &apos;<arg fmt="%s" index="2">bcd</arg>&apos; does not match port size
+<msg type="warning" file="HDLCompilers" num="261" delta="old" ><arg fmt="%s" index="1">&quot;../src/top.v&quot; line 79 </arg>Connection to output port &apos;<arg fmt="%s" index="2">bcd</arg>&apos; does not match port size
 </msg>
 
 <msg type="warning" file="Xst" num="905" delta="old" >&quot;<arg fmt="%s" index="1">../src/numlight.v</arg>&quot; line <arg fmt="%d" index="2">133</arg>: One or more signals are missing in the sensitivity list of always block. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
@@ -22,9 +22,6 @@
 </msg>
 
 <msg type="warning" file="Xst" num="1780" delta="old" >Signal &lt;<arg fmt="%s" index="1">none</arg>&gt; is never used or assigned. This unconnected signal will be trimmed during the optimization process.
-</msg>
-
-<msg type="warning" file="Xst" num="646" delta="old" >Signal &lt;<arg fmt="%s" index="1">isRun</arg>&gt; is assigned but never used. This unconnected signal will be trimmed during the optimization process.
 </msg>
 
 <msg type="warning" file="Xst" num="1780" delta="old" >Signal &lt;<arg fmt="%s" index="1">clk_10k</arg>&gt; is never used or assigned. This unconnected signal will be trimmed during the optimization process.
