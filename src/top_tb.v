@@ -18,7 +18,7 @@ reg clk=0,rst_n=0,K_Night=0;
     Y2,
     G2,
 
-    K_Night
+
 );
 always #10 clk=~clk;
 initial begin

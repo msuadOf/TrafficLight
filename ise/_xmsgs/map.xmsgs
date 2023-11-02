@@ -16,11 +16,5 @@
 	<arg fmt="%s" index="2">c2/Mcount_div_clk_cnt_cy&lt;0&gt;</arg>
 </msg>
 
-<msg type="warning" file="PhysDesignRules" num="372" delta="old" >Gated clock. Clock net <arg fmt="%s" index="1">c2/div_clk</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
-</msg>
-
-<msg type="warning" file="PhysDesignRules" num="372" delta="new" >Gated clock. Clock net <arg fmt="%s" index="1">R1_r_or0000</arg> is sourced by a combinatorial pin. This is not good design practice. Use the CE pin to control the loading of data into the flip-flop.
-</msg>
-
 </messages>
 

@@ -1,6 +1,6 @@
 module top (
     input  wire         clk,
-    input  wire         rst_n,
+    //input  wire         rst_n,
     output wire [  1:0] debug,
     output wire [7-1:0] seg71_d,
     output wire [4-1:0] seg71_sel,
@@ -14,9 +14,21 @@ module top (
     output wire Y2,
     output wire G2,
 
-    input wire K_Night
+    input wire [2-1:0] Key_state,
+    input wire Key_plus,
+    input wire Key_sub
 );
+wire rst_n=1;
+parameter CNT_WIDTH=10+1;
 
+parameter setRGCnt_default=11'd8;
+parameter setYCnt_default=11'd6;
+
+wire isNight,isRun,isSetRGCnt,isSetYCnt;
+assign isRun=(Key_state==2'b00)?(1'd1):(1'd0);
+assign isNight=(Key_state==2'b01)?(1'd1):(1'd0);
+assign isSetRGCnt=(Key_state==2'b10)?(1'd1):(1'd0);
+assign isSetYCnt=(Key_state==2'b11)?(1'd1):(1'd0);
 
   wire clk_10k;
   wire clk_500;
@@ -89,7 +101,7 @@ module top (
   assign clk_1s_pulse = !clk_1s_r & clk_1s_rr;
 
   //RYG fsm
-  reg [6:0] RYG_state = 0;
+  reg [6:0] RYG_state = 7'd0;
   parameter RYG_state_Night = 7'd0, RYG_state_group1 = 7'd1, RYG_state_group1to2 = 7'd2, RYG_state_group2 = 7'd3, RYG_state_group2to1 = 7'd4;
   /**
 *   g1 -> g1to2 
@@ -98,10 +110,10 @@ module top (
   g2to1 <-  g2
 */
   //api:
-  wire [10:0] RYG_cnt_set, RG_cnt_set, Y_cnt_set;
+  wire [CNT_WIDTH-1:0] RYG_cnt_set, RG_cnt_set, Y_cnt_set;
   assign RYG_cnt_set = ((RYG_state == RYG_state_group1) || (RYG_state == RYG_state_group2)) ? (RG_cnt_set) : (Y_cnt_set);
 
-  reg [10:0] RYG_cnt = 0;
+  reg [CNT_WIDTH-1:0] RYG_cnt = 0;
   reg        SinglePeriod_start_pulse = 0;
 
   always @(posedge clk or negedge rst_n) begin
@@ -109,7 +121,7 @@ module top (
       RYG_state <= RYG_state_Night;
 
     end else begin
-      if (K_Night == 1) begin
+      if (isNight == 1) begin
         RYG_state <= RYG_state_Night;
       end else begin
 
@@ -169,15 +181,72 @@ module top (
       RYG_state_group1to2: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd1, 1'd0, 1'd0, 1'd0, 1'd1, 1'd0};
       RYG_state_group2: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <=    {1'd1, 1'd0, 1'd0, 1'd0, 1'd0, 1'd1};
       RYG_state_group2to1: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd0, 1'd1, 1'd0, 1'd1, 1'd0, 1'd0};
+      default:    {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <=0;
     endcase
 
   end
 
-  //
-  assign seg71_disp_bin[0]       = 96;
-  assign seg71_disp_bin[1]       = 75;
+reg Key_plus_r=0,Key_plus_rr=0,Key_sub_r=0,Key_sub_rr=0;
+wire Key_plus_pulse,Key_sub_pulse;
+always @(posedge clk or negedge rst_n) begin
+  if(!rst_n)
+    begin
+      Key_plus_r<=0;
+      Key_plus_rr<=0;
+      Key_sub_r<=0;
+      Key_sub_rr<=0;
+    end
+    else begin
+      Key_plus_r<=Key_plus;
+      Key_plus_rr<=Key_plus_r;
+      Key_sub_r<=Key_sub;
+      Key_sub_rr<=Key_sub_r;
+    end
+end
+assign Key_plus_pulse=~Key_plus_r&Key_plus_rr;
+assign Key_sub_pulse=~Key_sub_r&Key_sub_rr;
+
+
+//isSetRGCnt
+reg [CNT_WIDTH-1:0] setRGCnt_r=setRGCnt_default;
+always @(posedge clk or negedge rst_n) begin
+  if(!rst_n)
+    begin
+      setRGCnt_r<=setRGCnt_default;
+    end
+    else begin
+      if(isSetRGCnt==1)begin
+        setRGCnt_r<=(Key_plus_pulse)?(setRGCnt_r+1):((Key_sub_pulse)?(setRGCnt_r-1):(0));
+      end
+      else begin
+        setRGCnt_r<=setRGCnt_r;
+      end
+    end
+end
+
+//isSetYCnt
+reg [CNT_WIDTH-1:0] setYCnt_r=setYCnt_default;
+always @(posedge clk or negedge rst_n) begin
+  if(!rst_n)
+    begin
+      setYCnt_r<=setYCnt_default;
+    end
+    else begin
+      if(isSetYCnt==1)begin
+        setYCnt_r<=(Key_plus_pulse)?(setYCnt_r+1):((Key_sub_pulse)?(setYCnt_r-1):(0));
+      end
+      else begin
+        setYCnt_r<=setYCnt_r;
+      end
+    end
+end
+  assign {RG_cnt_set, Y_cnt_set} = {setRGCnt_r, setYCnt_r};
 
   //
-  assign {RG_cnt_set, Y_cnt_set} = {11'd7, 11'd5};
+  assign seg71_disp_bin[0]       = RYG_cnt[7-1:0];
+  assign seg71_disp_bin[1]       = RYG_state;
+
+  //
+
   assign debug                   = {clk, SinglePeriod_start_pulse};
 endmodule  //top

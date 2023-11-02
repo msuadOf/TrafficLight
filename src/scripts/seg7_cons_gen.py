@@ -23,6 +23,12 @@ led_Pin={
     "P4":"Y1",
     "P3":"G1"
 }
+Key_Pin={
+    "P110":"Key_plus",
+    "P111":"Key_sub",
+    "P113":"Key_state<0>",
+    "P114":"Key_state<1>",
+}
 for i in Seg1_d_Pin:
     print(f"NET seg71_d<{Seg1_d_Pin[i]}>  LOC = {i} | IOSTANDARD = LVTTL;")
 
@@ -34,3 +40,8 @@ print()
 
 for i in led_Pin:
     print(f"NET {led_Pin[i]}  LOC = {i} | IOSTANDARD = LVTTL;")
+
+print()
+
+for i in Key_Pin:
+    print(f"NET {Key_Pin[i]}  LOC = {i} | IOSTANDARD = LVTTL;")
