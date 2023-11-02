@@ -44,7 +44,8 @@ Setup/Hold to clock clk
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-K_Night     |    2.241(R)|    0.010(R)|debug_1_OBUF      |   0.000|
+K_Night     |    2.872(R)|    0.037(R)|debug_1_OBUF      |   0.000|
+rst_n       |    4.270(R)|   -2.509(R)|debug_1_OBUF      |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock clk to Pad
@@ -52,7 +53,7 @@ Clock clk to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-debug<0>    |   12.607(R)|debug_1_OBUF      |   0.000|
+debug<0>    |    9.448(R)|debug_1_OBUF      |   0.000|
 ------------+------------+------------------+--------+
 
 Clock to Setup on destination clock clk
@@ -60,7 +61,7 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |   11.386|         |         |         |
+clk            |   12.087|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
@@ -71,7 +72,7 @@ clk            |debug<1>       |    8.636|
 ---------------+---------------+---------+
 
 
-Analysis completed Thu Nov 02 08:28:59 2023 
+Analysis completed Thu Nov 02 13:08:44 2023 
 --------------------------------------------------------------------------------
 
 Trace Settings:

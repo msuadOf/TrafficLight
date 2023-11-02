@@ -9,32 +9,32 @@ Target Device  : xc3s50an
 Target Package : tqg144
 Target Speed   : -4
 Mapper Version : spartan3a -- $Revision: 1.55 $
-Mapped Date    : Thu Nov 02 08:28:37 2023
+Mapped Date    : Thu Nov 02 13:08:24 2023
 
 Design Summary
 --------------
 Number of errors:      0
 Number of warnings:    3
 Logic Utilization:
-  Number of Slice Flip Flops:           159 out of   1,408   11%
-  Number of 4 input LUTs:               236 out of   1,408   16%
+  Number of Slice Flip Flops:           160 out of   1,408   11%
+  Number of 4 input LUTs:               255 out of   1,408   18%
 Logic Distribution:
-  Number of occupied Slices:            136 out of     704   19%
-    Number of Slices containing only related logic:     136 out of     136 100%
-    Number of Slices containing unrelated logic:          0 out of     136   0%
+  Number of occupied Slices:            148 out of     704   21%
+    Number of Slices containing only related logic:     148 out of     148 100%
+    Number of Slices containing unrelated logic:          0 out of     148   0%
       *See NOTES below for an explanation of the effects of unrelated logic.
-  Total Number of 4 input LUTs:         242 out of   1,408   17%
-    Number used as logic:               236
-    Number used as a route-thru:          6
+  Total Number of 4 input LUTs:         263 out of   1,408   18%
+    Number used as logic:               255
+    Number used as a route-thru:          8
 
   The Slice Logic Distribution report is not meaningful if the design is
   over-mapped for a non-slice resource or if Placement fails.
 
   Number of bonded IOBs:                 22 out of     108   20%
-    IOB Latches:                          1
+    IOB Latches:                          6
   Number of BUFGMUXs:                     1 out of      24    4%
 
-Average Fanout of Non-Clock Nets:                2.75
+Average Fanout of Non-Clock Nets:                2.72
 
 Peak Memory Usage:  174 MB
 Total REAL time to MAP completion:  3 secs 
@@ -86,8 +86,8 @@ WARNING:Pack:249 - The following adjacent carry multiplexers occupy different
 WARNING:PhysDesignRules:372 - Gated clock. Clock net c2/div_clk is sourced by a
    combinatorial pin. This is not good design practice. Use the CE pin to
    control the loading of data into the flip-flop.
-WARNING:PhysDesignRules:372 - Gated clock. Clock net G2_r_not0001 is sourced by
-   a combinatorial pin. This is not good design practice. Use the CE pin to
+WARNING:PhysDesignRules:372 - Gated clock. Clock net R1_r_or0000 is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
    control the loading of data into the flip-flop.
 
 Section 3 - Informational
@@ -119,13 +119,13 @@ Section 6 - IOB Properties
 | IOB Name                           | Type             | Direction | IO Standard          | Diff  | Drive    | Slew    | Reg (s)      | Resistor | IBUF/IFD | SUSPEND          |
 |                                    |                  |           |                      | Term  | Strength | Rate    |              |          | Delay    |                  |
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| G1                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
+| G1                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    | OFF1         |          | 0 / 0    | 3STATE           |
 | G2                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    | OFF1         |          | 0 / 0    | 3STATE           |
 | K_Night                            | IBUF             | INPUT     | LVCMOS25             |       |          |         |              |          | 0 / 0    |                  |
-| R1                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
-| R2                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
-| Y1                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
-| Y2                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
+| R1                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    | OFF1         |          | 0 / 0    | 3STATE           |
+| R2                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    | OFF1         |          | 0 / 0    | 3STATE           |
+| Y1                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    | OFF1         |          | 0 / 0    | 3STATE           |
+| Y2                                 | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    | OFF1         |          | 0 / 0    | 3STATE           |
 | clk                                | IBUF             | INPUT     | LVCMOS33             |       |          |         |              |          | 0 / 0    |                  |
 | debug<0>                           | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |
 | debug<1>                           | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW    |              |          | 0 / 0    | 3STATE           |

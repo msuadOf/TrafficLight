@@ -25,8 +25,8 @@ module top (
       .div_n_RegWith(64)
   ) c1 (
       .clk    (clk),
-    //   .div_n  (12_000_000  - 1),
-    .div_n  (12_000_000/12_000_00  - 1),
+      //  .div_n  (12_000_000  - 1),
+      .div_n  ({0, 12_000_000 / 1 - 1}),
       .rst_n  (1),
       .clk_out(clk_1s)
   );
@@ -34,7 +34,7 @@ module top (
       .div_n_RegWith(64)
   ) c2 (
       .clk    (clk),
-      .div_n  (12_000_000 / 500 - 1),
+      .div_n  ({0, 12_000_000 / 500 - 1}),
       .rst_n  (1),
       .clk_out(clk_500)
   );
@@ -71,7 +71,7 @@ module top (
       .bitchose(seg71_sel),
       .num     (seg71_d)
   );
-  assign debug = {clk, SinglePeriod_start_pulse};
+
 
   // clk_1s --> clk_1s_pulse
   wire clk_1s_pulse;
@@ -90,7 +90,7 @@ module top (
 
   //RYG fsm
   reg [6:0] RYG_state = 0;
-  parameter RYG_state_Night = 0, RYG_state_group1 = 1, RYG_state_group1to2 = 2, RYG_state_group2 = 3, RYG_state_group2to1 = 4;
+  parameter RYG_state_Night = 7'd0, RYG_state_group1 = 7'd1, RYG_state_group1to2 = 7'd2, RYG_state_group2 = 7'd3, RYG_state_group2to1 = 7'd4;
   /**
 *   g1 -> g1to2 
     ^       |
@@ -106,14 +106,15 @@ module top (
 
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      RYG_state                <= RYG_state_Night;
+      RYG_state <= RYG_state_Night;
 
     end else begin
       if (K_Night == 1) begin
         RYG_state <= RYG_state_Night;
       end else begin
-        if (RYG_cnt == 0) begin
-              SinglePeriod_start_pulse <= 1;
+
+        if (RYG_cnt == 0 && SinglePeriod_start_pulse == 0) begin
+          SinglePeriod_start_pulse <= 1;
           RYG_state<=(RYG_state==RYG_state_Night)?(RYG_state_group1)
                     :((RYG_state==RYG_state_group1)?(RYG_state_group1to2)
                     :((RYG_state==RYG_state_group1to2)?(RYG_state_group2)
@@ -121,10 +122,10 @@ module top (
                     :((RYG_state==RYG_state_group2to1)?(RYG_state_group1)
                     :(RYG_state_Night)))));//when it occurs , error happens
 
-        
+
         end else begin
-            SinglePeriod_start_pulse<=0;
-          RYG_state <= RYG_state;
+          SinglePeriod_start_pulse <= 0;
+          RYG_state                <= RYG_state;
         end
       end
 
@@ -138,7 +139,7 @@ module top (
       RYG_cnt <= 0;
     end else begin
       if ((RYG_state != RYG_state_group1) && (RYG_state != RYG_state_group1to2) && (RYG_state != RYG_state_group2) && (RYG_state != RYG_state_group2to1)) begin
-        RYG_cnt <= 0;//do when Night state
+        RYG_cnt <= 0;  //do when Night state
       end else begin
         if (SinglePeriod_start_pulse) begin
           RYG_cnt <= RYG_cnt_set;
@@ -160,22 +161,23 @@ module top (
   reg Y2_r = 0;
   reg G2_r = 0;
   assign {R1, Y1, G1, R2, Y2, G2} = {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r};
-always @(*) begin
+  always @(*) begin
 
-      case (RYG_state)
-        RYG_state_Night:{R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r}<={0,1,0,0,1,0};
-        RYG_state_group1 :{R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r}<={0,0,1,1,0,0};
-        RYG_state_group1to2 :{R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r}<={1,0,0,0,1,0};
-        RYG_state_group2 :{R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r}<={1,0,0,0,0,1};
-        RYG_state_group2to1 :{R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r}<={0,1,0,1,0,0};
-      endcase
+    case (RYG_state)
+      RYG_state_Night: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <=     {1'd0, 1'd1, 1'd0, 1'd0, 1'd1, 1'd0};
+      RYG_state_group1: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <=    {1'd0, 1'd0, 1'd1, 1'd1, 1'd0, 1'd0};
+      RYG_state_group1to2: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd1, 1'd0, 1'd0, 1'd0, 1'd1, 1'd0};
+      RYG_state_group2: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <=    {1'd1, 1'd0, 1'd0, 1'd0, 1'd0, 1'd1};
+      RYG_state_group2to1: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd0, 1'd1, 1'd0, 1'd1, 1'd0, 1'd0};
+    endcase
 
-end
+  end
 
   //
   assign seg71_disp_bin[0]       = 96;
   assign seg71_disp_bin[1]       = 75;
 
   //
-  assign {RG_cnt_set, Y_cnt_set} = {10'd6, 10'd4};
+  assign {RG_cnt_set, Y_cnt_set} = {11'd7, 11'd5};
+  assign debug                   = {clk, SinglePeriod_start_pulse};
 endmodule  //top
