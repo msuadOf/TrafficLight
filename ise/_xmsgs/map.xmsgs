@@ -11,7 +11,7 @@
 <msg type="info" file="LIT" num="244" delta="old" >All of the single ended outputs in this design are using slew rate limited output drivers. The delay on speed critical single ended outputs can be dramatically reduced by designating them as fast outputs.
 </msg>
 
-<msg type="warning" file="Pack" num="249" delta="old" >The following adjacent carry multiplexers occupy different slice components.  The resulting carry chain will have suboptimal timing.
+<msg type="warning" file="Pack" num="249" delta="new" >The following adjacent carry multiplexers occupy different slice components.  The resulting carry chain will have suboptimal timing.
 	<arg fmt="%s" index="1">c2/Mcompar_div_clk_cnt_cmp_lt0000_cy&lt;20&gt;</arg>
 	<arg fmt="%s" index="2">c2/Mcount_div_clk_cnt_cy&lt;0&gt;</arg>
 </msg>

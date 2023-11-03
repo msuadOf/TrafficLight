@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Fri Nov 03 19:08:44 2023
+Fri Nov 03 20:36:02 2023
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -82,11 +82,11 @@ Pinout by Pin Number:
 |P60       |            |DIFFSTB   |IO_L10N_2/GCLK3       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |P61       |            |          |VCCO_2                |         |           |2             |          |         |           |         |2.50     |          |           |                |
 |P62       |            |DIFFMTB   |IO_2/MOSI/CSI_B       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P63       |debug<0>    |IOB       |IO_L11P_2/AWAKE       |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
+|P63       |            |DIFFMTB   |IO_L11P_2/AWAKE       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |P64       |            |DIFFSTB   |IO_L11N_2/DOUT        |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |P65       |            |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
 |P66       |            |          |VCCAUX                |         |           |              |          |         |           |         |3.3      |          |           |                |
-|P67       |            |DIFFMTB   |IO_L12P_2/INIT_B      |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
+|P67       |debug<0>    |IOB       |IO_L12P_2/INIT_B      |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
 |P68       |            |DIFFSTB   |IO_L12N_2/D3          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |P69       |            |DIFFMTB   |IO_L13P_2/D2          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
 |P70       |            |DIFFMTB   |IO_L14P_2/D1          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |

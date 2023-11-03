@@ -61,7 +61,7 @@ module top (
   );
 
 
-  wire [ 32:0] none;
+  wire [  32:0] none;
   // seg7 seg1(
   //     .clk(clk_500),
   //     .reset_n(1),
@@ -71,39 +71,70 @@ module top (
   //);
 
   //disp api
-  wire [7-1:0] seg71_disp_bin[2-1:0];
-  wire [8-1:0] seg71_disp_bcd[2-1:0];
-  bin2bcd b2b1_0 (
-      .bin(seg71_disp_bin[0]),  // binary
-      .bcd(seg71_disp_bcd[0])
+  // wire [7-1:0] seg71_disp_bin[2-1:0];
+  // wire [8-1:0] seg71_disp_bcd[2-1:0];
+  // bin2bcd b2b1_0 (
+  //     .bin(seg71_disp_bin[0]),  // binary
+  //     .bcd(seg71_disp_bcd[0])
+  // );
+  // bin2bcd b2b1_1 (
+  //     .bin(seg71_disp_bin[1]),  // binary
+  //     .bcd(seg71_disp_bcd[1])
+  // );
+  // numlight seg1 (
+  //     .clk_500(clk_500),
+
+  //     .fir(seg71_disp_bcd[1][8-1:5-1]),
+  //     .sec(seg71_disp_bcd[1][4-1:1-1]),
+  //     .thi(seg71_disp_bcd[0][8-1:5-1]),
+  //     .fou(seg71_disp_bcd[0][4-1:1-1]),
+
+  //     .bitchose(seg71_sel),
+  //     .num     (seg71_d)
+  // );
+
+  //seg71
+  wire [14-1:0] seg71_disp_bin;
+  wire [16-1:0] seg71_disp_bcd;
+  wire [ 2-1:0] seg71_none;
+  bin2bcd #(
+      .W(14)
+  )  // input width
+      b2b1 (
+      .bin(seg71_disp_bin),                              // binary
+      .bcd({seg71_none[2-1:0], seg71_disp_bcd[16-1:0]})
   );
-  bin2bcd b2b1_1 (
-      .bin(seg71_disp_bin[1]),  // binary
-      .bcd(seg71_disp_bcd[1])
-  );
-  numlight seg1 (
+
+  numlight seg71 (
       .clk_500(clk_500),
 
-      .fir(seg71_disp_bcd[1][8-1:5-1]),
-      .sec(seg71_disp_bcd[1][4-1:1-1]),
-      .thi(seg71_disp_bcd[0][8-1:5-1]),
-      .fou(seg71_disp_bcd[0][4-1:1-1]),
+      .fir(seg71_disp_bcd[16-1:13-1]),
+      .sec(seg71_disp_bcd[12-1:9-1]),
+      .thi(seg71_disp_bcd[8-1:5-1]),
+      .fou(seg71_disp_bcd[4-1:1-1]),
+
+      // .fir(4'd2),
+      // .sec(4'd1),
+      // .thi(4'd4),
+      // .fou(4'd8),
 
       .bitchose(seg71_sel),
       .num     (seg71_d)
   );
 
-//seg2
-wire [14-1:0] seg72_disp_bin;
-wire [16-1:0] seg72_disp_bcd;
-wire [2-1:0] seg72_none;
-bin2bcd
- #(            .W (14))  // input width
-  b2b2(.bin(seg72_disp_bin)   ,  // binary
-  .bcd({seg72_none[2-1:0],seg72_disp_bcd[16-1:0]})   
-  ); 
+  //seg72
+  wire [14-1:0] seg72_disp_bin;
+  wire [16-1:0] seg72_disp_bcd;
+  wire [ 2-1:0] seg72_none;
+  bin2bcd #(
+      .W(14)
+  )  // input width
+      b2b2 (
+      .bin(seg72_disp_bin),                              // binary
+      .bcd({seg72_none[2-1:0], seg72_disp_bcd[16-1:0]})
+  );
 
-  numlight seg2 (
+  numlight seg72 (
       .clk_500(clk_500),
 
       .fir(seg72_disp_bcd[16-1:13-1]),
@@ -119,7 +150,7 @@ bin2bcd
       .bitchose(seg72_sel),
       .num     (seg72_d)
   );
-//+=======================
+  //+=======================
   // clk_1s --> clk_1s_pulse
   wire clk_1s_pulse;
   reg clk_1s_r = 0, clk_1s_rr = 0;
@@ -162,7 +193,7 @@ bin2bcd
 
         if (RYG_cnt == 0 && SinglePeriod_start_pulse == 0) begin
           SinglePeriod_start_pulse <= 1;
-          if(isRun)begin
+          if (isRun) begin
             RYG_state<=(RYG_state==RYG_state_Night)?(RYG_state_group1)
                     :((RYG_state==RYG_state_group1)?(RYG_state_group1to2)
                     :((RYG_state==RYG_state_group1to2)?(RYG_state_group2)
@@ -170,9 +201,9 @@ bin2bcd
                     :((RYG_state==RYG_state_group2to1)?(RYG_state_group1)
                     :(RYG_state_Night)))));//when it occurs , error happens
           end else begin
-            RYG_state<=RYG_state;
+            RYG_state <= RYG_state;
           end
-          
+
         end else begin
           SinglePeriod_start_pulse <= 0;
           RYG_state                <= RYG_state;
@@ -194,7 +225,7 @@ bin2bcd
         if (SinglePeriod_start_pulse) begin
           RYG_cnt <= RYG_cnt_set;
         end else begin
-          if (clk_1s_pulse && RYG_cnt > 0) begin
+          if (clk_1s_pulse && RYG_cnt > 0 && isRun) begin
             RYG_cnt <= RYG_cnt - 1;
           end else begin
             RYG_cnt <= RYG_cnt;
@@ -273,23 +304,21 @@ bin2bcd
   assign {RG_cnt_set, Y_cnt_set} = {setRGCnt_r, setYCnt_r};
 
   //seg1
-  wire [16-1:0] RYGcnt_Display;
-  assign RYGcnt_Display={0,(RYG_state==RYG_state_group2)?(RYG_cnt+Y_cnt_set):(RYG_cnt)};
-  assign seg71_disp_bin[0]       = (isSetRGCnt) ? (setRGCnt_r[7-1:0]) : 
-                                    ((isSetYCnt) ? (setYCnt_r[7-1:0]) : 
-                                    (RYGcnt_Display[7-1:0]));
-  assign seg71_disp_bin[1]       = RYG_state;
+  wire [CNT_WIDTH-1:0] RYGcnt_Display;
+  assign RYGcnt_Display = {0, (RYG_state == RYG_state_group2) ? (RYG_cnt + Y_cnt_set) : (RYG_cnt)};
+  assign seg71_disp_bin = {0,(isSetRGCnt) ? (setRGCnt_r) : ((isSetYCnt) ? (setYCnt_r) : (RYGcnt_Display))};
 
-//seg2
-reg [16-1:0] seg72_disp_bin_r;
-assign seg72_disp_bin={0,(RYG_state==RYG_state_group1)?(RYG_cnt+Y_cnt_set):(RYG_cnt)};
-// always @(*) begin
-//   case(RYG_state)
-//     RYG_state_group1:seg72_disp_bin_r=RYG_cnt;
-//   endcase
-// end
-// wire [16-1:0] seg72_disp_bin;
+
+  //seg2
+  reg [16-1:0] seg72_disp_bin_r;
+  assign seg72_disp_bin = {0, (RYG_state == RYG_state_group1) ? (RYG_cnt + Y_cnt_set) : (RYG_cnt)};
+  // always @(*) begin
+  //   case(RYG_state)
+  //     RYG_state_group1:seg72_disp_bin_r=RYG_cnt;
+  //   endcase
+  // end
+  // wire [16-1:0] seg72_disp_bin;
   //
 
-  assign debug                   = {clk, SinglePeriod_start_pulse};
+  assign debug          = {clk, SinglePeriod_start_pulse};
 endmodule  //top
