@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.41 secs
+Total CPU time to Xst completion: 0.23 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.42 secs
+Total CPU time to Xst completion: 0.23 secs
  
 --> Reading design: top.prj
 
@@ -149,6 +149,9 @@ Analyzing hierarchy for module <numlight> in library <work> with parameters.
 	two = "0010010"
 	zero = "0000001"
 
+Analyzing hierarchy for module <bin2bcd> in library <work> with parameters.
+	W = "00000000000000000000000000001110"
+
 
 =========================================================================
 *                            HDL Analysis                               *
@@ -168,9 +171,9 @@ Analyzing module <clk_div> in library <work>.
 	div_n_RegWith = 32'sb00000000000000000000000001000000
 Module <clk_div> is correct for synthesis.
  
-Analyzing module <bin2bcd> in library <work>.
+Analyzing module <bin2bcd.1> in library <work>.
 	W = 32'sb00000000000000000000000000000111
-Module <bin2bcd> is correct for synthesis.
+Module <bin2bcd.1> is correct for synthesis.
  
 Analyzing module <numlight> in library <work>.
 	db = 7'b1100000
@@ -188,6 +191,10 @@ Analyzing module <numlight> in library <work>.
 WARNING:Xst:905 - "../src/numlight.v" line 133: One or more signals are missing in the sensitivity list of always block. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
    <firreg>, <secreg>, <thireg>, <foureg>
 Module <numlight> is correct for synthesis.
+ 
+Analyzing module <bin2bcd.2> in library <work>.
+	W = 32'sb00000000000000000000000000001110
+Module <bin2bcd.2> is correct for synthesis.
  
 
 =========================================================================
@@ -208,7 +215,7 @@ Synthesizing Unit <clk_div>.
 Unit <clk_div> synthesized.
 
 
-Synthesizing Unit <bin2bcd>.
+Synthesizing Unit <bin2bcd_1>.
     Related source file is "../src/bin2bcd.v".
     Found 4-bit adder for signal <$add0000> created at line 15.
     Found 4-bit adder for signal <$add0001> created at line 15.
@@ -223,7 +230,7 @@ Synthesizing Unit <bin2bcd>.
     Summary:
 	inferred   5 Adder/Subtractor(s).
 	inferred   5 Comparator(s).
-Unit <bin2bcd> synthesized.
+Unit <bin2bcd_1> synthesized.
 
 
 Synthesizing Unit <numlight>.
@@ -252,10 +259,73 @@ Synthesizing Unit <numlight>.
 Unit <numlight> synthesized.
 
 
+Synthesizing Unit <bin2bcd_2>.
+    Related source file is "../src/bin2bcd.v".
+    Found 4-bit adder for signal <$add0000> created at line 15.
+    Found 4-bit adder for signal <$add0001> created at line 15.
+    Found 4-bit adder for signal <$add0002> created at line 15.
+    Found 4-bit adder for signal <$add0003> created at line 15.
+    Found 4-bit adder for signal <$add0004> created at line 15.
+    Found 4-bit adder for signal <$add0005> created at line 15.
+    Found 4-bit adder for signal <$add0006> created at line 15.
+    Found 4-bit adder for signal <$add0007> created at line 15.
+    Found 4-bit adder for signal <$add0008> created at line 15.
+    Found 4-bit adder for signal <$add0009> created at line 15.
+    Found 4-bit adder for signal <$add0010> created at line 15.
+    Found 4-bit adder for signal <$add0011> created at line 15.
+    Found 4-bit adder for signal <$add0012> created at line 15.
+    Found 4-bit adder for signal <$add0013> created at line 15.
+    Found 4-bit adder for signal <$add0014> created at line 15.
+    Found 4-bit adder for signal <$add0015> created at line 15.
+    Found 4-bit adder for signal <$add0016> created at line 15.
+    Found 4-bit adder for signal <$add0017> created at line 15.
+    Found 4-bit adder for signal <$add0018> created at line 15.
+    Found 4-bit adder for signal <$add0019> created at line 15.
+    Found 4-bit adder for signal <$add0020> created at line 15.
+    Found 4-bit adder for signal <$add0021> created at line 15.
+    Found 4-bit adder for signal <$add0022> created at line 15.
+    Found 4-bit adder for signal <$add0023> created at line 15.
+    Found 4-bit adder for signal <$add0024> created at line 15.
+    Found 4-bit adder for signal <$add0025> created at line 15.
+    Found 4-bit comparator greater for signal <bcd_1$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <bcd_13$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <bcd_5$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <bcd_9$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0000$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0003$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0006$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0012$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0015$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0019$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0022$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0026$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0029$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0036$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0039$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0043$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0047$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0050$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0054$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0058$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0061$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0065$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0072$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0075$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0079$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0083$cmp_gt0000> created at line 14.
+    Summary:
+	inferred  26 Adder/Subtractor(s).
+	inferred  26 Comparator(s).
+Unit <bin2bcd_2> synthesized.
+
+
 Synthesizing Unit <top>.
     Related source file is "../src/top.v".
+WARNING:Xst:646 - Signal <seg72_none> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <seg72_disp_bin_r> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
 WARNING:Xst:1780 - Signal <none> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
 WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <RYGcnt_Display<15:7>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
     Found finite state machine <FSM_0> for signal <RYG_state>.
     -----------------------------------------------------------------------
     | States             | 5                                              |
@@ -278,7 +348,8 @@ WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected 
     Found 1-bit register for signal <Key_sub_r>.
     Found 1-bit register for signal <Key_sub_rr>.
     Found 11-bit down counter for signal <RYG_cnt>.
-    Found 11-bit comparator greater for signal <RYG_cnt$cmp_gt0000> created at line 168.
+    Found 11-bit comparator greater for signal <RYG_cnt$cmp_gt0000> created at line 197.
+    Found 11-bit adder for signal <seg72_disp_bin$add0000> created at line 285.
     Found 11-bit updown counter for signal <setRGCnt_r>.
     Found 11-bit updown counter for signal <setYCnt_r>.
     Found 1-bit register for signal <SinglePeriod_start_pulse>.
@@ -286,6 +357,7 @@ WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected 
 	inferred   1 Finite State Machine(s).
 	inferred   3 Counter(s).
 	inferred   7 D-type flip-flop(s).
+	inferred   1 Adder/Subtractor(s).
 	inferred   1 Comparator(s).
 Unit <top> synthesized.
 
@@ -294,30 +366,31 @@ Unit <top> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# ROMs                                                 : 4
- 16x7-bit ROM                                          : 4
-# Adders/Subtractors                                   : 10
- 4-bit adder                                           : 10
-# Counters                                             : 6
+# ROMs                                                 : 8
+ 16x7-bit ROM                                          : 8
+# Adders/Subtractors                                   : 37
+ 11-bit adder                                          : 1
+ 4-bit adder                                           : 36
+# Counters                                             : 7
  11-bit down counter                                   : 1
  11-bit updown counter                                 : 2
- 2-bit up counter                                      : 1
+ 2-bit up counter                                      : 2
  64-bit up counter                                     : 2
-# Registers                                            : 13
+# Registers                                            : 19
  1-bit register                                        : 7
- 4-bit register                                        : 1
- 7-bit register                                        : 5
-# Comparators                                          : 18
+ 4-bit register                                        : 2
+ 7-bit register                                        : 10
+# Comparators                                          : 45
  11-bit comparator greater                             : 1
- 2-bit comparator less                                 : 1
- 4-bit comparator greater                              : 10
+ 2-bit comparator less                                 : 2
+ 4-bit comparator greater                              : 36
  64-bit comparator equal                               : 2
  64-bit comparator less                                : 2
  64-bit comparator lessequal                           : 2
-# Multiplexers                                         : 1
- 7-bit 4-to-1 multiplexer                              : 1
-# Decoders                                             : 1
- 1-of-4 decoder                                        : 1
+# Multiplexers                                         : 2
+ 7-bit 4-to-1 multiplexer                              : 2
+# Decoders                                             : 2
+ 1-of-4 decoder                                        : 2
 
 =========================================================================
 
@@ -349,28 +422,29 @@ Advanced HDL Synthesis Report
 
 Macro Statistics
 # FSMs                                                 : 1
-# ROMs                                                 : 4
- 16x7-bit ROM                                          : 4
-# Adders/Subtractors                                   : 10
- 4-bit adder                                           : 10
-# Counters                                             : 6
+# ROMs                                                 : 8
+ 16x7-bit ROM                                          : 8
+# Adders/Subtractors                                   : 37
+ 11-bit adder                                          : 1
+ 4-bit adder                                           : 36
+# Counters                                             : 7
  11-bit down counter                                   : 1
  11-bit updown counter                                 : 2
- 2-bit up counter                                      : 1
+ 2-bit up counter                                      : 2
  64-bit up counter                                     : 2
-# Registers                                            : 46
- Flip-Flops                                            : 46
-# Comparators                                          : 18
+# Registers                                            : 85
+ Flip-Flops                                            : 85
+# Comparators                                          : 45
  11-bit comparator greater                             : 1
- 2-bit comparator less                                 : 1
- 4-bit comparator greater                              : 10
+ 2-bit comparator less                                 : 2
+ 4-bit comparator greater                              : 36
  64-bit comparator equal                               : 2
  64-bit comparator less                                : 2
  64-bit comparator lessequal                           : 2
-# Multiplexers                                         : 1
- 7-bit 4-to-1 multiplexer                              : 1
-# Decoders                                             : 1
- 1-of-4 decoder                                        : 1
+# Multiplexers                                         : 2
+ 7-bit 4-to-1 multiplexer                              : 2
+# Decoders                                             : 2
+ 1-of-4 decoder                                        : 2
 
 =========================================================================
 
@@ -380,15 +454,19 @@ Macro Statistics
 
 Optimizing unit <top> ...
 
-Optimizing unit <bin2bcd> ...
+Optimizing unit <bin2bcd_1> ...
 
 Optimizing unit <numlight> ...
+
+Optimizing unit <bin2bcd_2> ...
 WARNING:Xst:1426 - The value init of the FF/Latch seg1/firreg_5 hinder the constant cleaning in the block top.
    You should achieve better results by setting this init to 0.
 WARNING:Xst:1426 - The value init of the FF/Latch seg1/firreg_4 hinder the constant cleaning in the block top.
    You should achieve better results by setting this init to 0.
 WARNING:Xst:1426 - The value init of the FF/Latch seg1/firreg_0 hinder the constant cleaning in the block top.
    You should achieve better results by setting this init to 1.
+WARNING:Xst:1426 - The value init of the FF/Latch seg2/firreg_5 hinder the constant cleaning in the block top.
+   You should achieve better results by setting this init to 0.
 WARNING:Xst:1426 - The value init of the FF/Latch seg1/firreg_6 hinder the constant cleaning in the block top.
    You should achieve better results by setting this init to 0.
 WARNING:Xst:1426 - The value init of the FF/Latch seg1/firreg_3 hinder the constant cleaning in the block top.
@@ -400,8 +478,9 @@ WARNING:Xst:1426 - The value init of the FF/Latch seg1/firreg_1 hinder the const
 
 Mapping all equations...
 Building and optimizing final netlist ...
-INFO:Xst:2261 - The FF/Latch <seg1/firreg_6> in Unit <top> is equivalent to the following 5 FFs/Latches, which will be removed : <seg1/firreg_5> <seg1/firreg_4> <seg1/firreg_3> <seg1/firreg_2> <seg1/firreg_1> 
-Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 28.
+INFO:Xst:2261 - The FF/Latch <seg2/firreg_5> in Unit <top> is equivalent to the following 6 FFs/Latches, which will be removed : <seg1/firreg_6> <seg1/firreg_5> <seg1/firreg_4> <seg1/firreg_3> <seg1/firreg_2> <seg1/firreg_1> 
+INFO:Xst:2261 - The FF/Latch <seg2/firreg_6> in Unit <top> is equivalent to the following FF/Latch, which will be removed : <seg2/firreg_3> 
+Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 40.
 
 Final Macro Processing ...
 
@@ -409,8 +488,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 209
- Flip-Flops                                            : 209
+# Registers                                            : 248
+ Flip-Flops                                            : 248
 
 =========================================================================
 
@@ -436,36 +515,36 @@ Optimization Goal                  : Speed
 Keep Hierarchy                     : No
 
 Design Statistics
-# IOs                              : 24
+# IOs                              : 35
 
 Cell Usage :
-# BELS                             : 781
+# BELS                             : 942
 #      GND                         : 1
-#      INV                         : 22
+#      INV                         : 24
 #      LUT1                        : 6
-#      LUT2                        : 18
-#      LUT3                        : 200
-#      LUT4                        : 106
-#      MUXCY                       : 242
-#      MUXF5                       : 22
+#      LUT2                        : 34
+#      LUT3                        : 250
+#      LUT4                        : 163
+#      MUXCY                       : 252
+#      MUXF5                       : 37
 #      MUXF6                       : 2
 #      VCC                         : 1
-#      XORCY                       : 161
-# FlipFlops/Latches                : 209
-#      FD                          : 7
-#      FD_1                        : 14
+#      XORCY                       : 172
+# FlipFlops/Latches                : 248
+#      FD                          : 8
+#      FD_1                        : 27
 #      FDC                         : 128
 #      FDE                         : 23
-#      FDR                         : 12
-#      FDR_1                       : 3
+#      FDR                         : 24
+#      FDR_1                       : 9
 #      FDRE                        : 15
-#      FDS_1                       : 6
+#      FDS_1                       : 13
 #      FDSE                        : 1
 # Clock Buffers                    : 2
 #      BUFG                        : 2
-# IO Buffers                       : 24
+# IO Buffers                       : 35
 #      IBUF                        : 5
-#      OBUF                        : 19
+#      OBUF                        : 30
 =========================================================================
 
 Device utilization summary:
@@ -473,11 +552,11 @@ Device utilization summary:
 
 Selected Device : 3s50antqg144-4 
 
- Number of Slices:                      209  out of    704    29%  
- Number of Slice Flip Flops:            209  out of   1408    14%  
- Number of 4 input LUTs:                352  out of   1408    25%  
- Number of IOs:                          24
- Number of bonded IOBs:                  24  out of    108    22%  
+ Number of Slices:                      267  out of    704    37%  
+ Number of Slice Flip Flops:            248  out of   1408    17%  
+ Number of 4 input LUTs:                477  out of   1408    33%  
+ Number of IOs:                          35
+ Number of bonded IOBs:                  35  out of    108    32%  
  Number of GCLKs:                         2  out of     24     8%  
 
 ---------------------------
@@ -502,7 +581,7 @@ Clock Information:
 Clock Signal                                       | Clock buffer(FF name)  | Load  |
 ---------------------------------------------------+------------------------+-------+
 clk                                                | IBUF+BUFG              | 173   |
-c2/div_clk1(c2/Mcompar_div_clk_cmp_le0000_cy<18>:O)| BUFG(*)(seg1/bitnum_1) | 36    |
+c2/div_clk1(c2/Mcompar_div_clk_cmp_le0000_cy<18>:O)| BUFG(*)(seg2/bitnum_1) | 75    |
 ---------------------------------------------------+------------------------+-------+
 (*) This 1 clock signal(s) are generated by combinatorial logic,
 and XST is not able to identify which are the primary clock signals.
@@ -521,8 +600,8 @@ Timing Summary:
 Speed Grade: -4
 
    Minimum period: 11.741ns (Maximum Frequency: 85.174MHz)
-   Minimum input arrival time before clock: 9.904ns
-   Maximum output required time after clock: 7.524ns
+   Minimum input arrival time before clock: 9.268ns
+   Maximum output required time after clock: 7.517ns
    Maximum combinational path delay: 5.816ns
 
 Timing Detail:
@@ -641,22 +720,22 @@ Delay:               11.741ns (Levels of Logic = 88)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'c2/div_clk1'
   Clock period: 8.098ns (frequency: 123.487MHz)
-  Total number of paths / destination ports: 64 / 18
+  Total number of paths / destination ports: 128 / 36
 -------------------------------------------------------------------------
 Delay:               4.049ns (Levels of Logic = 2)
-  Source:            seg1/bitnum_0 (FF)
-  Destination:       seg1/num_6 (FF)
+  Source:            seg2/bitnum_0 (FF)
+  Destination:       seg2/num_6 (FF)
   Source Clock:      c2/div_clk1 falling
   Destination Clock: c2/div_clk1 rising
 
-  Data Path: seg1/bitnum_0 to seg1/num_6
+  Data Path: seg2/bitnum_0 to seg2/num_6
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q             20   0.591   1.245  seg1/bitnum_0 (seg1/bitnum_0)
-     LUT3:I0->O            1   0.648   0.000  seg1/Mmux_numreg_3 (seg1/Mmux_numreg_3)
-     MUXF5:I1->O           1   0.276   0.420  seg1/Mmux_numreg_2_f5 (seg1/numreg<0>)
-     FDR:R                     0.869          seg1/num_0
+     FDR:C->Q             20   0.591   1.245  seg2/bitnum_0 (seg2/bitnum_0)
+     LUT3:I0->O            1   0.648   0.000  seg2/Mmux_numreg_3 (seg2/Mmux_numreg_3)
+     MUXF5:I1->O           1   0.276   0.420  seg2/Mmux_numreg_2_f5 (seg2/numreg<0>)
+     FDR:R                     0.869          seg2/num_0
     ----------------------------------------
     Total                      4.049ns (2.384ns logic, 1.665ns route)
                                        (58.9% logic, 41.1% route)
@@ -665,7 +744,7 @@ Delay:               4.049ns (Levels of Logic = 2)
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
   Total number of paths / destination ports: 68 / 35
 -------------------------------------------------------------------------
-Offset:              4.210ns (Levels of Logic = 2)
+Offset:              4.103ns (Levels of Logic = 2)
   Source:            Key_state<0> (PAD)
   Destination:       RYG_state_FSM_FFd4 (FF)
   Destination Clock: clk rising
@@ -674,18 +753,18 @@ Offset:              4.210ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            18   0.849   1.211  Key_state_0_IBUF (Key_state_0_IBUF)
+     IBUF:I->O            12   0.849   1.104  Key_state_0_IBUF (Key_state_0_IBUF)
      LUT2:I0->O            5   0.648   0.633  isNight_cmp_eq00001 (isNight)
      FDRE:R                    0.869          RYG_state_FSM_FFd4
     ----------------------------------------
-    Total                      4.210ns (2.366ns logic, 1.844ns route)
-                                       (56.2% logic, 43.8% route)
+    Total                      4.103ns (2.366ns logic, 1.737ns route)
+                                       (57.7% logic, 42.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'c2/div_clk1'
-  Total number of paths / destination ports: 2602 / 20
+  Total number of paths / destination ports: 1776 / 20
 -------------------------------------------------------------------------
-Offset:              9.904ns (Levels of Logic = 7)
+Offset:              9.268ns (Levels of Logic = 8)
   Source:            Key_state<0> (PAD)
   Destination:       seg1/thireg_3 (FF)
   Destination Clock: c2/div_clk1 falling
@@ -694,41 +773,42 @@ Offset:              9.904ns (Levels of Logic = 7)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            18   0.849   1.211  Key_state_0_IBUF (Key_state_0_IBUF)
-     LUT3:I0->O            2   0.648   0.479  seg71_disp_bin_0_mux0000<3>_SW0 (N30)
-     LUT3:I2->O           15   0.648   1.097  seg71_disp_bin_0_mux0000<3> (seg71_disp_bin<0><3>)
-     LUT4:I1->O            2   0.643   0.590  b2b1_0/bcd<1>51 (b2b1_0/bcd<1>_bdd1)
-     LUT3:I0->O            1   0.648   0.000  b2b1_0/bcd<4>_G (N35)
-     MUXF5:I1->O           7   0.276   0.851  b2b1_0/bcd<4> (seg71_disp_bcd<0><4>)
+     IBUF:I->O            12   0.849   1.104  Key_state_0_IBUF (Key_state_0_IBUF)
+     LUT3:I0->O            1   0.648   0.000  seg71_disp_bin_0_mux0000<3>28_G (N67)
+     MUXF5:I1->O          16   0.276   1.114  seg71_disp_bin_0_mux0000<3>28 (seg71_disp_bin<0><3>)
+     LUT4:I1->O            1   0.643   0.000  b2b1_0/bcd<4>_SW1_F (N70)
+     MUXF5:I0->O           4   0.276   0.619  b2b1_0/bcd<4>_SW1 (N30)
+     LUT3:I2->O            1   0.648   0.000  b2b1_0/bcd<4>1 (b2b1_0/bcd<4>)
+     MUXF5:I1->O           7   0.276   0.851  b2b1_0/bcd<4>_f5 (seg71_disp_bcd<0><4>)
      LUT4:I0->O            2   0.648   0.447  seg1/Mrom_thireg_mux000061 (seg1/Mrom_thireg_mux00006)
      FDS_1:S                   0.869          seg1/thireg_3
     ----------------------------------------
-    Total                      9.904ns (5.229ns logic, 4.675ns route)
-                                       (52.8% logic, 47.2% route)
+    Total                      9.268ns (5.133ns logic, 4.135ns route)
+                                       (55.4% logic, 44.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
   Total number of paths / destination ports: 11 / 7
 -------------------------------------------------------------------------
-Offset:              7.524ns (Levels of Logic = 2)
-  Source:            RYG_state_FSM_FFd2 (FF)
-  Destination:       R1 (PAD)
+Offset:              7.517ns (Levels of Logic = 2)
+  Source:            RYG_state_FSM_FFd4 (FF)
+  Destination:       R2 (PAD)
   Source Clock:      clk rising
 
-  Data Path: RYG_state_FSM_FFd2 to R1
+  Data Path: RYG_state_FSM_FFd4 to R2
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDRE:C->Q            23   0.591   1.345  RYG_state_FSM_FFd2 (RYG_state_FSM_FFd2)
-     LUT2:I0->O            1   0.648   0.420  R11 (seg71_disp_bcd<1><1>)
-     OBUF:I->O                 4.520          R1_OBUF (R1)
+     FDRE:C->Q            34   0.591   1.343  RYG_state_FSM_FFd4 (RYG_state_FSM_FFd4)
+     LUT2:I1->O            1   0.643   0.420  RYG_state_FSM_Out71 (R2_OBUF)
+     OBUF:I->O                 4.520          R2_OBUF (R2)
     ----------------------------------------
-    Total                      7.524ns (5.759ns logic, 1.765ns route)
+    Total                      7.517ns (5.754ns logic, 1.763ns route)
                                        (76.5% logic, 23.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'c2/div_clk1'
-  Total number of paths / destination ports: 11 / 11
+  Total number of paths / destination ports: 22 / 22
 -------------------------------------------------------------------------
 Offset:              5.531ns (Levels of Logic = 1)
   Source:            seg1/bitchose_3 (FF)
@@ -766,14 +846,14 @@ Delay:               5.816ns (Levels of Logic = 2)
 =========================================================================
 
 
-Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.28 secs
+Total REAL time to Xst completion: 8.00 secs
+Total CPU time to Xst completion: 8.02 secs
  
 --> 
 
-Total memory usage is 157848 kilobytes
+Total memory usage is 160920 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   14 (   0 filtered)
-Number of infos    :    5 (   0 filtered)
+Number of warnings :   18 (   0 filtered)
+Number of infos    :    6 (   0 filtered)
 
