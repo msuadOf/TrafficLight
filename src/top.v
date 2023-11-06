@@ -1,4 +1,4 @@
-//`define Debug
+//`define DEBUG
 module top (
     input  wire         clk,
     //input  wire         rst_n,
@@ -10,13 +10,19 @@ module top (
     output wire [4-1:0] seg72_sel,
 
     //R Y G
-    output wire R1,
-    output wire Y1,
-    output wire G1,
+    output wire o_R1,
+    output wire o_Y1,
+    output wire o_G1,
+    output wire o_R2,
+    output wire o_Y2,
+    output wire o_G2,
 
-    output wire R2,
-    output wire Y2,
-    output wire G2,
+    output wire o_R1_L,
+    output wire o_Y1_L,
+    output wire o_G1_L,
+    output wire o_R2_L,
+    output wire o_Y2_L,
+    output wire o_G2_L,
 
     input wire [2-1:0] Key_state,
     input wire         Key_plus,
@@ -26,6 +32,26 @@ module top (
     output wire SN74HC595_data_clk,
     output wire SN74HC595_refresh_clk
 );
+//LED
+    wire R1;
+    wire Y1;
+    wire G1;
+    wire R2;
+    wire Y2;
+    wire G2;
+
+    wire R1_L;
+    wire Y1_L;
+    wire G1_L;
+    wire R2_L;
+    wire Y2_L;
+    wire G2_L;
+
+assign {    o_R1,o_Y1,o_G1,o_R2,o_Y2,o_G2}={    R1,Y1,G1,R2,Y2,G2};
+assign {    o_R1_L,o_Y1_L,o_G1_L,o_R2_L,o_Y2_L,o_G2_L}={    R1_L,Y1_L,G1_L,R2_L,Y2_L,G2_L};
+
+
+
   wire rst_n = 1;
   parameter CNT_WIDTH = 10 + 1;
 
@@ -75,36 +101,7 @@ wire [7:0] SN74HC595_buf;
 );
 
   wire [  32:0] none;
-  // seg7 seg1(
-  //     .clk(clk_500),
-  //     .reset_n(1),
-  //     .q_a({4'd1,4'd2,4'd3,4'd4}),
-  //     .data({seg71_d,none[0]}),
-  //     .sel(seg71_sel)
-  //);
-
-  //disp api
-  // wire [7-1:0] seg71_disp_bin[2-1:0];
-  // wire [8-1:0] seg71_disp_bcd[2-1:0];
-  // bin2bcd b2b1_0 (
-  //     .bin(seg71_disp_bin[0]),  // binary
-  //     .bcd(seg71_disp_bcd[0])
-  // );
-  // bin2bcd b2b1_1 (
-  //     .bin(seg71_disp_bin[1]),  // binary
-  //     .bcd(seg71_disp_bcd[1])
-  // );
-  // numlight seg1 (
-  //     .clk_500(clk_500),
-
-  //     .fir(seg71_disp_bcd[1][8-1:5-1]),
-  //     .sec(seg71_disp_bcd[1][4-1:1-1]),
-  //     .thi(seg71_disp_bcd[0][8-1:5-1]),
-  //     .fou(seg71_disp_bcd[0][4-1:1-1]),
-
-  //     .bitchose(seg71_sel),
-  //     .num     (seg71_d)
-  // );
+  
 
   //seg71
   wire [14-1:0] seg71_disp_bin;
@@ -126,10 +123,6 @@ wire [7:0] SN74HC595_buf;
       .thi(seg71_disp_bcd[8-1:5-1]),
       .fou(seg71_disp_bcd[4-1:1-1]),
 
-      // .fir(4'd2),
-      // .sec(4'd1),
-      // .thi(4'd4),
-      // .fou(4'd8),
 
       .bitchose(seg71_sel),
       .num     (seg71_d)
@@ -150,15 +143,16 @@ wire [7:0] SN74HC595_buf;
   numlight seg72 (
       .clk_500(clk_500),
 
+`ifdef DEBUG
       .fir(seg72_disp_bcd[16-1:13-1]),
+`else
+      .fir(seg72_disp_bcd[16-1:13-1]),
+`endif
+
       .sec(seg72_disp_bcd[12-1:9-1]),
       .thi(seg72_disp_bcd[8-1:5-1]),
       .fou(seg72_disp_bcd[4-1:1-1]),
 
-      // .fir(4'd2),
-      // .sec(4'd1),
-      // .thi(4'd4),
-      // .fou(4'd8),
 
       .bitchose(seg72_sel),
       .num     (seg72_d)
@@ -179,9 +173,42 @@ wire [7:0] SN74HC595_buf;
 
   assign clk_1s_pulse = !clk_1s_r & clk_1s_rr;
 
+//key press -> pulse
+//Plus+Sub
+  reg Key_plus_r = 0, Key_plus_rr = 0, Key_sub_r = 0, Key_sub_rr = 0;
+  wire Key_plus_pulse, Key_sub_pulse;
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      Key_plus_r  <= 0;
+      Key_plus_rr <= 0;
+      Key_sub_r   <= 0;
+      Key_sub_rr  <= 0;
+    end else begin
+      Key_plus_r  <= Key_plus;
+      Key_plus_rr <= Key_plus_r;
+      Key_sub_r   <= Key_sub;
+      Key_sub_rr  <= Key_sub_r;
+    end
+  end
+  assign Key_plus_pulse = ~Key_plus_r & Key_plus_rr;
+  assign Key_sub_pulse  = ~Key_sub_r & Key_sub_rr;
+
+//Key_groupx_
+wire Key_group1_pulse,Key_group2_pulse;
+assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
+
+
   //RYG fsm
   reg [6:0] RYG_state = 7'd0;
-  parameter RYG_state_Night = 7'd0, RYG_state_group1 = 7'd1, RYG_state_group1to2 = 7'd2, RYG_state_group2 = 7'd3, RYG_state_group2to1 = 7'd4;
+  parameter RYG_state_Night          = 7'd0, 
+              RYG_state_group1       = 7'd1,
+              RYG_state_group1to1L   = 7'd2,  
+              RYG_state_group1L      = 7'd3,
+              RYG_state_group1Lto2   = 7'd4, 
+              RYG_state_group2       = 7'd5, 
+              RYG_state_group2to2L   = 7'd6,
+              RYG_state_group2L      = 7'd7,
+              RYG_state_group2Lto1   = 7'd8;
   /**
 *   g1 -> g1to2 
     ^       |
@@ -190,7 +217,12 @@ wire [7:0] SN74HC595_buf;
 */
   //api:
   wire [CNT_WIDTH-1:0] RYG_cnt_set, RG_cnt_set, Y_cnt_set;
-  assign RYG_cnt_set = ((RYG_state == RYG_state_group1) || (RYG_state == RYG_state_group2)) ? (RG_cnt_set) : (Y_cnt_set);
+  assign RYG_cnt_set = ((RYG_state == RYG_state_group1) 
+                        || (RYG_state == RYG_state_group2)
+                        || (RYG_state == RYG_state_group1L)
+                        || (RYG_state == RYG_state_group2L)) ? (RG_cnt_set) : (Y_cnt_set);
+ // assign RYG_cnt_set = ((RYG_state == RYG_state_group1) || (RYG_state == RYG_state_group2)) ? (RG_cnt_set) : (Y_cnt_set);
+
 
   reg [CNT_WIDTH-1:0] RYG_cnt = 0;
   reg                 SinglePeriod_start_pulse = 0;
@@ -208,11 +240,15 @@ wire [7:0] SN74HC595_buf;
           SinglePeriod_start_pulse <= 1;
           if (isRun) begin
             RYG_state<=(RYG_state==RYG_state_Night)?(RYG_state_group1)
-                    :((RYG_state==RYG_state_group1)?(RYG_state_group1to2)
-                    :((RYG_state==RYG_state_group1to2)?(RYG_state_group2)
-                    :((RYG_state==RYG_state_group2)?(RYG_state_group2to1)
-                    :((RYG_state==RYG_state_group2to1)?(RYG_state_group1)
-                    :(RYG_state_Night)))));//when it occurs , error happens
+                    :((RYG_state==RYG_state_group1)?(RYG_state_group1to1L)
+                    :((RYG_state==RYG_state_group1to1L)?(RYG_state_group1L)
+                    :((RYG_state==RYG_state_group1L)?(RYG_state_group1Lto2)
+                    :((RYG_state==RYG_state_group1Lto2)?(RYG_state_group2)
+                    :((RYG_state==RYG_state_group2)?(RYG_state_group2to2L)
+                    :((RYG_state==RYG_state_group2to2L)?(RYG_state_group2L)
+                    :((RYG_state==RYG_state_group2L)?(RYG_state_group2Lto1)
+                    :((RYG_state==RYG_state_group2Lto1)?(RYG_state_group1)
+                    :(RYG_state_Night))))))))); //when it occurs , error happens
           end else begin
             RYG_state <= RYG_state;
           end
@@ -232,7 +268,7 @@ wire [7:0] SN74HC595_buf;
     if (!rst_n) begin
       RYG_cnt <= 0;
     end else begin
-      if ((RYG_state != RYG_state_group1) && (RYG_state != RYG_state_group1to2) && (RYG_state != RYG_state_group2) && (RYG_state != RYG_state_group2to1)) begin
+      if (RYG_state == RYG_state_Night) begin
         RYG_cnt <= 0;  //do when Night state
       end else begin
         if (SinglePeriod_start_pulse) begin
@@ -254,38 +290,33 @@ wire [7:0] SN74HC595_buf;
   reg R2_r = 0;
   reg Y2_r = 0;
   reg G2_r = 0;
-  assign {R1, Y1, G1, R2, Y2, G2} = {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r};
+
+  reg R1_L_r=0;
+  reg Y1_L_r=0;
+  reg G1_L_r=0;
+  reg R2_L_r=0;
+  reg Y2_L_r=0;
+  reg G2_L_r=0;
+
+  assign {R1, Y1, G1, R1_L, Y1_L, G1_L,  R2, Y2, G2, R2_L, Y2_L, G2_L} = {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r};
   always @(*) begin
 
     case (RYG_state)
-      RYG_state_Night:     {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd0, 1'd1, 1'd0, 1'd0, 1'd1, 1'd0};
-      RYG_state_group1:    {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd0, 1'd0, 1'd1, 1'd1, 1'd0, 1'd0};
-      RYG_state_group1to2: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd0, 1'd1, 1'd0, 1'd1, 1'd0, 1'd0};
-      RYG_state_group2:    {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd1, 1'd0, 1'd0, 1'd0, 1'd0, 1'd1};
-      RYG_state_group2to1: {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= {1'd1, 1'd0, 1'd0, 1'd0, 1'd1, 1'd0};
-      default:             {R1_r, Y1_r, G1_r, R2_r, Y2_r, G2_r} <= 0;
+
+//                                                                                                                           g1 g1_1L g2 g2_L
+      RYG_state_Night       :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b010_010_010_010;
+      RYG_state_group1      :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b001_100_100_100;
+      RYG_state_group1to1L  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b010_100_100_100;
+      RYG_state_group1L     :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_001_100_100;
+      RYG_state_group1Lto2  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_010_100_100;
+      RYG_state_group2      :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_100_001_100;
+      RYG_state_group2to2L  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_100_010_100;
+      RYG_state_group2L     :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_100_100_001;
+      RYG_state_group2Lto1  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_100_100_010;
+      default               :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b0;
     endcase
 
   end
-
-  reg Key_plus_r = 0, Key_plus_rr = 0, Key_sub_r = 0, Key_sub_rr = 0;
-  wire Key_plus_pulse, Key_sub_pulse;
-  always @(posedge clk or negedge rst_n) begin
-    if (!rst_n) begin
-      Key_plus_r  <= 0;
-      Key_plus_rr <= 0;
-      Key_sub_r   <= 0;
-      Key_sub_rr  <= 0;
-    end else begin
-      Key_plus_r  <= Key_plus;
-      Key_plus_rr <= Key_plus_r;
-      Key_sub_r   <= Key_sub;
-      Key_sub_rr  <= Key_sub_r;
-    end
-  end
-  assign Key_plus_pulse = ~Key_plus_r & Key_plus_rr;
-  assign Key_sub_pulse  = ~Key_sub_r & Key_sub_rr;
-
 
   //isSetRGCnt
   reg [CNT_WIDTH-1:0] setRGCnt_r = setRGCnt_default;
@@ -325,6 +356,7 @@ wire [7:0] SN74HC595_buf;
   //seg2
   reg [16-1:0] seg72_disp_bin_r;
   assign seg72_disp_bin = {0, (RYG_state == RYG_state_group1) ? (RYG_cnt + Y_cnt_set) : (RYG_cnt)};
+  //assign seg72_disp_bin = {0, (RYG_cnt)};
   // always @(*) begin
   //   case(RYG_state)
   //     RYG_state_group1:seg72_disp_bin_r=RYG_cnt;
@@ -332,6 +364,7 @@ wire [7:0] SN74HC595_buf;
   // end
   // wire [16-1:0] seg72_disp_bin;
   //
-assign SN74HC595_buf=8'd1010_1010;
+ assign SN74HC595_buf={G2_L,Y2_L,Y1,R1,G1,G1_L,Y1_L,R1_L};
+// assign SN74HC595_buf={1'd0,1'd0,Y1,R1,G1,G2,Y2,R2};
   assign debug          = {clk, SinglePeriod_start_pulse};
 endmodule  //top

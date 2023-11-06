@@ -13,7 +13,7 @@ module SN74HC595 (
       .div_n_RegWith(64)
   ) _SN74HC595_div_500_ (
       .clk    (clk),
-      .div_n  ({0, 12_000_000/12_000 - 1}),
+      .div_n  ({0, 12_000_000/1_000 - 1}),
       .rst_n  (rst_n),
       .clk_out(data_clk)
   );
@@ -45,29 +45,24 @@ module SN74HC595 (
   assign data_clk_pulse              = data_clk_r & ~data_clk;
   assign SN74HC595_refresh_clk_pulse = ~SN74HC595_refresh_clk_r & SN74HC595_refresh_clk;
 
-  reg o_sdata = 0;
+  reg o_sdata ;
   assign data = o_sdata;
   reg [10:0] cnt = 0;
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      o_sdata <= 0;
       cnt     <= 0;
     end else begin
       if (data_clk_pulse) begin
+        cnt<=(cnt<7)?(cnt+1):(0);
 
-        if (cnt <= 7) begin
-          o_sdata <= i_buf_r[cnt[3-1:0]];
-          cnt     <= (cnt == 7) ? (0) : (cnt + 1);
-        end else begin
-          o_sdata <= 0;
-          cnt     <= 0;
-        end
       end else begin
-        o_sdata <= o_sdata;
         cnt     <= cnt;
       end
-
     end
+  end
+
+  always @(*) begin
+    o_sdata=i_buf[cnt];
   end
   assign SN74HC595_data     = data;
   assign SN74HC595_data_clk = data_clk;

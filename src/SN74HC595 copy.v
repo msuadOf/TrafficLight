@@ -13,7 +13,7 @@ module SN74HC595 (
       .div_n_RegWith(64)
   ) _SN74HC595_div_500_ (
       .clk    (clk),
-      .div_n  ({0, 12_000_000/12_000 - 1}),
+      .div_n  ({0, 12_000_000/1_000 - 1}),
       .rst_n  (rst_n),
       .clk_out(data_clk)
   );

@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.44 secs
+Total CPU time to Xst completion: 0.34 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 1.00 secs
-Total CPU time to Xst completion: 0.44 secs
+Total CPU time to Xst completion: 0.34 secs
  
 --> Reading design: top.prj
 
@@ -113,7 +113,6 @@ Compiling verilog file "../src/bin2bcd.v" in library work
 Module <numlight> compiled
 Compiling verilog file "../src/top.v" in library work
 Module <bin2bcd> compiled
-WARNING:HDLCompilers:298 - "../src/top.v" line 335 Too many digits specified in decimal constant
 Module <top> compiled
 No errors in compilation
 Analysis of file <"top.prj"> succeeded.
@@ -126,9 +125,13 @@ Analyzing hierarchy for module <top> in library <work> with parameters.
 	CNT_WIDTH = "00000000000000000000000000001011"
 	RYG_state_Night = "0000000"
 	RYG_state_group1 = "0000001"
-	RYG_state_group1to2 = "0000010"
-	RYG_state_group2 = "0000011"
-	RYG_state_group2to1 = "0000100"
+	RYG_state_group1L = "0000011"
+	RYG_state_group1Lto2 = "0000100"
+	RYG_state_group1to1L = "0000010"
+	RYG_state_group2 = "0000101"
+	RYG_state_group2L = "0000111"
+	RYG_state_group2Lto1 = "0001000"
+	RYG_state_group2to2L = "0000110"
 	setRGCnt_default = "00000001000"
 	setYCnt_default = "00000000110"
 
@@ -168,9 +171,13 @@ Analyzing top module <top>.
 	CNT_WIDTH = 32'sb00000000000000000000000000001011
 	RYG_state_Night = 7'b0000000
 	RYG_state_group1 = 7'b0000001
-	RYG_state_group1to2 = 7'b0000010
-	RYG_state_group2 = 7'b0000011
-	RYG_state_group2to1 = 7'b0000100
+	RYG_state_group1L = 7'b0000011
+	RYG_state_group1Lto2 = 7'b0000100
+	RYG_state_group1to1L = 7'b0000010
+	RYG_state_group2 = 7'b0000101
+	RYG_state_group2L = 7'b0000111
+	RYG_state_group2Lto1 = 7'b0001000
+	RYG_state_group2to2L = 7'b0000110
 	setRGCnt_default = 11'b00000001000
 	setYCnt_default = 11'b00000000110
 Module <top> is correct for synthesis.
@@ -332,12 +339,14 @@ WARNING:Xst:1780 - Signal <seg72_disp_bin_r> is never used or assigned. This unc
 WARNING:Xst:646 - Signal <seg71_none> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
 WARNING:Xst:1780 - Signal <none> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
 WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Key_group2_pulse> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Key_group1_pulse> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
     Found finite state machine <FSM_0> for signal <RYG_state>.
     -----------------------------------------------------------------------
-    | States             | 5                                              |
-    | Transitions        | 5                                              |
+    | States             | 9                                              |
+    | Transitions        | 9                                              |
     | Inputs             | 0                                              |
-    | Outputs            | 9                                              |
+    | Outputs            | 13                                             |
     | Clock              | clk                       (rising_edge)        |
     | Clock enable       | RYG_state$not0000         (positive)           |
     | Reset              | isNight                   (positive)           |
@@ -354,8 +363,8 @@ WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected 
     Found 1-bit register for signal <Key_sub_r>.
     Found 1-bit register for signal <Key_sub_rr>.
     Found 11-bit down counter for signal <RYG_cnt>.
-    Found 11-bit comparator greater for signal <RYG_cnt$cmp_gt0000> created at line 241.
-    Found 11-bit adder for signal <seg72_disp_bin$add0000> created at line 327.
+    Found 11-bit comparator greater for signal <RYG_cnt$cmp_gt0000> created at line 272.
+    Found 11-bit adder for signal <RYGcnt_Display$addsub0000> created at line 347.
     Found 11-bit updown counter for signal <setRGCnt_r>.
     Found 11-bit updown counter for signal <setYCnt_r>.
     Found 1-bit register for signal <SinglePeriod_start_pulse>.
@@ -409,21 +418,20 @@ Macro Statistics
 =========================================================================
 
 Analyzing FSM <FSM_0> for best encoding.
-Optimizing FSM <RYG_state/FSM> on signal <RYG_state[1:5]> with one-hot encoding.
----------------------
+Optimizing FSM <RYG_state/FSM> on signal <RYG_state[1:9]> with one-hot encoding.
+----------------------
  State   | Encoding
----------------------
- 0000000 | 00001
- 0000001 | 00010
- 0000010 | 00100
- 0000011 | 01000
- 0000100 | 10000
----------------------
-INFO:Xst:2261 - The FF/Latch <i_buf_r_0> in Unit <u_SN74HC595> is equivalent to the following 5 FFs/Latches, which will be removed : <i_buf_r_2> <i_buf_r_3> <i_buf_r_5> <i_buf_r_6> <i_buf_r_7> 
-INFO:Xst:2261 - The FF/Latch <i_buf_r_1> in Unit <u_SN74HC595> is equivalent to the following FF/Latch, which will be removed : <i_buf_r_4> 
-WARNING:Xst:1710 - FF/Latch <i_buf_r_0> (without init value) has a constant value of 0 in block <u_SN74HC595>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <i_buf_r_1> (without init value) has a constant value of 1 in block <u_SN74HC595>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:2404 -  FFs/Latches <i_buf_r<7:5>> (without init value) have a constant value of 0 in block <SN74HC595>.
+----------------------
+ 0000000 | 000000001
+ 0000001 | 000000010
+ 0000010 | 000000100
+ 0000011 | 000001000
+ 0000100 | 000010000
+ 0000101 | 000100000
+ 0000110 | 001000000
+ 0000111 | 010000000
+ 0001000 | 100000000
+----------------------
 
 Synthesizing (advanced) Unit <numlight>.
 INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_firreg_mux0000> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
@@ -448,8 +456,8 @@ Macro Statistics
  11-bit updown counter                                 : 2
  2-bit up counter                                      : 2
  64-bit up counter                                     : 4
-# Registers                                            : 92
- Flip-Flops                                            : 92
+# Registers                                            : 95
+ Flip-Flops                                            : 95
 # Comparators                                          : 69
  11-bit comparator greater                             : 2
  11-bit comparator lessequal                           : 1
@@ -469,11 +477,6 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:1710 - FF/Latch <i_buf_r_0> (without init value) has a constant value of 0 in block <SN74HC595>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <i_buf_r_1> (without init value) has a constant value of 1 in block <SN74HC595>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <i_buf_r_2> (without init value) has a constant value of 0 in block <SN74HC595>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <i_buf_r_3> (without init value) has a constant value of 0 in block <SN74HC595>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <i_buf_r_4> (without init value) has a constant value of 1 in block <SN74HC595>. This FF/Latch will be trimmed during the optimization process.
 
 Optimizing unit <top> ...
 
@@ -500,8 +503,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 393
- Flip-Flops                                            : 393
+# Registers                                            : 405
+ Flip-Flops                                            : 405
 
 =========================================================================
 
@@ -527,35 +530,37 @@ Optimization Goal                  : Speed
 Keep Hierarchy                     : No
 
 Design Statistics
-# IOs                              : 38
+# IOs                              : 44
 
 Cell Usage :
-# BELS                             : 1538
+# BELS                             : 1536
 #      GND                         : 1
 #      INV                         : 28
 #      LUT1                        : 18
 #      LUT2                        : 39
-#      LUT3                        : 391
-#      LUT4                        : 257
+#      LUT3                        : 398
+#      LUT4                        : 245
+#      LUT4_D                      : 1
 #      MUXCY                       : 456
-#      MUXF5                       : 36
+#      MUXF5                       : 37
+#      MUXF6                       : 1
 #      VCC                         : 1
 #      XORCY                       : 311
-# FlipFlops/Latches                : 393
-#      FD                          : 9
+# FlipFlops/Latches                : 405
+#      FD                          : 17
 #      FD_1                        : 27
 #      FDC                         : 256
 #      FDE                         : 24
 #      FDR                         : 24
 #      FDR_1                       : 12
-#      FDRE                        : 26
+#      FDRE                        : 30
 #      FDS_1                       : 14
 #      FDSE                        : 1
 # Clock Buffers                    : 3
 #      BUFG                        : 3
-# IO Buffers                       : 38
+# IO Buffers                       : 44
 #      IBUF                        : 5
-#      OBUF                        : 33
+#      OBUF                        : 39
 =========================================================================
 
 Device utilization summary:
@@ -563,11 +568,11 @@ Device utilization summary:
 
 Selected Device : 3s50antqg144-4 
 
- Number of Slices:                      402  out of    704    57%  
- Number of Slice Flip Flops:            393  out of   1408    27%  
- Number of 4 input LUTs:                733  out of   1408    52%  
- Number of IOs:                          38
- Number of bonded IOBs:                  38  out of    108    35%  
+ Number of Slices:                      411  out of    704    58%  
+ Number of Slice Flip Flops:            405  out of   1408    28%  
+ Number of 4 input LUTs:                729  out of   1408    51%  
+ Number of IOs:                          44
+ Number of bonded IOBs:                  44  out of    108    40%  
  Number of GCLKs:                         3  out of     24    12%  
 
 ---------------------------
@@ -591,7 +596,7 @@ Clock Information:
 ---------------------------------------------------------------------------------------------+----------------------------------------------------------+-------+
 Clock Signal                                                                                 | Clock buffer(FF name)                                    | Load  |
 ---------------------------------------------------------------------------------------------+----------------------------------------------------------+-------+
-clk                                                                                          | IBUF+BUFG                                                | 250   |
+clk                                                                                          | IBUF+BUFG                                                | 262   |
 c2/div_clk1(c2/Mcompar_div_clk_cmp_le0000_cy<18>:O)                                          | BUFG(*)(seg72/bitnum_1)                                  | 79    |
 SN74HC595_data_clk_OBUF1(u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<16>:O)| BUFG(*)(u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_63)| 64    |
 ---------------------------------------------------------------------------------------------+----------------------------------------------------------+-------+
@@ -623,7 +628,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 11.741ns (frequency: 85.174MHz)
-  Total number of paths / destination ports: 420988 / 319
+  Total number of paths / destination ports: 421155 / 335
 -------------------------------------------------------------------------
 Delay:               11.741ns (Levels of Logic = 88)
   Source:            c1/div_clk_cnt_0 (FF)
@@ -857,24 +862,24 @@ Delay:               11.435ns (Levels of Logic = 82)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 90 / 46
+  Total number of paths / destination ports: 106 / 54
 -------------------------------------------------------------------------
-Offset:              4.968ns (Levels of Logic = 3)
-  Source:            Key_state<1> (PAD)
+Offset:              5.007ns (Levels of Logic = 3)
+  Source:            Key_state<0> (PAD)
   Destination:       RYG_cnt_0 (FF)
   Destination Clock: clk rising
 
-  Data Path: Key_state<1> to RYG_cnt_0
+  Data Path: Key_state<0> to RYG_cnt_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            17   0.849   1.131  Key_state_1_IBUF (Key_state_1_IBUF)
-     LUT3:I1->O            1   0.643   0.452  RYG_cnt_not0001_SW0 (N16)
-     LUT4:I2->O           11   0.648   0.933  RYG_cnt_not0001 (RYG_cnt_not0001)
+     IBUF:I->O            17   0.849   1.194  Key_state_0_IBUF (Key_state_0_IBUF)
+     LUT3:I0->O            1   0.648   0.423  RYG_cnt_not0001_SW0 (N14)
+     LUT4:I3->O           11   0.648   0.933  RYG_cnt_not0001 (RYG_cnt_not0001)
      FDRE:CE                   0.312          RYG_cnt_0
     ----------------------------------------
-    Total                      4.968ns (2.452ns logic, 2.516ns route)
-                                       (49.4% logic, 50.6% route)
+    Total                      5.007ns (2.457ns logic, 2.550ns route)
+                                       (49.1% logic, 50.9% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'c2/div_clk1'
@@ -909,7 +914,7 @@ Offset:              17.006ns (Levels of Logic = 13)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 74 / 9
+  Total number of paths / destination ports: 88 / 15
 -------------------------------------------------------------------------
 Offset:              8.814ns (Levels of Logic = 19)
   Source:            u_SN74HC595/_SN74HC595_div_500_/div_clk_cnt_2 (FF)
@@ -1020,14 +1025,14 @@ Delay:               5.816ns (Levels of Logic = 2)
 =========================================================================
 
 
-Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 6.86 secs
+Total REAL time to Xst completion: 19.00 secs
+Total CPU time to Xst completion: 18.58 secs
  
 --> 
 
-Total memory usage is 162968 kilobytes
+Total memory usage is 163992 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   20 (   0 filtered)
-Number of infos    :    9 (   0 filtered)
+Number of warnings :   13 (   0 filtered)
+Number of infos    :    7 (   0 filtered)
 

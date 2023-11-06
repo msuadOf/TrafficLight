@@ -1,7 +1,7 @@
 Release 14.7 - par P.20131013 (nt)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Mon Nov 06 13:06:57 2023
+Mon Nov 06 21:54:18 2023
 
 
 INFO: The IO information is provided in three file formats as part of the Place and Route (PAR) process.  These formats are:
@@ -17,154 +17,154 @@ PACKAGE:          tqg144
 
 Pinout by Pin Number:
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|Pin Number|Signal Name          |Pin Usage |Pin Name              |Direction|IO Standard|IO Bank Number|Drive (mA)|Slew Rate|Termination|IOB Delay|Voltage  |Constraint|IO Register|Signal Integrity|
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|P1        |                     |          |TMS                   |         |           |              |          |         |           |         |         |          |           |                |
-|P2        |                     |          |TDI                   |         |           |              |          |         |           |         |         |          |           |                |
-|P3        |                     |DIFFMLR   |IO_L02P_3             |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P4        |SN74HC595_data       |IOB       |IO_L01P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P5        |SN74HC595_refresh_clk|IOB       |IO_L02N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P6        |SN74HC595_data_clk   |IOB       |IO_L01N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P7        |                     |DIFFMLR   |IO_L03P_3             |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P8        |                     |DIFFSLR   |IO_L03N_3             |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P9        |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P10       |                     |DIFFMLR   |IO_L04P_3             |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P11       |                     |DIFFSLR   |IO_L04N_3/VREF_3      |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P12       |seg71_sel<3>         |IOB       |IO_L05P_3/LHCLK0      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P13       |seg71_d<0>           |IOB       |IO_L05N_3/LHCLK1      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P14       |                     |          |VCCO_3                |         |           |3             |          |         |           |         |3.30     |          |           |                |
-|P15       |seg71_d<4>           |IOB       |IO_L06P_3/LHCLK2      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P16       |                     |DIFFSLR   |IO_L06N_3/IRDY2/LHCLK3|UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P17       |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P18       |                     |DIFFMLR   |IO_L07P_3/LHCLK4      |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P19       |                     |DIFFMLR   |IO_L08P_3/TRDY2/LHCLK6|UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P20       |seg71_d<3>           |IOB       |IO_L07N_3/LHCLK5      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P21       |seg71_d<2>           |IOB       |IO_L08N_3/LHCLK7      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P22       |                     |          |VCCINT                |         |           |              |          |         |           |         |1.2      |          |           |                |
-|P23       |                     |          |VCCO_3                |         |           |3             |          |         |           |         |3.30     |          |           |                |
-|P24       |                     |DIFFMLR   |IO_L09P_3             |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P25       |                     |DIFFSLR   |IO_L09N_3             |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P26       |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P27       |seg71_d<5>           |IOB       |IO_L10P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P28       |seg71_sel<2>         |IOB       |IO_L11P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P29       |seg71_sel<1>         |IOB       |IO_L10N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P30       |seg71_d<1>           |IOB       |IO_L11N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P31       |seg71_d<6>           |IOB       |IO_L12P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P32       |seg71_sel<0>         |IOB       |IO_L12N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P33       |                     |DIFFMI_NDT|IP_L13P_3             |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P34       |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P35       |                     |DIFFSI_NDT|IP_L13N_3/VREF_3      |UNUSED   |           |3             |          |         |           |         |         |          |           |                |
-|P36       |                     |          |VCCAUX                |         |           |              |          |         |           |         |3.3      |          |           |                |
-|P37       |                     |DIFFMTB   |IO_L01P_2/M1          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P38       |                     |DIFFSTB   |IO_L01N_2/M0          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P39       |                     |DIFFMTB   |IO_L02P_2/M2          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P40       |                     |          |VCCO_2                |         |           |2             |          |         |           |         |any******|          |           |                |
-|P41       |                     |DIFFSTB   |IO_L02N_2/CSO_B       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P42       |                     |DIFFMTB   |IO_L03P_2/RDWR_B      |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P43       |                     |DIFFMTB   |IO_L04P_2/VS2         |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P44       |                     |DIFFSTB   |IO_L03N_2/VS1         |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P45       |                     |DIFFSTB   |IO_L04N_2/VS0         |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P46       |                     |DIFFMTB   |IO_L05P_2             |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P47       |                     |DIFFMTB   |IO_L06P_2             |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P48       |                     |DIFFSTB   |IO_L05N_2/D7          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P49       |                     |DIFFSTB   |IO_L06N_2/D6          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P50       |                     |DIFFMTB   |IO_L07P_2/D5          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P51       |                     |DIFFSTB   |IO_L07N_2/D4          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P52       |                     |          |VCCINT                |         |           |              |          |         |           |         |1.2      |          |           |                |
-|P53       |                     |IBUF      |IP_2/VREF_2           |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P54       |                     |DIFFMTB   |IO_L08P_2/GCLK14      |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P55       |                     |DIFFSTB   |IO_L08N_2/GCLK15      |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P56       |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P57       |clk                  |IBUF      |IO_L09P_2/GCLK0       |INPUT    |LVCMOS33   |2             |          |         |           |IBUF     |         |LOCATED   |NO         |NONE            |
-|P58       |                     |DIFFMTB   |IO_L10P_2/GCLK2       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P59       |                     |DIFFSTB   |IO_L09N_2/GCLK1       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P60       |                     |DIFFSTB   |IO_L10N_2/GCLK3       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P61       |                     |          |VCCO_2                |         |           |2             |          |         |           |         |any******|          |           |                |
-|P62       |                     |DIFFMTB   |IO_2/MOSI/CSI_B       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P63       |                     |DIFFMTB   |IO_L11P_2/AWAKE       |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P64       |                     |DIFFSTB   |IO_L11N_2/DOUT        |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P65       |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P66       |                     |          |VCCAUX                |         |           |              |          |         |           |         |3.3      |          |           |                |
-|P67       |                     |DIFFMTB   |IO_L12P_2/INIT_B      |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P68       |                     |DIFFSTB   |IO_L12N_2/D3          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P69       |                     |DIFFMTB   |IO_L13P_2/D2          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P70       |                     |DIFFMTB   |IO_L14P_2/D1          |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P71       |                     |DIFFSTB   |IO_L13N_2/D0/DIN/MISO |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P72       |                     |DIFFSTB   |IO_L14N_2/CCLK        |UNUSED   |           |2             |          |         |           |         |         |          |           |                |
-|P73       |                     |          |DONE                  |         |           |              |          |         |           |         |         |          |           |                |
-|P74       |                     |          |SUSPEND               |         |           |              |          |         |           |         |         |          |           |                |
-|P75       |                     |DIFFMLR   |IO_L02P_1/LDC1        |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P76       |seg72_d<2>           |IOB       |IO_L01P_1/HDC         |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P77       |seg72_d<3>           |IOB       |IO_L02N_1/LDC0        |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P78       |                     |DIFFSLR   |IO_L01N_1/LDC2        |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P79       |seg72_d<4>           |IOB       |IO_1                  |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P80       |                     |DIFFSI_NDT|IP_1/VREF_1           |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P81       |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P82       |                     |DIFFMLR   |IO_L03P_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P83       |                     |DIFFMLR   |IO_L04P_1/RHCLK0      |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P84       |                     |DIFFSLR   |IO_L03N_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P85       |                     |DIFFSLR   |IO_L04N_1/RHCLK1      |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P86       |                     |          |VCCO_1                |         |           |1             |          |         |           |         |3.30     |          |           |                |
-|P87       |                     |DIFFMLR   |IO_L05P_1/RHCLK2      |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P88       |                     |DIFFSLR   |IO_L05N_1/TRDY1/RHCLK3|UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P89       |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P90       |seg72_d<0>           |IOB       |IO_L06P_1/RHCLK4      |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P91       |seg72_sel<3>         |IOB       |IO_L07P_1/IRDY1/RHCLK6|OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P92       |seg72_sel<0>         |IOB       |IO_L06N_1/RHCLK5      |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P93       |seg72_d<6>           |IOB       |IO_L07N_1/RHCLK7      |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P94       |                     |          |VCCINT                |         |           |              |          |         |           |         |1.2      |          |           |                |
-|P95       |                     |          |VCCO_1                |         |           |1             |          |         |           |         |3.30     |          |           |                |
-|P96       |                     |DIFFMLR   |IO_L08P_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P97       |                     |DIFFMI_NDT|IP_1/VREF_1           |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P98       |                     |DIFFSLR   |IO_L08N_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P99       |                     |DIFFMLR   |IO_L09P_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P100      |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P101      |                     |DIFFSLR   |IO_L09N_1             |UNUSED   |           |1             |          |         |           |         |         |          |           |                |
-|P102      |seg72_d<1>           |IOB       |IO_L10P_1             |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P103      |seg72_sel<1>         |IOB       |IO_L11P_1             |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P104      |seg72_sel<2>         |IOB       |IO_L10N_1             |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P105      |seg72_d<5>           |IOB       |IO_L11N_1             |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |         |LOCATED   |NO         |NONE            |
-|P106      |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P107      |                     |          |TDO                   |         |           |              |          |         |           |         |         |          |           |                |
-|P108      |                     |          |VCCAUX                |         |           |              |          |         |           |         |3.3      |          |           |                |
-|P109      |                     |          |TCK                   |         |           |              |          |         |           |         |         |          |           |                |
-|P110      |Key_plus             |IBUF      |IO_L01P_0             |INPUT    |LVTTL      |0             |          |         |           |IBUF     |         |LOCATED   |NO         |NONE            |
-|P111      |Key_sub              |IBUF      |IO_L01N_0             |INPUT    |LVTTL      |0             |          |         |           |IBUF     |         |LOCATED   |NO         |NONE            |
-|P112      |debug<0>             |IOB       |IO_L02P_0/VREF_0      |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
-|P113      |Key_state<0>         |IBUF      |IO_L02N_0             |INPUT    |LVTTL      |0             |          |         |           |IBUF     |         |LOCATED   |NO         |NONE            |
-|P114      |Key_state<1>         |IBUF      |IO_L04P_0             |INPUT    |LVTTL      |0             |          |         |           |IBUF     |         |LOCATED   |NO         |NONE            |
-|P115      |Y2                   |IOB       |IO_L03P_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
-|P116      |R2                   |IOB       |IO_L04N_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
-|P117      |R1                   |IOB       |IO_L03N_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
-|P118      |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P119      |                     |          |VCCO_0                |         |           |0             |          |         |           |         |2.50     |          |           |                |
-|P120      |Y1                   |IOB       |IO_L05P_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
-|P121      |G1                   |IOB       |IO_L05N_0             |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
-|P122      |                     |          |VCCINT                |         |           |              |          |         |           |         |1.2      |          |           |                |
-|P123      |                     |IBUF      |IP_0/VREF_0           |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P124      |G2                   |IOB       |IO_L06P_0/GCLK4       |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
-|P125      |                     |DIFFMTB   |IO_L07P_0/GCLK6       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P126      |                     |DIFFSTB   |IO_L06N_0/GCLK5       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P127      |debug<1>             |IOB       |IO_L07N_0/GCLK7       |OUTPUT   |LVCMOS25*  |0             |12        |SLOW     |NONE**     |         |         |UNLOCATED |NO         |NONE            |
-|P128      |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P129      |                     |DIFFMTB   |IO_L08P_0/GCLK8       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P130      |                     |DIFFMTB   |IO_L09P_0/GCLK10      |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P131      |                     |DIFFSTB   |IO_L08N_0/GCLK9       |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P132      |                     |DIFFSTB   |IO_L09N_0/GCLK11      |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P133      |                     |          |VCCAUX                |         |           |              |          |         |           |         |3.3      |          |           |                |
-|P134      |                     |DIFFMTB   |IO_L10P_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P135      |                     |DIFFSTB   |IO_L10N_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P136      |                     |          |VCCO_0                |         |           |0             |          |         |           |         |2.50     |          |           |                |
-|P137      |                     |          |GND                   |         |           |              |          |         |           |         |         |          |           |                |
-|P138      |                     |DIFFMTB   |IO_L11P_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P139      |                     |DIFFSTB   |IO_L11N_0             |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P140      |                     |IBUF      |IP_0                  |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P141      |                     |DIFFMTB   |IO_L12P_0/VREF_0      |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P142      |                     |DIFFSTB   |IO_0                  |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P143      |                     |DIFFSTB   |IO_L12N_0/PUDC_B      |UNUSED   |           |0             |          |         |           |         |         |          |           |                |
-|P144      |                     |          |PROG_B                |         |           |              |          |         |           |         |         |          |           |                |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|Pin Number|Signal Name          |Pin Usage |Pin Name              |Direction|IO Standard|IO Bank Number|Drive (mA)|Slew Rate|Termination|IOB Delay|Voltage|Constraint|IO Register|Signal Integrity|
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|P1        |                     |          |TMS                   |         |           |              |          |         |           |         |       |          |           |                |
+|P2        |                     |          |TDI                   |         |           |              |          |         |           |         |       |          |           |                |
+|P3        |o_R2_L               |IOB       |IO_L02P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P4        |SN74HC595_data       |IOB       |IO_L01P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P5        |SN74HC595_refresh_clk|IOB       |IO_L02N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P6        |SN74HC595_data_clk   |IOB       |IO_L01N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P7        |o_Y1                 |IOB       |IO_L03P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P8        |                     |DIFFSLR   |IO_L03N_3             |UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P9        |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P10       |o_G1                 |IOB       |IO_L04P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P11       |                     |DIFFSLR   |IO_L04N_3/VREF_3      |UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P12       |seg71_sel<3>         |IOB       |IO_L05P_3/LHCLK0      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P13       |seg71_d<0>           |IOB       |IO_L05N_3/LHCLK1      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P14       |                     |          |VCCO_3                |         |           |3             |          |         |           |         |3.30   |          |           |                |
+|P15       |seg71_d<4>           |IOB       |IO_L06P_3/LHCLK2      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P16       |                     |DIFFSLR   |IO_L06N_3/IRDY2/LHCLK3|UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P17       |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P18       |                     |DIFFMLR   |IO_L07P_3/LHCLK4      |UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P19       |                     |DIFFMLR   |IO_L08P_3/TRDY2/LHCLK6|UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P20       |seg71_d<3>           |IOB       |IO_L07N_3/LHCLK5      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P21       |seg71_d<2>           |IOB       |IO_L08N_3/LHCLK7      |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P22       |                     |          |VCCINT                |         |           |              |          |         |           |         |1.2    |          |           |                |
+|P23       |                     |          |VCCO_3                |         |           |3             |          |         |           |         |3.30   |          |           |                |
+|P24       |                     |DIFFMLR   |IO_L09P_3             |UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P25       |                     |DIFFSLR   |IO_L09N_3             |UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P26       |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P27       |seg71_d<5>           |IOB       |IO_L10P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P28       |seg71_sel<2>         |IOB       |IO_L11P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P29       |seg71_sel<1>         |IOB       |IO_L10N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P30       |seg71_d<1>           |IOB       |IO_L11N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P31       |seg71_d<6>           |IOB       |IO_L12P_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P32       |seg71_sel<0>         |IOB       |IO_L12N_3             |OUTPUT   |LVTTL      |3             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P33       |                     |DIFFMI_NDT|IP_L13P_3             |UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P34       |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P35       |                     |DIFFSI_NDT|IP_L13N_3/VREF_3      |UNUSED   |           |3             |          |         |           |         |       |          |           |                |
+|P36       |                     |          |VCCAUX                |         |           |              |          |         |           |         |3.3    |          |           |                |
+|P37       |                     |DIFFMTB   |IO_L01P_2/M1          |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P38       |                     |DIFFSTB   |IO_L01N_2/M0          |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P39       |                     |DIFFMTB   |IO_L02P_2/M2          |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P40       |                     |          |VCCO_2                |         |           |2             |          |         |           |         |2.50   |          |           |                |
+|P41       |                     |DIFFSTB   |IO_L02N_2/CSO_B       |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P42       |                     |DIFFMTB   |IO_L03P_2/RDWR_B      |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P43       |o_R1_L               |IOB       |IO_L04P_2/VS2         |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P44       |                     |DIFFSTB   |IO_L03N_2/VS1         |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P45       |o_Y1_L               |IOB       |IO_L04N_2/VS0         |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P46       |o_G1_L               |IOB       |IO_L05P_2             |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P47       |o_Y2_L               |IOB       |IO_L06P_2             |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P48       |o_G2_L               |IOB       |IO_L05N_2/D7          |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P49       |o_R1                 |IOB       |IO_L06N_2/D6          |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P50       |o_Y2                 |IOB       |IO_L07P_2/D5          |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P51       |                     |DIFFSTB   |IO_L07N_2/D4          |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P52       |                     |          |VCCINT                |         |           |              |          |         |           |         |1.2    |          |           |                |
+|P53       |                     |IBUF      |IP_2/VREF_2           |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P54       |                     |DIFFMTB   |IO_L08P_2/GCLK14      |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P55       |                     |DIFFSTB   |IO_L08N_2/GCLK15      |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P56       |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P57       |clk                  |IBUF      |IO_L09P_2/GCLK0       |INPUT    |LVCMOS33   |2             |          |         |           |IBUF     |       |LOCATED   |NO         |NONE            |
+|P58       |                     |DIFFMTB   |IO_L10P_2/GCLK2       |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P59       |                     |DIFFSTB   |IO_L09N_2/GCLK1       |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P60       |debug<1>             |IOB       |IO_L10N_2/GCLK3       |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P61       |                     |          |VCCO_2                |         |           |2             |          |         |           |         |2.50   |          |           |                |
+|P62       |                     |DIFFMTB   |IO_2/MOSI/CSI_B       |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P63       |                     |DIFFMTB   |IO_L11P_2/AWAKE       |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P64       |                     |DIFFSTB   |IO_L11N_2/DOUT        |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P65       |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P66       |                     |          |VCCAUX                |         |           |              |          |         |           |         |3.3    |          |           |                |
+|P67       |debug<0>             |IOB       |IO_L12P_2/INIT_B      |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P68       |o_G2                 |IOB       |IO_L12N_2/D3          |OUTPUT   |LVCMOS25*  |2             |12        |SLOW     |NONE**     |         |       |UNLOCATED |NO         |NONE            |
+|P69       |                     |DIFFMTB   |IO_L13P_2/D2          |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P70       |                     |DIFFMTB   |IO_L14P_2/D1          |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P71       |                     |DIFFSTB   |IO_L13N_2/D0/DIN/MISO |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P72       |                     |DIFFSTB   |IO_L14N_2/CCLK        |UNUSED   |           |2             |          |         |           |         |       |          |           |                |
+|P73       |                     |          |DONE                  |         |           |              |          |         |           |         |       |          |           |                |
+|P74       |                     |          |SUSPEND               |         |           |              |          |         |           |         |       |          |           |                |
+|P75       |                     |DIFFMLR   |IO_L02P_1/LDC1        |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P76       |seg72_d<2>           |IOB       |IO_L01P_1/HDC         |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P77       |seg72_d<3>           |IOB       |IO_L02N_1/LDC0        |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P78       |                     |DIFFSLR   |IO_L01N_1/LDC2        |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P79       |seg72_d<4>           |IOB       |IO_1                  |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P80       |                     |DIFFSI_NDT|IP_1/VREF_1           |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P81       |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P82       |                     |DIFFMLR   |IO_L03P_1             |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P83       |                     |DIFFMLR   |IO_L04P_1/RHCLK0      |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P84       |                     |DIFFSLR   |IO_L03N_1             |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P85       |                     |DIFFSLR   |IO_L04N_1/RHCLK1      |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P86       |                     |          |VCCO_1                |         |           |1             |          |         |           |         |3.30   |          |           |                |
+|P87       |                     |DIFFMLR   |IO_L05P_1/RHCLK2      |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P88       |                     |DIFFSLR   |IO_L05N_1/TRDY1/RHCLK3|UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P89       |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P90       |seg72_d<0>           |IOB       |IO_L06P_1/RHCLK4      |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P91       |seg72_sel<3>         |IOB       |IO_L07P_1/IRDY1/RHCLK6|OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P92       |seg72_sel<0>         |IOB       |IO_L06N_1/RHCLK5      |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P93       |seg72_d<6>           |IOB       |IO_L07N_1/RHCLK7      |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P94       |                     |          |VCCINT                |         |           |              |          |         |           |         |1.2    |          |           |                |
+|P95       |                     |          |VCCO_1                |         |           |1             |          |         |           |         |3.30   |          |           |                |
+|P96       |                     |DIFFMLR   |IO_L08P_1             |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P97       |                     |DIFFMI_NDT|IP_1/VREF_1           |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P98       |                     |DIFFSLR   |IO_L08N_1             |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P99       |                     |DIFFMLR   |IO_L09P_1             |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P100      |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P101      |                     |DIFFSLR   |IO_L09N_1             |UNUSED   |           |1             |          |         |           |         |       |          |           |                |
+|P102      |seg72_d<1>           |IOB       |IO_L10P_1             |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P103      |seg72_sel<1>         |IOB       |IO_L11P_1             |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P104      |seg72_sel<2>         |IOB       |IO_L10N_1             |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P105      |seg72_d<5>           |IOB       |IO_L11N_1             |OUTPUT   |LVTTL      |1             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P106      |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P107      |                     |          |TDO                   |         |           |              |          |         |           |         |       |          |           |                |
+|P108      |                     |          |VCCAUX                |         |           |              |          |         |           |         |3.3    |          |           |                |
+|P109      |                     |          |TCK                   |         |           |              |          |         |           |         |       |          |           |                |
+|P110      |Key_plus             |IBUF      |IO_L01P_0             |INPUT    |LVTTL      |0             |          |         |           |IBUF     |       |LOCATED   |NO         |NONE            |
+|P111      |Key_sub              |IBUF      |IO_L01N_0             |INPUT    |LVTTL      |0             |          |         |           |IBUF     |       |LOCATED   |NO         |NONE            |
+|P112      |                     |DIFFMTB   |IO_L02P_0/VREF_0      |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P113      |Key_state<0>         |IBUF      |IO_L02N_0             |INPUT    |LVTTL      |0             |          |         |           |IBUF     |       |LOCATED   |NO         |NONE            |
+|P114      |Key_state<1>         |IBUF      |IO_L04P_0             |INPUT    |LVTTL      |0             |          |         |           |IBUF     |       |LOCATED   |NO         |NONE            |
+|P115      |                     |DIFFMTB   |IO_L03P_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P116      |                     |DIFFSTB   |IO_L04N_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P117      |                     |DIFFSTB   |IO_L03N_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P118      |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P119      |                     |          |VCCO_0                |         |           |0             |          |         |           |         |3.30   |          |           |                |
+|P120      |                     |DIFFMTB   |IO_L05P_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P121      |                     |DIFFSTB   |IO_L05N_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P122      |                     |          |VCCINT                |         |           |              |          |         |           |         |1.2    |          |           |                |
+|P123      |                     |IBUF      |IP_0/VREF_0           |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P124      |                     |DIFFMTB   |IO_L06P_0/GCLK4       |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P125      |                     |DIFFMTB   |IO_L07P_0/GCLK6       |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P126      |o_R2                 |IOB       |IO_L06N_0/GCLK5       |OUTPUT   |LVTTL      |0             |12        |SLOW     |NONE**     |         |       |LOCATED   |NO         |NONE            |
+|P127      |                     |DIFFSTB   |IO_L07N_0/GCLK7       |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P128      |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P129      |                     |DIFFMTB   |IO_L08P_0/GCLK8       |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P130      |                     |DIFFMTB   |IO_L09P_0/GCLK10      |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P131      |                     |DIFFSTB   |IO_L08N_0/GCLK9       |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P132      |                     |DIFFSTB   |IO_L09N_0/GCLK11      |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P133      |                     |          |VCCAUX                |         |           |              |          |         |           |         |3.3    |          |           |                |
+|P134      |                     |DIFFMTB   |IO_L10P_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P135      |                     |DIFFSTB   |IO_L10N_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P136      |                     |          |VCCO_0                |         |           |0             |          |         |           |         |3.30   |          |           |                |
+|P137      |                     |          |GND                   |         |           |              |          |         |           |         |       |          |           |                |
+|P138      |                     |DIFFMTB   |IO_L11P_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P139      |                     |DIFFSTB   |IO_L11N_0             |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P140      |                     |IBUF      |IP_0                  |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P141      |                     |DIFFMTB   |IO_L12P_0/VREF_0      |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P142      |                     |DIFFSTB   |IO_0                  |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P143      |                     |DIFFSTB   |IO_L12N_0/PUDC_B      |UNUSED   |           |0             |          |         |           |         |       |          |           |                |
+|P144      |                     |          |PROG_B                |         |           |              |          |         |           |         |       |          |           |                |
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 * Default value.
 ** This default Pullup/Pulldown value can be overridden in Bitgen. 
