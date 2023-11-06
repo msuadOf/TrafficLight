@@ -1,0 +1,11 @@
+0.7
+2020.2
+May  7 2023
+15:24:31
+F:/ise/TrafficLight/TL_sim_vivado/TL_sim_vivado.sim/sim_1/behav/xsim/glbl.v,1683266558,verilog,,,,glbl,,,,,,,,
+F:/ise/TrafficLight/src/SN74HC595.v,1699245174,verilog,,F:/ise/TrafficLight/src/clk_div.v,,SN74HC595,,,,,,,,
+F:/ise/TrafficLight/src/SN74HC595_tb.v,1699244364,verilog,,,,SN74HC595_tb,,,,,,,,
+F:/ise/TrafficLight/src/bin2bcd.v,1699013278,verilog,,F:/ise/TrafficLight/src/clk_div.v,,bin2bcd,,,,,,,,
+F:/ise/TrafficLight/src/clk_div.v,1699013278,verilog,,F:/ise/TrafficLight/src/SN74HC595_tb.v,,clk_div,,,,,,,,
+F:/ise/TrafficLight/src/numlight.v,1699013278,verilog,,F:/ise/TrafficLight/src/top.v,,numlight,,,,,,,,
+F:/ise/TrafficLight/src/top.v,1699243826,verilog,,,,top,,,,,,,,

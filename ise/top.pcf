@@ -1,19 +1,15 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Fri Nov 03 20:35:47 2023
+// Written by: Map P.20131013 on Mon Nov 06 13:06:44 2023
 //! **************************************************************************
 
 SCHEMATIC START;
-COMP "G1" LOCATE = SITE "P3" LEVEL 1;
-COMP "G2" LOCATE = SITE "P6" LEVEL 1;
-COMP "R1" LOCATE = SITE "P5" LEVEL 1;
-COMP "R2" LOCATE = SITE "P10" LEVEL 1;
-COMP "Y1" LOCATE = SITE "P4" LEVEL 1;
-COMP "Y2" LOCATE = SITE "P7" LEVEL 1;
 COMP "clk" LOCATE = SITE "P57" LEVEL 1;
 COMP "Key_state<0>" LOCATE = SITE "P113" LEVEL 1;
 COMP "Key_state<1>" LOCATE = SITE "P114" LEVEL 1;
 COMP "Key_sub" LOCATE = SITE "P111" LEVEL 1;
+COMP "SN74HC595_refresh_clk" LOCATE = SITE "P5" LEVEL 1;
 COMP "Key_plus" LOCATE = SITE "P110" LEVEL 1;
+COMP "SN74HC595_data" LOCATE = SITE "P4" LEVEL 1;
 COMP "seg71_sel<0>" LOCATE = SITE "P32" LEVEL 1;
 COMP "seg71_sel<1>" LOCATE = SITE "P29" LEVEL 1;
 COMP "seg71_sel<2>" LOCATE = SITE "P28" LEVEL 1;
@@ -36,5 +32,6 @@ COMP "seg72_d<3>" LOCATE = SITE "P77" LEVEL 1;
 COMP "seg72_d<4>" LOCATE = SITE "P79" LEVEL 1;
 COMP "seg72_d<5>" LOCATE = SITE "P105" LEVEL 1;
 COMP "seg72_d<6>" LOCATE = SITE "P93" LEVEL 1;
+COMP "SN74HC595_data_clk" LOCATE = SITE "P6" LEVEL 1;
 SCHEMATIC END;
 

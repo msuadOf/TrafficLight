@@ -20,7 +20,11 @@ module top (
 
     input wire [2-1:0] Key_state,
     input wire         Key_plus,
-    input wire         Key_sub
+    input wire         Key_sub,
+
+    output wire SN74HC595_data,
+    output wire SN74HC595_data_clk,
+    output wire SN74HC595_refresh_clk
 );
   wire rst_n = 1;
   parameter CNT_WIDTH = 10 + 1;
@@ -60,6 +64,15 @@ module top (
       .clk_out(clk_500)
   );
 
+wire [7:0] SN74HC595_buf;
+ SN74HC595 u_SN74HC595(
+    .clk(clk),
+    .rst_n(rst_n),
+    .i_buf(SN74HC595_buf),
+    .SN74HC595_data(SN74HC595_data),
+    .SN74HC595_data_clk(SN74HC595_data_clk),
+    .SN74HC595_refresh_clk(SN74HC595_refresh_clk)
+);
 
   wire [  32:0] none;
   // seg7 seg1(
@@ -319,6 +332,6 @@ module top (
   // end
   // wire [16-1:0] seg72_disp_bin;
   //
-
+assign SN74HC595_buf=8'd1010_1010;
   assign debug          = {clk, SinglePeriod_start_pulse};
 endmodule  //top

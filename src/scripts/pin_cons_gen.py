@@ -37,17 +37,28 @@ for i in Seg1_sel_Pin:
     print(f"NET seg71_sel<{Seg1_sel_Pin[i]}>  LOC = {i} | IOSTANDARD = LVTTL;")
 
 print()
-led_Pin={
-    "P10":"R2",
-    "P7":"Y2",
-    "P6":"G2",
-    "P5":"R1",
-    "P4":"Y1",
-    "P3":"G1"
-}
-for i in led_Pin:
-    print(f"NET {led_Pin[i]}  LOC = {i} | IOSTANDARD = LVTTL;")
 
+# led_Pin={
+#     "P10":"R2",
+#     "P7":"Y2",
+#     "P6":"G2",
+#     "P5":"R1",
+#     "P4":"Y1",
+#     "P3":"G1"
+# }
+# for i in led_Pin:
+#     print(f"NET {led_Pin[i]}  LOC = {i} | IOSTANDARD = LVTTL;")
+
+SN74HC595={
+    "P4":"SN74HC595_data",
+    "P5":"SN74HC595_refresh_clk",
+    "P6":"SN74HC595_data_clk",
+}
+
+for i in SN74HC595:
+    print(f"NET {SN74HC595[i]}  LOC = {i} | IOSTANDARD = LVTTL;")
+
+print()
 
 Key_Pin={
     "P110":"Key_plus",
