@@ -39,8 +39,8 @@ for i in Seg1_sel_Pin:
 print()
 
 led_Pin={
-    "P10":"o_G1",
-    "P7": "o_Y1",
+    "P10":"o_G2",
+    "P7": "o_Y2",
     "P3": "o_R2_L",
     "P126":"o_R2"
 }

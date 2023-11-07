@@ -67,15 +67,17 @@ assign {    o_R1_L,o_Y1_L,o_G1_L,o_R2_L,o_Y2_L,o_G2_L}={    R1_L,Y1_L,G1_L,R2_L,
 
 //state
   reg [6:0] RYG_state = 7'd0;
-  parameter RYG_state_Night          = 7'd0, 
-              RYG_state_group1       = 7'd1,
-              RYG_state_group1to1L   = 7'd2,  
-              RYG_state_group1L      = 7'd3,
-              RYG_state_group1Lto2   = 7'd4, 
-              RYG_state_group2       = 7'd5, 
-              RYG_state_group2to2L   = 7'd6,
-              RYG_state_group2L      = 7'd7,
-              RYG_state_group2Lto1   = 7'd8;
+  parameter RYG_state_Night               = 7'd0, 
+              RYG_state_group1            = 7'd1,
+              RYG_state_group1to1L        = 7'd2,  
+              RYG_state_group1L           = 7'd3,
+              RYG_state_group1Lto2        = 7'd4, 
+              RYG_state_group2            = 7'd5, 
+              RYG_state_group2to2L        = 7'd6,
+              RYG_state_group2L           = 7'd7,
+              RYG_state_group2Lto1        = 7'd8,
+              RYG_state_group1_interrupt  = 7'd9,
+              RYG_state_group2_interrupt  = 7'd10;
 
   wire clk_10k;
   wire clk_500;
@@ -207,8 +209,8 @@ wire [7:0] SN74HC595_buf;
   assign Key_sub_pulse  = ~Key_sub_r & Key_sub_rr;
 
 //Key_groupx_
-wire Key_group1_pulse,Key_group2_pulse;
-assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
+wire Key_group1_interrupt_pulse,Key_group2_interrupt_pulse;
+assign {Key_group1_interrupt_pulse,Key_group2_interrupt_pulse}={Key_sub_pulse,Key_plus_pulse};
 
 
   //RYG fsm
@@ -224,7 +226,10 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
   assign RYG_cnt_set = ((RYG_state == RYG_state_group1) 
                         || (RYG_state == RYG_state_group2)
                         || (RYG_state == RYG_state_group1L)
-                        || (RYG_state == RYG_state_group2L)) ? (RG_cnt_set) : (Y_cnt_set);
+                        || (RYG_state == RYG_state_group2L)) ? (RG_cnt_set) 
+                                                            : (((RYG_state == RYG_state_group1_interrupt)
+                                                                  ||(RYG_state == RYG_state_group2_interrupt))?(10'd5)
+                                                                                                            :(Y_cnt_set));
  // assign RYG_cnt_set = ((RYG_state == RYG_state_group1) || (RYG_state == RYG_state_group2)) ? (RG_cnt_set) : (Y_cnt_set);
 
 
@@ -235,10 +240,17 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
     if (!rst_n) begin
       RYG_state <= RYG_state_Night;
 
-    end else begin
+    end
+    else begin
       if (isNight == 1) begin
         RYG_state <= RYG_state_Night;
-      end else begin
+      end 
+      else begin
+        if(Key_group1_interrupt_pulse||Key_group2_interrupt_pulse) begin
+          RYG_state <=(Key_group1_interrupt_pulse)?(RYG_state_group1_interrupt):(RYG_state_group2_interrupt);
+        end
+        else begin
+                
 
         if (RYG_cnt == 0 && SinglePeriod_start_pulse == 0) begin
           SinglePeriod_start_pulse <= 1;
@@ -252,7 +264,9 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
                     :((RYG_state==RYG_state_group2to2L)?(RYG_state_group2L)
                     :((RYG_state==RYG_state_group2L)?(RYG_state_group2Lto1)
                     :((RYG_state==RYG_state_group2Lto1)?(RYG_state_group1)
-                    :(RYG_state_Night))))))))); //when it occurs , error happens
+                    :((RYG_state==RYG_state_group1_interrupt)?(RYG_state_group1)
+                    :((RYG_state==RYG_state_group2_interrupt)?(RYG_state_group2)
+                    :(RYG_state_Night))))))))))); //when it occurs , error happens
           end else begin
             RYG_state <= RYG_state;
           end
@@ -261,12 +275,25 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
           SinglePeriod_start_pulse <= 0;
           RYG_state                <= RYG_state;
         end
+      
+
+        end
       end
 
     end
   end
 
   //SinglePeriod
+  reg SinglePeriod_start_pulse_r=0;
+  always @(posedge clk or negedge rst_n) begin
+    if(!rst_n)
+      begin
+        SinglePeriod_start_pulse_r<=0;
+      end
+      else begin
+        SinglePeriod_start_pulse_r<=SinglePeriod_start_pulse;
+      end
+  end
 
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -275,7 +302,7 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
       if (RYG_state == RYG_state_Night) begin
         RYG_cnt <= 0;  //do when Night state
       end else begin
-        if (SinglePeriod_start_pulse) begin
+        if (SinglePeriod_start_pulse_r) begin
           RYG_cnt <= RYG_cnt_set;
         end else begin
           if (clk_1s_pulse && RYG_cnt > 0 && isRun) begin
@@ -307,16 +334,19 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
 
     case (RYG_state)
 
-//                                                                                                                           g1               g1_1L             g2              g2_L
-      RYG_state_Night       :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b1,1'b0, 1'b0,1'b1,1'b0,  1'b0,1'b1,1'b0, 1'b0,1'b1,1'b0};
-      RYG_state_group1      :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b0,1'b1, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
-      RYG_state_group1to1L  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b1,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
-      RYG_state_group1L     :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b0,1'b0,1'b1,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
-      RYG_state_group1Lto2  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b0,1'b1,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
-      RYG_state_group2      :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b0,1'b0,1'b1, 1'b1,1'b0,1'b0};
-      RYG_state_group2to2L  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b0,1'b1,1'b0, 1'b1,1'b0,1'b0};
-      RYG_state_group2L     :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b0,1'b0,1'b1};
-      RYG_state_group2Lto1  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b0,1'b1,1'b0};
+//                                                                                                                                g1               g1_1L             g2              g2_L
+      RYG_state_Night            :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b1,1'b0, 1'b0,1'b1,1'b0,  1'b0,1'b1,1'b0, 1'b0,1'b1,1'b0};
+      RYG_state_group1           :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b0,1'b1, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group1to1L       :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b1,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group1L          :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b0,1'b0,1'b1,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group1Lto2       :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b0,1'b1,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group2           :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b0,1'b0,1'b1, 1'b1,1'b0,1'b0};
+      RYG_state_group2to2L       :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b0,1'b1,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group2L          :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b0,1'b0,1'b1};
+      RYG_state_group2Lto1       :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b0,1'b1,1'b0};
+
+      RYG_state_group1_interrupt :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b1,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group2_interrupt :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b0,1'b1,1'b0, 1'b1,1'b0,1'b0};
       default               :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b0;
     endcase
 
@@ -370,5 +400,5 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
   //
  assign SN74HC595_buf={G2_L,Y2_L,Y1,R1,G1,G1_L,Y1_L,R1_L};//{1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1};//
 // assign SN74HC595_buf={1'd0,1'd0,Y1,R1,G1,G2,Y2,R2};
-  assign SIM          = {clk, SinglePeriod_start_pulse};
+  assign SIM          = {clk, SinglePeriod_start_pulse_r};
 endmodule  //top
