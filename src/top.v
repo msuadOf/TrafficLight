@@ -307,16 +307,16 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
 
     case (RYG_state)
 
-//                                                                                                                           g1 g1_1L g2 g2_L
-      RYG_state_Night       :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b010_010_010_010;
-      RYG_state_group1      :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b001_100_100_100;
-      RYG_state_group1to1L  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b010_100_100_100;
-      RYG_state_group1L     :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_001_100_100;
-      RYG_state_group1Lto2  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_010_100_100;
-      RYG_state_group2      :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_100_001_100;
-      RYG_state_group2to2L  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_100_010_100;
-      RYG_state_group2L     :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_100_100_001;
-      RYG_state_group2Lto1  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b100_100_100_010;
+//                                                                                                                           g1               g1_1L             g2              g2_L
+      RYG_state_Night       :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b1,1'b0, 1'b0,1'b1,1'b0,  1'b0,1'b1,1'b0, 1'b0,1'b1,1'b0};
+      RYG_state_group1      :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b0,1'b1, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group1to1L  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b0,1'b1,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group1L     :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b0,1'b0,1'b1,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group1Lto2  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b0,1'b1,1'b0,  1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group2      :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b0,1'b0,1'b1, 1'b1,1'b0,1'b0};
+      RYG_state_group2to2L  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b0,1'b1,1'b0, 1'b1,1'b0,1'b0};
+      RYG_state_group2L     :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b0,1'b0,1'b1};
+      RYG_state_group2Lto1  :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= {1'b1,1'b0,1'b0, 1'b1,1'b0,1'b0,  1'b1,1'b0,1'b0, 1'b0,1'b1,1'b0};
       default               :   {R1_r, Y1_r, G1_r,R1_L_r, Y1_L_r, G1_L_r,   R2_r, Y2_r, G2_r, R2_L_r, Y2_L_r, G2_L_r} <= 12'b0;
     endcase
 
