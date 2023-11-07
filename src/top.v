@@ -1,8 +1,9 @@
-//`define DEBUG
+//`define SIM
+`define DEBUG
 module top (
     input  wire         clk,
     //input  wire         rst_n,
-    output wire [  1:0] debug,
+    output wire [  1:0] SIM,
     output wire [7-1:0] seg71_d,
     output wire [4-1:0] seg71_sel,
 
@@ -64,6 +65,18 @@ assign {    o_R1_L,o_Y1_L,o_G1_L,o_R2_L,o_Y2_L,o_G2_L}={    R1_L,Y1_L,G1_L,R2_L,
   assign isSetRGCnt = (Key_state == 2'b10) ? (1'd1) : (1'd0);
   assign isSetYCnt  = (Key_state == 2'b11) ? (1'd1) : (1'd0);
 
+//state
+  reg [6:0] RYG_state = 7'd0;
+  parameter RYG_state_Night          = 7'd0, 
+              RYG_state_group1       = 7'd1,
+              RYG_state_group1to1L   = 7'd2,  
+              RYG_state_group1L      = 7'd3,
+              RYG_state_group1Lto2   = 7'd4, 
+              RYG_state_group2       = 7'd5, 
+              RYG_state_group2to2L   = 7'd6,
+              RYG_state_group2L      = 7'd7,
+              RYG_state_group2Lto1   = 7'd8;
+
   wire clk_10k;
   wire clk_500;
   wire clk_1s;
@@ -73,7 +86,7 @@ assign {    o_R1_L,o_Y1_L,o_G1_L,o_R2_L,o_Y2_L,o_G2_L}={    R1_L,Y1_L,G1_L,R2_L,
       .clk(clk),
       //  .div_n  (12_000_000  - 1),
 
-`ifdef DEBUG
+`ifdef SIM
       .div_n  ({0, 12_000_000 / 12_000_00 - 1}),
 `else
       .div_n  ({0, 12_000_000 / 1 - 1}),
@@ -144,7 +157,7 @@ wire [7:0] SN74HC595_buf;
       .clk_500(clk_500),
 
 `ifdef DEBUG
-      .fir(seg72_disp_bcd[16-1:13-1]),
+      .fir(RYG_state),
 `else
       .fir(seg72_disp_bcd[16-1:13-1]),
 `endif
@@ -199,16 +212,7 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
 
 
   //RYG fsm
-  reg [6:0] RYG_state = 7'd0;
-  parameter RYG_state_Night          = 7'd0, 
-              RYG_state_group1       = 7'd1,
-              RYG_state_group1to1L   = 7'd2,  
-              RYG_state_group1L      = 7'd3,
-              RYG_state_group1Lto2   = 7'd4, 
-              RYG_state_group2       = 7'd5, 
-              RYG_state_group2to2L   = 7'd6,
-              RYG_state_group2L      = 7'd7,
-              RYG_state_group2Lto1   = 7'd8;
+
   /**
 *   g1 -> g1to2 
     ^       |
@@ -364,7 +368,7 @@ assign {Key_group1_pulse,Key_group2_pulse}={Key_sub_pulse,Key_plus_pulse};
   // end
   // wire [16-1:0] seg72_disp_bin;
   //
- assign SN74HC595_buf={G2_L,Y2_L,Y1,R1,G1,G1_L,Y1_L,R1_L};
+ assign SN74HC595_buf={G2_L,Y2_L,Y1,R1,G1,G1_L,Y1_L,R1_L};//{1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1};//
 // assign SN74HC595_buf={1'd0,1'd0,Y1,R1,G1,G2,Y2,R2};
-  assign debug          = {clk, SinglePeriod_start_pulse};
+  assign SIM          = {clk, SinglePeriod_start_pulse};
 endmodule  //top
