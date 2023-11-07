@@ -1,6 +1,0 @@
-INFO: [VRFC 10-2263] Analyzing Verilog file "F:/ise/TrafficLight/src/SN74HC595.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module SN74HC595
-INFO: [VRFC 10-2263] Analyzing Verilog file "F:/ise/TrafficLight/src/clk_div.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module clk_div
-INFO: [VRFC 10-2263] Analyzing Verilog file "F:/ise/TrafficLight/src/SN74HC595_tb.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module SN74HC595_tb
