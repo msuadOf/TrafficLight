@@ -1,30 +1,37 @@
-// `timescale 1ns / 1ps
-// module top_tb (
-// );
-// reg clk=0,rst_n=0,K_Night=0;
-//    top t(
-//     clk,
-//    // rst_n,
-//     debug,
-//     seg71_d,
-//     seg71_sel,
+`timescale 1ns / 1ps
+module top_tb (
+);
+reg clk=0,rst_n=0,K_Night=0;
+top y(
+            clk,
+    debug,
+    seg71_d,
+    seg71_sel,
+    seg72_d,
+    seg72_sel,
+    o_R1,
+    o_Y1,
+    o_G1,
+    o_R2,
+    o_Y2,
+    o_G2,
+    o_R1_L,
+    o_Y1_L,
+    o_G1_L,
+    o_R2_L,
+    o_Y2_L,
+    o_G2_L,
+    Key_state,
+ Key_plus,
+ Key_sub,
+    SN74HC595_data,
+    SN74HC595_data_clk,
+    SN74HC595_refresh_clk
 
-//     //R Y G
-//     R1,
-//     Y1,
-//     G1,
-
-//     R2,
-//     Y2,
-//     G2,
-
-//     Key_state,
-//     Key_plus,
-//     Key_sub
-// );
-// always #10 clk=~clk;
-// initial begin
-//    // # 50 rst_n=1;
-//    Key_state=11;
-// end
-// endmodule //top_tb
+);
+always #10 clk=~clk;
+initial begin
+   // # 50 rst_n=1;
+   Key_state=11;
+end
+endmodule //top_tb
