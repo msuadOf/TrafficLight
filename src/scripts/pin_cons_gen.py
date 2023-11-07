@@ -63,6 +63,7 @@ Key_Pin={
     "P111":"Key_sub",
     "P113":"Key_state<0>",
     "P114":"Key_state<1>",
+    "P125":"Key_ACC"
 }
 
 for i in Key_Pin:

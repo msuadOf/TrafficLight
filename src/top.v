@@ -32,7 +32,9 @@ module top (
 
     output wire SN74HC595_data,
     output wire SN74HC595_data_clk,
-    output wire SN74HC595_refresh_clk
+    output wire SN74HC595_refresh_clk,
+
+    input wire Key_ACC
 );
   //LED
   wire R1;
@@ -94,10 +96,9 @@ module top (
 
 `ifdef SIM
       .div_n  ({0, 12_000_000 / 12_000_00 - 1}),
-`elsif ACCURATE
-      .div_n  ({0, 12_000_000 / 60 - 1}),
+
 `else
-      .div_n  ({0, 12_000_000 / 1 - 1}),
+      .div_n  ({0, 12_000_000 / (Key_ACC==1)?(60):(1) - 1}),
 `endif
       .rst_n  (1),
       .clk_out(clk_1s)
@@ -216,7 +217,7 @@ module top (
 
   //Key_groupx_
   wire Key_group1_interrupt_pulse, Key_group2_interrupt_pulse;
-  assign {Key_group1_interrupt_pulse, Key_group2_interrupt_pulse} = {Key_sub_pulse, Key_plus_pulse};
+  assign {Key_group1_interrupt_pulse, Key_group2_interrupt_pulse} =(isRun)?( {Key_sub_pulse, Key_plus_pulse}):(0);
 
 
   //RYG fsm
