@@ -246,12 +246,7 @@ assign {Key_group1_interrupt_pulse,Key_group2_interrupt_pulse}={Key_sub_pulse,Ke
         RYG_state <= RYG_state_Night;
       end 
       else begin
-        if(Key_group1_interrupt_pulse||Key_group2_interrupt_pulse) begin
-          RYG_state <=(Key_group1_interrupt_pulse)?(RYG_state_group1_interrupt):(RYG_state_group2_interrupt);
-        end
-        else begin
-                
-
+           
         if (RYG_cnt == 0 && SinglePeriod_start_pulse == 0) begin
           SinglePeriod_start_pulse <= 1;
           if (isRun) begin
@@ -268,7 +263,12 @@ assign {Key_group1_interrupt_pulse,Key_group2_interrupt_pulse}={Key_sub_pulse,Ke
                     :((RYG_state==RYG_state_group2_interrupt)?(RYG_state_group2)
                     :(RYG_state_Night))))))))))); //when it occurs , error happens
           end else begin
-            RYG_state <= RYG_state;
+            if(Key_group1_interrupt_pulse||Key_group2_interrupt_pulse) begin
+          RYG_state <=(Key_group1_interrupt_pulse)?(RYG_state_group1_interrupt):(RYG_state_group2_interrupt);
+            end else begin
+              RYG_state <= RYG_state;
+            end
+              
           end
 
         end else begin
@@ -276,8 +276,6 @@ assign {Key_group1_interrupt_pulse,Key_group2_interrupt_pulse}={Key_sub_pulse,Ke
           RYG_state                <= RYG_state;
         end
       
-
-        end
       end
 
     end
