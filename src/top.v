@@ -1,6 +1,5 @@
 //`define SIM
 `define DEBUG
-`define ACCURATE
 module top (
     input  wire         clk,
     //input  wire         rst_n,
@@ -88,6 +87,9 @@ module top (
   wire clk_10k;
   wire clk_500;
   wire clk_1s;
+  wire _clk_1s,_clk_60Hz;
+assign clk_1s=(Key_ACC)?(_clk_60Hz):(_clk_1s);
+
   clk_div #(
       .div_n_RegWith(64)
   ) c1 (
@@ -98,11 +100,25 @@ module top (
       .div_n  ({0, 12_000_000 / 12_000_00 - 1}),
 
 `else
-      .div_n  ({0, 12_000_000 / (Key_ACC==1)?(60):(1) - 1}),
+      .div_n  ( {0,(12_000_000 / 1-1)}),
 `endif
       .rst_n  (1),
-      .clk_out(clk_1s)
+      .clk_out(_clk_1s)
   );
+
+    clk_div #(
+      .div_n_RegWith(64)
+  ) c10 (
+      .clk(clk),
+      //  .div_n  (12_000_000  - 1),
+
+      .div_n  ({0, 12_000_000 / 60 - 1}),
+
+      .rst_n  (1),
+      .clk_out(_clk_60Hz)
+  );
+
+
   clk_div #(
       .div_n_RegWith(64)
   ) c2 (
@@ -166,7 +182,7 @@ module top (
       .clk_500(clk_500),
 
 `ifdef DEBUG
-      .fir(RYG_state),
+      .fir(hour),
 `else
       .fir(seg72_disp_bcd[16-1:13-1]),
 `endif
