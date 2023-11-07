@@ -295,7 +295,7 @@ assign {Key_group1_interrupt_pulse,Key_group2_interrupt_pulse}={Key_sub_pulse,Ke
       if (RYG_state == RYG_state_Night) begin
         RYG_cnt <= 0;  //do when Night state
       end else begin
-        if (SinglePeriod_start_pulse) begin
+        if (SinglePeriod_start_pulse||Key_groupx_interrupt_start_pulse) begin
           RYG_cnt <= RYG_cnt_set;
         end else begin
           if (clk_1s_pulse && RYG_cnt > 0 && isRun) begin
