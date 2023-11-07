@@ -2,6 +2,8 @@
 module top_tb (
 );
 reg clk=0,rst_n=0,K_Night=0;
+reg [2-1:0]Key_state;
+reg Key_plus,Key_sub;
 top y(
             clk,
     debug,
@@ -32,6 +34,7 @@ top y(
 always #10 clk=~clk;
 initial begin
    // # 50 rst_n=1;
-   Key_state=11;
+   Key_state=00;
+   {Key_plus,Key_sub}=2'b00;
 end
 endmodule //top_tb
