@@ -56,7 +56,7 @@ module SN74HC595 (
       if (data_clk_pulse) begin
 
         if (cnt <= 7) begin
-          o_sdata <= i_buf_r[cnt[3-1:0]];
+          o_sdata <= i_buf_r[cnt];
           cnt     <= (cnt == 7) ? (0) : (cnt + 1);
         end else begin
           o_sdata <= 0;
