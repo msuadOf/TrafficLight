@@ -393,7 +393,7 @@ end
       setRGCnt_r <= setRGCnt_default;
     end else begin
       if (isSetRGCnt == 1) begin
-        setRGCnt_r <= (isMainRoadPeak)?(2):(1)*(Key_plus_pulse) ? (setRGCnt_r + 1) : ((Key_sub_pulse) ? (setRGCnt_r - 1) : (setRGCnt_r));
+        setRGCnt_r <= (isMainRoadPeak&&(RYG_state_group1||RYG_state_group2))?(2):(1)*(Key_plus_pulse) ? (setRGCnt_r + 1) : ((Key_sub_pulse) ? (setRGCnt_r - 1) : (setRGCnt_r));
       end else begin
         setRGCnt_r <= setRGCnt_r;
       end
