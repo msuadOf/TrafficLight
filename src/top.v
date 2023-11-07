@@ -1,5 +1,6 @@
 //`define SIM
 `define DEBUG
+`define ACCURATE
 module top (
     input  wire         clk,
     //input  wire         rst_n,
@@ -56,14 +57,17 @@ module top (
   wire rst_n = 1;
   parameter CNT_WIDTH = 10 + 1;
 
-  parameter setRGCnt_default = 11'd8;
-  parameter setYCnt_default = 11'd6;
+  parameter setRGCnt_default = 11'd30;
+  parameter setYCnt_default = 11'd5;
 
   wire isNight, isRun, isSetRGCnt, isSetYCnt;
   assign isRun      = (Key_state == 2'b00) ? (1'd1) : (1'd0);
   assign isNight    = (Key_state == 2'b01) ? (1'd1) : (1'd0);
   assign isSetRGCnt = (Key_state == 2'b10) ? (1'd1) : (1'd0);
   assign isSetYCnt  = (Key_state == 2'b11) ? (1'd1) : (1'd0);
+
+  reg [32-1:0] second=0,minute=0,hour=0;
+  reg isMainRoadPeak=0;
 
   //state
   reg [6:0] RYG_state = 7'd0;
@@ -90,6 +94,8 @@ module top (
 
 `ifdef SIM
       .div_n  ({0, 12_000_000 / 12_000_00 - 1}),
+`elsif ACCURATE
+      .div_n  ({0, 12_000_000 / 60 - 1}),
 `else
       .div_n  ({0, 12_000_000 / 1 - 1}),
 `endif
@@ -336,6 +342,50 @@ module top (
 
   end
 
+ //datagen
+
+  //second
+  always @(posedge clk or negedge rst_n) begin
+    if(!rst_n)
+      begin
+        second<=0;
+        minute<=0;
+        hour<=0;
+      end
+      else begin
+        if (clk_1s_pulse) begin
+          if(second>=60)begin
+            second<=0;
+            if(minute>=60)begin
+              minute<=0;
+              if(hour>=24) begin
+                hour<=0;
+              end else begin
+                hour<=hour+1;
+              end
+            end else begin
+              minute<=minute+1;
+            end
+          end else begin
+            second<=second+1;
+          end
+        end
+        else begin
+          second<=second;
+          minute<=minute;
+          hour<=hour;
+        end
+      end
+  end
+
+always @(*) begin
+  if((hour>=7&&hour<=9)||(hour>=17&&hour<=19))begin
+    isMainRoadPeak=1;
+  end else begin
+    isMainRoadPeak=0;
+  end
+end
+
   //isSetRGCnt
   reg [CNT_WIDTH-1:0] setRGCnt_r = setRGCnt_default;
   always @(posedge clk or negedge rst_n) begin
@@ -343,7 +393,7 @@ module top (
       setRGCnt_r <= setRGCnt_default;
     end else begin
       if (isSetRGCnt == 1) begin
-        setRGCnt_r <= (Key_plus_pulse) ? (setRGCnt_r + 1) : ((Key_sub_pulse) ? (setRGCnt_r - 1) : (setRGCnt_r));
+        setRGCnt_r <= (isMainRoadPeak)?(2):(1)*(Key_plus_pulse) ? (setRGCnt_r + 1) : ((Key_sub_pulse) ? (setRGCnt_r - 1) : (setRGCnt_r));
       end else begin
         setRGCnt_r <= setRGCnt_r;
       end
@@ -365,6 +415,8 @@ module top (
   end
   assign {RG_cnt_set, Y_cnt_set} = {setRGCnt_r, setYCnt_r};
 
+ 
+
   //seg1
   wire [CNT_WIDTH-1:0] RYGcnt_Display;
   assign RYGcnt_Display = {0, (RYG_state == RYG_state_group2) ? (RYG_cnt + Y_cnt_set) : (RYG_cnt)};
@@ -385,4 +437,5 @@ module top (
   assign SN74HC595_buf  = {G2_L, Y2_L, Y1, R1, G1, G1_L, Y1_L, R1_L};  //{1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1};//
   // assign SN74HC595_buf={1'd0,1'd0,Y1,R1,G1,G2,Y2,R2};
   assign SIM            = {clk, SinglePeriod_start_pulse};
+  
 endmodule  //top
