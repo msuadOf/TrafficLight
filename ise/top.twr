@@ -1,0 +1,104 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt\unwrapped\trce.exe -intstyle ise -v 3 -s 4 -n
+3 -fastpaths -xml top.twx top.ncd -o top.twr top.pcf
+
+Design file:              top.ncd
+Physical constraint file: top.pcf
+Device,package,speed:     xc3s50an,tqg144,-4 (PRODUCTION 1.42 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+INFO:Timing:3390 - This architecture does not support a default System Jitter 
+   value, please add SYSTEM_JITTER constraint to the UCF to modify the Clock 
+   Uncertainty calculation.
+INFO:Timing:3389 - This architecture does not support 'Discrete Jitter' and 
+   'Phase Error' calculations, these terms will be zero in the Clock 
+   Uncertainty calculation.  Please make appropriate modification to 
+   SYSTEM_JITTER to account for the unsupported Discrete Jitter and Phase 
+   Error.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Setup/Hold to clock clk
+------------+------------+------------+------------------+--------+
+            |Max Setup to|Max Hold to |                  | Clock  |
+Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
+------------+------------+------------+------------------+--------+
+Key_ACC     |    1.787(R)|   -0.614(R)|SIM_1_OBUF        |   0.000|
+Key_plus    |    0.663(R)|    0.292(R)|SIM_1_OBUF        |   0.000|
+Key_state<0>|    8.256(R)|   -0.628(R)|SIM_1_OBUF        |   0.000|
+Key_state<1>|    7.556(R)|   -0.507(R)|SIM_1_OBUF        |   0.000|
+Key_sub     |    0.663(R)|    0.292(R)|SIM_1_OBUF        |   0.000|
+------------+------------+------------+------------------+--------+
+
+Clock clk to Pad
+------------------+------------+------------------+--------+
+                  | clk (edge) |                  | Clock  |
+Destination       |   to PAD   |Internal Clock(s) | Phase  |
+------------------+------------+------------------+--------+
+SIM<0>            |    8.516(R)|SIM_1_OBUF        |   0.000|
+SN74HC595_data    |    8.773(R)|SIM_1_OBUF        |   0.000|
+SN74HC595_data_clk|   13.362(R)|SIM_1_OBUF        |   0.000|
+o_G1              |    8.481(R)|SIM_1_OBUF        |   0.000|
+o_G1_L            |    8.583(R)|SIM_1_OBUF        |   0.000|
+o_G2              |    8.630(R)|SIM_1_OBUF        |   0.000|
+o_G2_L            |    8.904(R)|SIM_1_OBUF        |   0.000|
+o_R1              |   11.615(R)|SIM_1_OBUF        |   0.000|
+o_R1_L            |   10.653(R)|SIM_1_OBUF        |   0.000|
+o_R2              |   13.606(R)|SIM_1_OBUF        |   0.000|
+o_R2_L            |   10.353(R)|SIM_1_OBUF        |   0.000|
+o_Y1              |   11.196(R)|SIM_1_OBUF        |   0.000|
+o_Y1_L            |    9.726(R)|SIM_1_OBUF        |   0.000|
+o_Y2              |   11.310(R)|SIM_1_OBUF        |   0.000|
+o_Y2_L            |    9.809(R)|SIM_1_OBUF        |   0.000|
+------------------+------------+------------------+--------+
+
+Clock to Setup on destination clock clk
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+clk            |   14.104|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+Key_ACC        |seg72_dot      |   10.997|
+Key_state<1>   |seg72_dot      |   10.100|
+clk            |SIM<1>         |    5.947|
+---------------+---------------+---------+
+
+
+Analysis completed Tue Nov 07 23:16:27 2023 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 113 MB
+
+
+

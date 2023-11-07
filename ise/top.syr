@@ -1,0 +1,1097 @@
+Release 14.7 - xst P.20131013 (nt)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.47 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.48 secs
+ 
+--> Reading design: top.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "top.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "top"
+Output Format                      : NGC
+Target Device                      : xc3s50an-4-tqg144
+
+---- Source Options
+Top Module Name                    : top
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "../src/clk_div.v" in library work
+Compiling verilog file "../src/SN74HC595.v" in library work
+Module <clk_div> compiled
+Compiling verilog file "../src/numlight.v" in library work
+Module <SN74HC595> compiled
+Compiling verilog file "../src/bin2bcd.v" in library work
+Module <numlight> compiled
+Compiling verilog file "../src/top.v" in library work
+Module <bin2bcd> compiled
+Module <top> compiled
+No errors in compilation
+Analysis of file <"top.prj"> succeeded.
+ 
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for module <top> in library <work> with parameters.
+	CNT_WIDTH = "00000000000000000000000000001011"
+	RYG_state_Night = "0000000"
+	RYG_state_group1 = "0000001"
+	RYG_state_group1L = "0000011"
+	RYG_state_group1Lto2 = "0000100"
+	RYG_state_group1_interrupt = "0001001"
+	RYG_state_group1to1L = "0000010"
+	RYG_state_group2 = "0000101"
+	RYG_state_group2L = "0000111"
+	RYG_state_group2Lto1 = "0001000"
+	RYG_state_group2_interrupt = "0001010"
+	RYG_state_group2to2L = "0000110"
+	setRGCnt_default = "00000011110"
+	setYCnt_default = "00000000101"
+
+Analyzing hierarchy for module <clk_div> in library <work> with parameters.
+	div_n_RegWith = "00000000000000000000000001000000"
+
+Analyzing hierarchy for module <SN74HC595> in library <work>.
+
+Analyzing hierarchy for module <bin2bcd> in library <work> with parameters.
+	W = "00000000000000000000000000001110"
+
+Analyzing hierarchy for module <numlight> in library <work> with parameters.
+	db = "1100000"
+	eight = "0000000"
+	errcod = "1111110"
+	five = "0100100"
+	four = "1001100"
+	nine = "0000100"
+	one = "1001111"
+	seven = "0001111"
+	six = "0100000"
+	three = "0000110"
+	two = "0010010"
+	zero = "0000001"
+
+Analyzing hierarchy for module <clk_div> in library <work> with parameters.
+	div_n_RegWith = "00000000000000000000000001000000"
+
+Analyzing hierarchy for module <clk_div> in library <work> with parameters.
+	div_n_RegWith = "00000000000000000000000001000000"
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing top module <top>.
+	CNT_WIDTH = 32'sb00000000000000000000000000001011
+	RYG_state_Night = 7'b0000000
+	RYG_state_group1 = 7'b0000001
+	RYG_state_group1L = 7'b0000011
+	RYG_state_group1Lto2 = 7'b0000100
+	RYG_state_group1_interrupt = 7'b0001001
+	RYG_state_group1to1L = 7'b0000010
+	RYG_state_group2 = 7'b0000101
+	RYG_state_group2L = 7'b0000111
+	RYG_state_group2Lto1 = 7'b0001000
+	RYG_state_group2_interrupt = 7'b0001010
+	RYG_state_group2to2L = 7'b0000110
+	setRGCnt_default = 11'b00000011110
+	setYCnt_default = 11'b00000000101
+Module <top> is correct for synthesis.
+ 
+Analyzing module <clk_div> in library <work>.
+	div_n_RegWith = 32'sb00000000000000000000000001000000
+Module <clk_div> is correct for synthesis.
+ 
+Analyzing module <SN74HC595> in library <work>.
+Module <SN74HC595> is correct for synthesis.
+ 
+Analyzing module <bin2bcd> in library <work>.
+	W = 32'sb00000000000000000000000000001110
+Module <bin2bcd> is correct for synthesis.
+ 
+Analyzing module <numlight> in library <work>.
+	db = 7'b1100000
+	eight = 7'b0000000
+	errcod = 7'b1111110
+	five = 7'b0100100
+	four = 7'b1001100
+	nine = 7'b0000100
+	one = 7'b1001111
+	seven = 7'b0001111
+	six = 7'b0100000
+	three = 7'b0000110
+	two = 7'b0010010
+	zero = 7'b0000001
+WARNING:Xst:905 - "../src/numlight.v" line 133: One or more signals are missing in the sensitivity list of always block. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <firreg>, <secreg>, <thireg>, <foureg>
+Module <numlight> is correct for synthesis.
+ 
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <clk_div>.
+    Related source file is "../src/clk_div.v".
+    Found 64-bit comparator equal for signal <clk_out$cmp_eq0000> created at line 26.
+    Found 64-bit comparator lessequal for signal <div_clk$cmp_le0000> created at line 21.
+    Found 64-bit up counter for signal <div_clk_cnt>.
+    Found 64-bit comparator less for signal <div_clk_cnt$cmp_lt0000> created at line 15.
+    Summary:
+	inferred   1 Counter(s).
+	inferred   3 Comparator(s).
+Unit <clk_div> synthesized.
+
+
+Synthesizing Unit <bin2bcd>.
+    Related source file is "../src/bin2bcd.v".
+    Found 4-bit adder for signal <$add0000> created at line 15.
+    Found 4-bit adder for signal <$add0001> created at line 15.
+    Found 4-bit adder for signal <$add0002> created at line 15.
+    Found 4-bit adder for signal <$add0003> created at line 15.
+    Found 4-bit adder for signal <$add0004> created at line 15.
+    Found 4-bit adder for signal <$add0005> created at line 15.
+    Found 4-bit adder for signal <$add0006> created at line 15.
+    Found 4-bit adder for signal <$add0007> created at line 15.
+    Found 4-bit adder for signal <$add0008> created at line 15.
+    Found 4-bit adder for signal <$add0009> created at line 15.
+    Found 4-bit adder for signal <$add0010> created at line 15.
+    Found 4-bit adder for signal <$add0011> created at line 15.
+    Found 4-bit adder for signal <$add0012> created at line 15.
+    Found 4-bit adder for signal <$add0013> created at line 15.
+    Found 4-bit adder for signal <$add0014> created at line 15.
+    Found 4-bit adder for signal <$add0015> created at line 15.
+    Found 4-bit adder for signal <$add0016> created at line 15.
+    Found 4-bit adder for signal <$add0017> created at line 15.
+    Found 4-bit adder for signal <$add0018> created at line 15.
+    Found 4-bit adder for signal <$add0019> created at line 15.
+    Found 4-bit adder for signal <$add0020> created at line 15.
+    Found 4-bit adder for signal <$add0021> created at line 15.
+    Found 4-bit adder for signal <$add0022> created at line 15.
+    Found 4-bit adder for signal <$add0023> created at line 15.
+    Found 4-bit adder for signal <$add0024> created at line 15.
+    Found 4-bit adder for signal <$add0025> created at line 15.
+    Found 4-bit comparator greater for signal <bcd_1$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <bcd_13$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <bcd_5$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <bcd_9$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0000$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0003$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0006$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0012$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0015$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0019$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0022$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0026$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0029$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0036$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0039$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0043$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0047$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0050$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0054$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0058$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0061$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0065$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0072$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0075$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0079$cmp_gt0000> created at line 14.
+    Found 4-bit comparator greater for signal <mux0083$cmp_gt0000> created at line 14.
+    Summary:
+	inferred  26 Adder/Subtractor(s).
+	inferred  26 Comparator(s).
+Unit <bin2bcd> synthesized.
+
+
+Synthesizing Unit <numlight>.
+    Related source file is "../src/numlight.v".
+    Found 16x7-bit ROM for signal <firreg$mux0000> created at line 70.
+    Found 16x7-bit ROM for signal <secreg$mux0000> created at line 83.
+    Found 16x7-bit ROM for signal <thireg$mux0000> created at line 96.
+    Found 16x7-bit ROM for signal <foureg$mux0000> created at line 109.
+    Found 7-bit register for signal <num>.
+    Found 4-bit register for signal <bitchose>.
+    Found 2-bit up counter for signal <bitnum>.
+    Found 2-bit comparator less for signal <bitnum$cmp_lt0000> created at line 125.
+    Found 1-of-4 decoder for signal <bitreg>.
+    Found 7-bit register for signal <firreg>.
+    Found 7-bit register for signal <foureg>.
+    Found 7-bit 4-to-1 multiplexer for signal <numreg>.
+    Found 7-bit register for signal <secreg>.
+    Found 7-bit register for signal <thireg>.
+    Summary:
+	inferred   4 ROM(s).
+	inferred   1 Counter(s).
+	inferred  39 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   7 Multiplexer(s).
+	inferred   1 Decoder(s).
+Unit <numlight> synthesized.
+
+
+Synthesizing Unit <SN74HC595>.
+    Related source file is "../src/SN74HC595.v".
+WARNING:Xst:646 - Signal <SN74HC595_refresh_clk_pulse> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found 11-bit up counter for signal <cnt>.
+    Found 11-bit comparator greater for signal <cnt$cmp_gt0000> created at line 58.
+    Found 1-bit register for signal <data_clk_r>.
+    Found 8-bit register for signal <i_buf_r>.
+    Found 1-bit register for signal <o_sdata>.
+    Found 11-bit comparator lessequal for signal <o_sdata$cmp_le0000> created at line 58.
+    Summary:
+	inferred   1 Counter(s).
+	inferred  10 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred   1 Multiplexer(s).
+Unit <SN74HC595> synthesized.
+
+
+Synthesizing Unit <top>.
+    Related source file is "../src/top.v".
+WARNING:Xst:646 - Signal <seg72_none> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <seg72_disp_bin_r> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <seg71_none> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <none> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <clk_10k> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+    Found finite state machine <FSM_0> for signal <RYG_state>.
+    -----------------------------------------------------------------------
+    | States             | 11                                             |
+    | Transitions        | 44                                             |
+    | Inputs             | 3                                              |
+    | Outputs            | 19                                             |
+    | Clock              | clk                       (rising_edge)        |
+    | Clock enable       | RYG_state$not0000         (positive)           |
+    | Reset              | isNight                   (positive)           |
+    | Reset type         | synchronous                                    |
+    | Reset State        | 0000000                                        |
+    | Power Up State     | 0000000                                        |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+WARNING:Xst:643 - "../src/top.v" line 474: The result of a 32x7-bit multiplication is partially used. Only the 32 least significant bits are used. If you are doing this on purpose, you may safely ignore this warning. Otherwise, make sure you are not losing information, leading to unexpected circuit behavior.
+    Found 1-bit register for signal <clk_1s_r>.
+    Found 1-bit register for signal <clk_1s_rr>.
+    Found 32-bit up counter for signal <hour>.
+    Found 32-bit comparator greatequal for signal <hour$cmp_ge0000> created at line 379.
+    Found 32-bit comparator less for signal <hour$cmp_lt0000> created at line 377.
+    Found 32-bit comparator greatequal for signal <isMainRoadPeak$cmp_ge0000> created at line 400.
+    Found 32-bit comparator greatequal for signal <isMainRoadPeak$cmp_ge0001> created at line 400.
+    Found 32-bit comparator lessequal for signal <isMainRoadPeak$cmp_le0000> created at line 400.
+    Found 32-bit comparator lessequal for signal <isMainRoadPeak$cmp_le0001> created at line 400.
+    Found 1-bit register for signal <Key_groupx_interrupt_start_pulse>.
+    Found 1-bit register for signal <Key_plus_r>.
+    Found 1-bit register for signal <Key_plus_rr>.
+    Found 1-bit register for signal <Key_sub_r>.
+    Found 1-bit register for signal <Key_sub_rr>.
+    Found 32-bit up counter for signal <minute>.
+    Found 32-bit comparator greatequal for signal <minute$cmp_ge0000> created at line 377.
+    Found 32-bit comparator less for signal <minute$cmp_lt0000> created at line 375.
+    Found 11-bit down counter for signal <RYG_cnt>.
+    Found 11-bit comparator greater for signal <RYG_cnt$cmp_gt0000> created at line 316.
+    Found 11-bit adder for signal <RYGcnt_group2_Display$add0000> created at line 462.
+    Found 11-bit adder for signal <RYGcnt_group2_Display$add0001> created at line 463.
+    Found 11-bit adder for signal <RYGcnt_group2_Display$add0002> created at line 464.
+    Found 11-bit adder for signal <RYGcnt_group2_Display$addsub0000> created at line 462.
+    Found 32-bit up counter for signal <second>.
+    Found 32-bit comparator greatequal for signal <second$cmp_ge0000> created at line 375.
+    Found 32-bit adder for signal <seg72_disp_bin$addsub0000> created at line 474.
+    Found 32x7-bit multiplier for signal <seg72_disp_bin$mult0001> created at line 474.
+    Found 11-bit updown counter for signal <setRGCnt_r>.
+    Found 11-bit updown counter for signal <setYCnt_r>.
+    Found 1-bit register for signal <SinglePeriod_start_pulse>.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   6 Counter(s).
+	inferred   8 D-type flip-flop(s).
+	inferred   5 Adder/Subtractor(s).
+	inferred   1 Multiplier(s).
+	inferred  10 Comparator(s).
+Unit <top> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# ROMs                                                 : 8
+ 16x7-bit ROM                                          : 8
+# Multipliers                                          : 1
+ 32x7-bit multiplier                                   : 1
+# Adders/Subtractors                                   : 57
+ 11-bit adder                                          : 4
+ 32-bit adder                                          : 1
+ 4-bit adder                                           : 52
+# Counters                                             : 14
+ 11-bit down counter                                   : 1
+ 11-bit up counter                                     : 1
+ 11-bit updown counter                                 : 2
+ 2-bit up counter                                      : 2
+ 32-bit up counter                                     : 3
+ 64-bit up counter                                     : 5
+# Registers                                            : 23
+ 1-bit register                                        : 10
+ 4-bit register                                        : 2
+ 7-bit register                                        : 10
+ 8-bit register                                        : 1
+# Comparators                                          : 81
+ 11-bit comparator greater                             : 2
+ 11-bit comparator lessequal                           : 1
+ 2-bit comparator less                                 : 2
+ 32-bit comparator greatequal                          : 5
+ 32-bit comparator less                                : 2
+ 32-bit comparator lessequal                           : 2
+ 4-bit comparator greater                              : 52
+ 64-bit comparator equal                               : 5
+ 64-bit comparator less                                : 5
+ 64-bit comparator lessequal                           : 5
+# Multiplexers                                         : 3
+ 1-bit 8-to-1 multiplexer                              : 1
+ 7-bit 4-to-1 multiplexer                              : 2
+# Decoders                                             : 2
+ 1-of-4 decoder                                        : 2
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <RYG_state/FSM> on signal <RYG_state[1:11]> with one-hot encoding.
+------------------------
+ State   | Encoding
+------------------------
+ 0000000 | 00000000001
+ 0000001 | 00000001000
+ 0000010 | 00000010000
+ 0000011 | 00000100000
+ 0000100 | 00001000000
+ 0000101 | 00010000000
+ 0000110 | 00100000000
+ 0000111 | 01000000000
+ 0001000 | 10000000000
+ 0001001 | 00000000010
+ 0001010 | 00000000100
+------------------------
+
+Synthesizing (advanced) Unit <numlight>.
+INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_firreg_mux0000> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
+INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_secreg_mux0000> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
+INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_foureg_mux0000> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
+INFO:Xst:3034 - In order to maximize performance and save block RAM resources, the small ROM <Mrom_thireg_mux0000> will be implemented on LUT. If you want to force its implementation on block, use option/constraint rom_style.
+Unit <numlight> synthesized (advanced).
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# FSMs                                                 : 1
+# ROMs                                                 : 8
+ 16x7-bit ROM                                          : 8
+# Multipliers                                          : 1
+ 32x7-bit multiplier                                   : 1
+# Adders/Subtractors                                   : 57
+ 11-bit adder                                          : 4
+ 14-bit adder                                          : 1
+ 4-bit adder                                           : 52
+# Counters                                             : 14
+ 11-bit down counter                                   : 1
+ 11-bit up counter                                     : 1
+ 11-bit updown counter                                 : 2
+ 2-bit up counter                                      : 2
+ 32-bit up counter                                     : 3
+ 64-bit up counter                                     : 5
+# Registers                                            : 96
+ Flip-Flops                                            : 96
+# Comparators                                          : 81
+ 11-bit comparator greater                             : 2
+ 11-bit comparator lessequal                           : 1
+ 2-bit comparator less                                 : 2
+ 32-bit comparator greatequal                          : 5
+ 32-bit comparator less                                : 2
+ 32-bit comparator lessequal                           : 2
+ 4-bit comparator greater                              : 52
+ 64-bit comparator equal                               : 5
+ 64-bit comparator less                                : 5
+ 64-bit comparator lessequal                           : 5
+# Multiplexers                                         : 3
+ 1-bit 8-to-1 multiplexer                              : 1
+ 7-bit 4-to-1 multiplexer                              : 2
+# Decoders                                             : 2
+ 1-of-4 decoder                                        : 2
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+WARNING:Xst:2677 - Node <Mmult_seg72_disp_bin_mult00011> of sequential type is unconnected in block <top>.
+
+Optimizing unit <top> ...
+
+Optimizing unit <bin2bcd> ...
+
+Optimizing unit <numlight> ...
+
+Optimizing unit <SN74HC595> ...
+WARNING:Xst:1426 - The value init of the FF/Latch seg71/firreg_5 hinder the constant cleaning in the block top.
+   You should achieve better results by setting this init to 0.
+
+Mapping all equations...
+Building and optimizing final netlist ...
+INFO:Xst:2261 - The FF/Latch <seg71/firreg_6> in Unit <top> is equivalent to the following FF/Latch, which will be removed : <seg71/firreg_3> 
+Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 96.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 570
+ Flip-Flops                                            : 570
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : top.ngr
+Top Level Output File Name         : top
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 46
+
+Cell Usage :
+# BELS                             : 2504
+#      GND                         : 1
+#      INV                         : 39
+#      LUT1                        : 121
+#      LUT2                        : 82
+#      LUT2_L                      : 1
+#      LUT3                        : 472
+#      LUT3_D                      : 9
+#      LUT3_L                      : 1
+#      LUT4                        : 489
+#      LUT4_D                      : 2
+#      LUT4_L                      : 3
+#      MUXCY                       : 743
+#      MUXF5                       : 32
+#      MUXF6                       : 1
+#      VCC                         : 1
+#      XORCY                       : 507
+# FlipFlops/Latches                : 570
+#      FD                          : 17
+#      FD_1                        : 30
+#      FDC                         : 320
+#      FDE                         : 25
+#      FDR                         : 24
+#      FDR_1                       : 10
+#      FDRE                        : 128
+#      FDS_1                       : 15
+#      FDSE                        : 1
+# Clock Buffers                    : 3
+#      BUFG                        : 3
+# IO Buffers                       : 46
+#      IBUF                        : 6
+#      OBUF                        : 40
+# MULTs                            : 1
+#      MULT18X18SIO                : 1
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s50antqg144-4 
+
+ Number of Slices:                      651  out of    704    92%  
+ Number of Slice Flip Flops:            570  out of   1408    40%  
+ Number of 4 input LUTs:               1219  out of   1408    86%  
+ Number of IOs:                          46
+ Number of bonded IOBs:                  46  out of    108    42%  
+ Number of MULT18X18SIOs:                 1  out of      3    33%  
+ Number of GCLKs:                         3  out of     24    12%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+---------------------------------------------------------------------------------------------+----------------------------------------------------------+-------+
+Clock Signal                                                                                 | Clock buffer(FF name)                                    | Load  |
+---------------------------------------------------------------------------------------------+----------------------------------------------------------+-------+
+clk                                                                                          | IBUF+BUFG                                                | 425   |
+c2/div_clk1(c2/Mcompar_div_clk_cmp_le0000_cy<18>:O)                                          | BUFG(*)(seg72/bitnum_1)                                  | 81    |
+SN74HC595_data_clk_OBUF1(u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<16>:O)| BUFG(*)(u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_63)| 64    |
+---------------------------------------------------------------------------------------------+----------------------------------------------------------+-------+
+(*) These 2 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+-----------------------------------+------------------------+-------+
+Control Signal                     | Buffer(FF name)        | Load  |
+-----------------------------------+------------------------+-------+
+N0(XST_GND:G)                      | NONE(c1/div_clk_cnt_0) | 320   |
+-----------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -4
+
+   Minimum period: 12.773ns (Maximum Frequency: 78.293MHz)
+   Minimum input arrival time before clock: 37.373ns
+   Maximum output required time after clock: 8.814ns
+   Maximum combinational path delay: 7.704ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clk'
+  Clock period: 12.773ns (frequency: 78.293MHz)
+  Total number of paths / destination ports: 580629 / 693
+-------------------------------------------------------------------------
+Delay:               12.773ns (Levels of Logic = 86)
+  Source:            c10/div_clk_cnt_0 (FF)
+  Destination:       c10/div_clk_cnt_63 (FF)
+  Source Clock:      clk rising
+  Destination Clock: clk rising
+
+  Data Path: c10/div_clk_cnt_0 to c10/div_clk_cnt_63
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              3   0.591   0.674  c10/div_clk_cnt_0 (c10/div_clk_cnt_0)
+     LUT1:I0->O            1   0.648   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<0>_rt (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<0>_rt)
+     MUXCY:S->O            1   0.632   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<0> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<0>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<1> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<1>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<2> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<2>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<3> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<3>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<4> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<4>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<5> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<5>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<6> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<6>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<7> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<7>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<8> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<8>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<9> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<9>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<10> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<10>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<11> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<11>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<12> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<12>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<13> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<13>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<14> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<14>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<15> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<15>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<16> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<16>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<17> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<17>)
+     MUXCY:CI->O           1   0.269   0.500  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<18> (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<18>)
+     LUT3:I1->O           65   0.643   1.305  c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<20>1 (c10/Mcompar_div_clk_cnt_cmp_lt0000_cy<20>)
+     LUT3:I2->O            1   0.648   0.000  c10/Mcount_div_clk_cnt_lut<0> (c10/Mcount_div_clk_cnt_lut<0>)
+     MUXCY:S->O            1   0.632   0.000  c10/Mcount_div_clk_cnt_cy<0> (c10/Mcount_div_clk_cnt_cy<0>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<1> (c10/Mcount_div_clk_cnt_cy<1>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<2> (c10/Mcount_div_clk_cnt_cy<2>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<3> (c10/Mcount_div_clk_cnt_cy<3>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<4> (c10/Mcount_div_clk_cnt_cy<4>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<5> (c10/Mcount_div_clk_cnt_cy<5>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<6> (c10/Mcount_div_clk_cnt_cy<6>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<7> (c10/Mcount_div_clk_cnt_cy<7>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<8> (c10/Mcount_div_clk_cnt_cy<8>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<9> (c10/Mcount_div_clk_cnt_cy<9>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<10> (c10/Mcount_div_clk_cnt_cy<10>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<11> (c10/Mcount_div_clk_cnt_cy<11>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<12> (c10/Mcount_div_clk_cnt_cy<12>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<13> (c10/Mcount_div_clk_cnt_cy<13>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<14> (c10/Mcount_div_clk_cnt_cy<14>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<15> (c10/Mcount_div_clk_cnt_cy<15>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<16> (c10/Mcount_div_clk_cnt_cy<16>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<17> (c10/Mcount_div_clk_cnt_cy<17>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<18> (c10/Mcount_div_clk_cnt_cy<18>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<19> (c10/Mcount_div_clk_cnt_cy<19>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<20> (c10/Mcount_div_clk_cnt_cy<20>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<21> (c10/Mcount_div_clk_cnt_cy<21>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<22> (c10/Mcount_div_clk_cnt_cy<22>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<23> (c10/Mcount_div_clk_cnt_cy<23>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<24> (c10/Mcount_div_clk_cnt_cy<24>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<25> (c10/Mcount_div_clk_cnt_cy<25>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<26> (c10/Mcount_div_clk_cnt_cy<26>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<27> (c10/Mcount_div_clk_cnt_cy<27>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<28> (c10/Mcount_div_clk_cnt_cy<28>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<29> (c10/Mcount_div_clk_cnt_cy<29>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<30> (c10/Mcount_div_clk_cnt_cy<30>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<31> (c10/Mcount_div_clk_cnt_cy<31>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<32> (c10/Mcount_div_clk_cnt_cy<32>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<33> (c10/Mcount_div_clk_cnt_cy<33>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<34> (c10/Mcount_div_clk_cnt_cy<34>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<35> (c10/Mcount_div_clk_cnt_cy<35>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<36> (c10/Mcount_div_clk_cnt_cy<36>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<37> (c10/Mcount_div_clk_cnt_cy<37>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<38> (c10/Mcount_div_clk_cnt_cy<38>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<39> (c10/Mcount_div_clk_cnt_cy<39>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<40> (c10/Mcount_div_clk_cnt_cy<40>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<41> (c10/Mcount_div_clk_cnt_cy<41>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<42> (c10/Mcount_div_clk_cnt_cy<42>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<43> (c10/Mcount_div_clk_cnt_cy<43>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<44> (c10/Mcount_div_clk_cnt_cy<44>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<45> (c10/Mcount_div_clk_cnt_cy<45>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<46> (c10/Mcount_div_clk_cnt_cy<46>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<47> (c10/Mcount_div_clk_cnt_cy<47>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<48> (c10/Mcount_div_clk_cnt_cy<48>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<49> (c10/Mcount_div_clk_cnt_cy<49>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<50> (c10/Mcount_div_clk_cnt_cy<50>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<51> (c10/Mcount_div_clk_cnt_cy<51>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<52> (c10/Mcount_div_clk_cnt_cy<52>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<53> (c10/Mcount_div_clk_cnt_cy<53>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<54> (c10/Mcount_div_clk_cnt_cy<54>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<55> (c10/Mcount_div_clk_cnt_cy<55>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<56> (c10/Mcount_div_clk_cnt_cy<56>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<57> (c10/Mcount_div_clk_cnt_cy<57>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<58> (c10/Mcount_div_clk_cnt_cy<58>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<59> (c10/Mcount_div_clk_cnt_cy<59>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<60> (c10/Mcount_div_clk_cnt_cy<60>)
+     MUXCY:CI->O           1   0.065   0.000  c10/Mcount_div_clk_cnt_cy<61> (c10/Mcount_div_clk_cnt_cy<61>)
+     MUXCY:CI->O           0   0.065   0.000  c10/Mcount_div_clk_cnt_cy<62> (c10/Mcount_div_clk_cnt_cy<62>)
+     XORCY:CI->O           1   0.844   0.000  c10/Mcount_div_clk_cnt_xor<63> (c10/Mcount_div_clk_cnt63)
+     FDC:D                     0.252          c10/div_clk_cnt_63
+    ----------------------------------------
+    Total                     12.773ns (10.294ns logic, 2.479ns route)
+                                       (80.6% logic, 19.4% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'c2/div_clk1'
+  Clock period: 8.098ns (frequency: 123.487MHz)
+  Total number of paths / destination ports: 128 / 36
+-------------------------------------------------------------------------
+Delay:               4.049ns (Levels of Logic = 2)
+  Source:            seg72/bitnum_0 (FF)
+  Destination:       seg72/num_6 (FF)
+  Source Clock:      c2/div_clk1 falling
+  Destination Clock: c2/div_clk1 rising
+
+  Data Path: seg72/bitnum_0 to seg72/num_6
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             20   0.591   1.245  seg72/bitnum_0 (seg72/bitnum_0)
+     LUT3:I0->O            1   0.648   0.000  seg72/Mmux_numreg_3 (seg72/Mmux_numreg_3)
+     MUXF5:I1->O           1   0.276   0.420  seg72/Mmux_numreg_2_f5 (seg72/numreg<0>)
+     FDR:R                     0.869          seg72/num_0
+    ----------------------------------------
+    Total                      4.049ns (2.384ns logic, 1.665ns route)
+                                       (58.9% logic, 41.1% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'SN74HC595_data_clk_OBUF1'
+  Clock period: 12.448ns (frequency: 80.337MHz)
+  Total number of paths / destination ports: 139296 / 64
+-------------------------------------------------------------------------
+Delay:               12.448ns (Levels of Logic = 81)
+  Source:            u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_3 (FF)
+  Destination:       u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_63 (FF)
+  Source Clock:      SN74HC595_data_clk_OBUF1 rising
+  Destination Clock: SN74HC595_data_clk_OBUF1 rising
+
+  Data Path: u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_3 to u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_63
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              3   0.591   0.674  u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_3 (u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_3)
+     LUT4:I0->O            1   0.648   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_lut<1> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_lut<1>)
+     MUXCY:S->O            1   0.632   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<1> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<1>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<2> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<2>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<3> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<3>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<4> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<4>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<5> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<5>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<6> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<6>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<7> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<7>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<8> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<8>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<9> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<9>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<10> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<10>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<11> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<11>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<12> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<12>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<13> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<13>)
+     MUXCY:CI->O           1   0.269   0.500  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<14> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<14>)
+     LUT3:I1->O           65   0.643   1.305  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<16>1 (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cnt_cmp_lt0000_cy<16>)
+     LUT3:I2->O            1   0.648   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_lut<0> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_lut<0>)
+     MUXCY:S->O            1   0.632   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<0> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<0>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<1> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<1>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<2> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<2>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<3> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<3>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<4> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<4>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<5> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<5>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<6> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<6>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<7> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<7>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<8> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<8>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<9> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<9>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<10> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<10>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<11> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<11>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<12> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<12>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<13> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<13>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<14> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<14>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<15> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<15>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<16> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<16>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<17> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<17>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<18> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<18>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<19> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<19>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<20> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<20>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<21> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<21>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<22> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<22>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<23> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<23>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<24> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<24>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<25> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<25>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<26> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<26>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<27> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<27>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<28> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<28>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<29> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<29>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<30> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<30>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<31> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<31>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<32> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<32>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<33> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<33>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<34> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<34>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<35> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<35>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<36> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<36>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<37> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<37>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<38> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<38>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<39> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<39>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<40> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<40>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<41> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<41>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<42> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<42>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<43> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<43>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<44> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<44>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<45> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<45>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<46> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<46>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<47> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<47>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<48> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<48>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<49> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<49>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<50> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<50>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<51> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<51>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<52> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<52>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<53> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<53>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<54> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<54>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<55> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<55>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<56> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<56>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<57> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<57>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<58> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<58>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<59> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<59>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<60> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<60>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<61> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<61>)
+     MUXCY:CI->O           0   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<62> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_cy<62>)
+     XORCY:CI->O           1   0.844   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt_xor<63> (u_SN74HC595/_SN74HC595_div_500_8_/Mcount_div_clk_cnt63)
+     FDC:D                     0.252          u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_63
+    ----------------------------------------
+    Total                     12.448ns (9.969ns logic, 2.479ns route)
+                                       (80.1% logic, 19.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
+  Total number of paths / destination ports: 207 / 71
+-------------------------------------------------------------------------
+Offset:              6.795ns (Levels of Logic = 4)
+  Source:            Key_state<1> (PAD)
+  Destination:       RYG_state_FSM_FFd3 (FF)
+  Destination Clock: clk rising
+
+  Data Path: Key_state<1> to RYG_state_FSM_FFd3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            37   0.849   1.344  Key_state_1_IBUF (Key_state_1_IBUF)
+     LUT2:I1->O            6   0.643   0.749  isRun_cmp_eq00001 (isRun)
+     LUT4:I1->O            3   0.643   0.674  RYG_state_and00001 (RYG_state_and0000)
+     LUT4:I0->O           11   0.648   0.933  RYG_state_not00011 (RYG_state_not0001)
+     FDRE:CE                   0.312          RYG_state_FSM_FFd3
+    ----------------------------------------
+    Total                      6.795ns (3.095ns logic, 3.700ns route)
+                                       (45.5% logic, 54.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'c2/div_clk1'
+  Total number of paths / destination ports: 300490861 / 78
+-------------------------------------------------------------------------
+Offset:              37.373ns (Levels of Logic = 29)
+  Source:            Key_state<1> (PAD)
+  Destination:       seg72/firreg_3 (FF)
+  Destination Clock: c2/div_clk1 falling
+
+  Data Path: Key_state<1> to seg72/firreg_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            37   0.849   1.344  Key_state_1_IBUF (Key_state_1_IBUF)
+     LUT2:I1->O           14   0.643   1.143  seg72_disp_bin_or00001 (seg72_disp_bin_or0000)
+     LUT4:I0->O           11   0.648   0.965  seg72_disp_bin_mux0000<0>61 (N12)
+     LUT4:I2->O            1   0.648   0.452  seg72_disp_bin_mux0000<10>32_SW0 (N98)
+     LUT4:I2->O            6   0.648   0.672  seg72_disp_bin_mux0000<10>32 (seg72_disp_bin<10>)
+     LUT4:I3->O            2   0.648   0.479  b2b2/Madd__add0001_cy<1>11 (b2b2/Madd__add0001_cy<1>)
+     LUT4:I2->O           11   0.648   1.076  b2b2/mux0003_cmp_gt00001 (b2b2/mux0003_cmp_gt0000)
+     LUT4:I0->O            4   0.648   0.590  b2b2/_mux00041 (b2b2/Madd__add0002_lut<2>)
+     LUT4:I3->O            9   0.648   0.823  b2b2/_mux001111 (b2b2/N26)
+     LUT4:I3->O            1   0.648   0.000  b2b2/_mux000712 (b2b2/_mux000711)
+     MUXF5:I0->O           4   0.276   0.619  b2b2/_mux00071_f5 (b2b2/Madd__add0003_lut<2>)
+     LUT3:I2->O            3   0.648   0.674  b2b2/_mux001811 (b2b2/N27)
+     LUT4:I0->O            3   0.648   0.674  b2b2/Madd__add0006_cy<1>11 (b2b2/Madd__add0006_cy<1>)
+     LUT2:I0->O            1   0.648   0.000  b2b2/mux0022_cmp_gt00001 (b2b2/mux0022_cmp_gt00001)
+     MUXF5:I1->O           8   0.276   0.900  b2b2/mux0022_cmp_gt0000_f5 (b2b2/mux0022_cmp_gt0000)
+     LUT3:I0->O            4   0.648   0.730  b2b2/_mux003011 (b2b2/N7)
+     LUT4:I0->O            4   0.648   0.619  b2b2/_mux00301 (b2b2/Madd__add0010_lut<2>)
+     LUT3:I2->O            3   0.648   0.674  b2b2/_mux004611 (b2b2/N32)
+     LUT4:I0->O            2   0.648   0.479  b2b2/Madd__add0014_cy<1>11 (b2b2/Madd__add0014_cy<1>)
+     LUT4:I2->O            6   0.648   0.701  b2b2/mux0054_cmp_gt0000 (b2b2/mux0054_cmp_gt0000)
+     LUT3:I2->O            1   0.648   0.423  b2b2/_mux005521 (b2b2/N151)
+     LUT4:I3->O            4   0.648   0.730  b2b2/_mux00551 (b2b2/Madd__add0017_lut<2>)
+     LUT4:I0->O            5   0.648   0.713  b2b2/_mux00651 (b2b2/Madd__add0020_lut<3>)
+     LUT4:I1->O            6   0.643   0.672  b2b2/_mux00861 (b2b2/Madd__add0025_cy<0>)
+     LUT4:I3->O            2   0.648   0.479  b2b2/Madd__add0025_cy<1>11 (b2b2/Madd__add0025_cy<1>)
+     LUT4:I2->O            5   0.648   0.776  b2b2/bcd_16_mux0000 (b2b2/bcd<16>)
+     LUT4:I0->O            1   0.648   0.000  b2b2/bcd_14_mux000011 (b2b2/bcd_14_mux00001)
+     MUXF5:I1->O           7   0.276   0.788  b2b2/bcd_14_mux00001_f5 (seg72_disp_bcd<14>)
+     LUT4:I1->O            2   0.643   0.447  seg72/Mrom_firreg_mux000061 (seg72/Mrom_firreg_mux00006)
+     FDS_1:S                   0.869          seg72/firreg_3
+    ----------------------------------------
+    Total                     37.373ns (18.731ns logic, 18.642ns route)
+                                       (50.1% logic, 49.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'c2/div_clk1'
+  Total number of paths / destination ports: 26 / 23
+-------------------------------------------------------------------------
+Offset:              7.869ns (Levels of Logic = 3)
+  Source:            seg72/bitchose_2 (FF)
+  Destination:       seg72_dot (PAD)
+  Source Clock:      c2/div_clk1 rising
+
+  Data Path: seg72/bitchose_2 to seg72_dot
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q              2   0.591   0.590  seg72/bitchose_2 (seg72/bitchose_2)
+     LUT3:I0->O            1   0.648   0.452  seg72_dot_and0000_SW1 (N100)
+     LUT4:I2->O            1   0.648   0.420  seg72_dot_and0000 (seg72_dot_OBUF)
+     OBUF:I->O                 4.520          seg72_dot_OBUF (seg72_dot)
+    ----------------------------------------
+    Total                      7.869ns (6.407ns logic, 1.462ns route)
+                                       (81.4% logic, 18.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
+  Total number of paths / destination ports: 92 / 15
+-------------------------------------------------------------------------
+Offset:              8.814ns (Levels of Logic = 19)
+  Source:            u_SN74HC595/_SN74HC595_div_500_/div_clk_cnt_2 (FF)
+  Destination:       SN74HC595_data_clk (PAD)
+  Source Clock:      clk rising
+
+  Data Path: u_SN74HC595/_SN74HC595_div_500_/div_clk_cnt_2 to SN74HC595_data_clk
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              3   0.591   0.674  u_SN74HC595/_SN74HC595_div_500_/div_clk_cnt_2 (u_SN74HC595/_SN74HC595_div_500_/div_clk_cnt_2)
+     LUT2:I0->O            1   0.648   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_lut<0> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_lut<0>)
+     MUXCY:S->O            1   0.632   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<0> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<0>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<1> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<1>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<2> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<2>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<3> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<3>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<4> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<4>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<5> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<5>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<6> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<6>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<7> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<7>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<8> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<8>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<9> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<9>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<10> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<10>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<11> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<11>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<12> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<12>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<13> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<13>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<14> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<14>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<15> (u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<15>)
+     MUXCY:CI->O           5   0.141   0.633  u_SN74HC595/_SN74HC595_div_500_/Mcompar_div_clk_cmp_le0000_cy<16> (SN74HC595_data_clk_OBUF1)
+     OBUF:I->O                 4.520          SN74HC595_data_clk_OBUF (SN74HC595_data_clk)
+    ----------------------------------------
+    Total                      8.814ns (7.507ns logic, 1.307ns route)
+                                       (85.2% logic, 14.8% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'SN74HC595_data_clk_OBUF1'
+  Total number of paths / destination ports: 62 / 1
+-------------------------------------------------------------------------
+Offset:              8.664ns (Levels of Logic = 18)
+  Source:            u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_2 (FF)
+  Destination:       SN74HC595_refresh_clk (PAD)
+  Source Clock:      SN74HC595_data_clk_OBUF1 rising
+
+  Data Path: u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_2 to SN74HC595_refresh_clk
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q              3   0.591   0.674  u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_2 (u_SN74HC595/_SN74HC595_div_500_8_/div_clk_cnt_2)
+     LUT4:I0->O            1   0.648   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_lut<0> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_lut<0>)
+     MUXCY:S->O            1   0.632   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<0> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<0>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<1> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<1>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<2> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<2>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<3> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<3>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<4> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<4>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<5> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<5>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<6> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<6>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<7> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<7>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<8> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<8>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<9> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<9>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<10> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<10>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<11> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<11>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<12> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<12>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<13> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<13>)
+     MUXCY:CI->O           1   0.065   0.000  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<14> (u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<14>)
+     MUXCY:CI->O           1   0.269   0.420  u_SN74HC595/_SN74HC595_div_500_8_/Mcompar_div_clk_cmp_le0000_cy<15> (SN74HC595_refresh_clk_OBUF)
+     OBUF:I->O                 4.520          SN74HC595_refresh_clk_OBUF (SN74HC595_refresh_clk)
+    ----------------------------------------
+    Total                      8.664ns (7.570ns logic, 1.094ns route)
+                                       (87.4% logic, 12.6% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 3 / 2
+-------------------------------------------------------------------------
+Delay:               7.704ns (Levels of Logic = 3)
+  Source:            Key_state<1> (PAD)
+  Destination:       seg72_dot (PAD)
+
+  Data Path: Key_state<1> to seg72_dot
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            37   0.849   1.267  Key_state_1_IBUF (Key_state_1_IBUF)
+     LUT4:I3->O            1   0.648   0.420  seg72_dot_and0000 (seg72_dot_OBUF)
+     OBUF:I->O                 4.520          seg72_dot_OBUF (seg72_dot)
+    ----------------------------------------
+    Total                      7.704ns (6.017ns logic, 1.687ns route)
+                                       (78.1% logic, 21.9% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 8.00 secs
+Total CPU time to Xst completion: 8.41 secs
+ 
+--> 
+
+Total memory usage is 173208 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :   13 (   0 filtered)
+Number of infos    :    5 (   0 filtered)
+

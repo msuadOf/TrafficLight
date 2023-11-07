@@ -1,5 +1,5 @@
 //`define SIM
-`define DEBUG
+//`define DEBUG
 module top (
     input  wire         clk,
     //input  wire         rst_n,
@@ -33,7 +33,8 @@ module top (
     output wire SN74HC595_data_clk,
     output wire SN74HC595_refresh_clk,
 
-    input wire Key_ACC
+    input wire Key_ACC,
+    output wire  seg72_dot
 );
   //LED
   wire R1;
@@ -87,8 +88,8 @@ module top (
   wire clk_10k;
   wire clk_500;
   wire clk_1s;
-  wire _clk_1s,_clk_60Hz;
-assign clk_1s=(Key_ACC)?(_clk_60Hz):(_clk_1s);
+  wire _clk_1s,_clk_1800Hz;
+assign clk_1s=(Key_ACC)?(_clk_1800Hz):(_clk_1s);
 
   clk_div #(
       .div_n_RegWith(64)
@@ -112,10 +113,10 @@ assign clk_1s=(Key_ACC)?(_clk_60Hz):(_clk_1s);
       .clk(clk),
       //  .div_n  (12_000_000  - 1),
 
-      .div_n  ({0, 12_000_000 / 60 - 1}),
+      .div_n  ({0, 12_000_000 / 1800 - 1}),
 
       .rst_n  (1),
-      .clk_out(_clk_60Hz)
+      .clk_out(_clk_1800Hz)
   );
 
 
@@ -147,7 +148,7 @@ assign clk_1s=(Key_ACC)?(_clk_60Hz):(_clk_1s);
   wire [ 2-1:0] seg71_none;
   bin2bcd #(
       .W(14)
-  )  // input width
+  ) 
       b2b1 (
       .bin(seg71_disp_bin),                              // binary
       .bcd({seg71_none[2-1:0], seg71_disp_bcd[16-1:0]})
@@ -172,7 +173,7 @@ assign clk_1s=(Key_ACC)?(_clk_60Hz):(_clk_1s);
   wire [ 2-1:0] seg72_none;
   bin2bcd #(
       .W(14)
-  )  // input width
+  ) 
       b2b2 (
       .bin(seg72_disp_bin),                              // binary
       .bcd({seg72_none[2-1:0], seg72_disp_bcd[16-1:0]})
@@ -371,11 +372,11 @@ assign clk_1s=(Key_ACC)?(_clk_60Hz):(_clk_1s);
       end
       else begin
         if (clk_1s_pulse) begin
-          if(second>=60)begin
+          if(second>=59)begin
             second<=0;
-            if(minute>=60)begin
+            if(minute>=59)begin
               minute<=0;
-              if(hour>=24) begin
+              if(hour>=23) begin
                 hour<=0;
               end else begin
                 hour<=hour+1;
@@ -410,7 +411,7 @@ end
       setRGCnt_r <= setRGCnt_default;
     end else begin
       if (isSetRGCnt == 1) begin
-        setRGCnt_r <= (isMainRoadPeak&&(RYG_state_group1||RYG_state_group2))?(2):(1)*(Key_plus_pulse) ? (setRGCnt_r + 1) : ((Key_sub_pulse) ? (setRGCnt_r - 1) : (setRGCnt_r));
+        setRGCnt_r <= (Key_plus_pulse) ? (setRGCnt_r + 1) : ((Key_sub_pulse) ? (setRGCnt_r - 1) : (setRGCnt_r));
       end else begin
         setRGCnt_r <= setRGCnt_r;
       end
@@ -430,19 +431,48 @@ end
       end
     end
   end
-  assign {RG_cnt_set, Y_cnt_set} = {setRGCnt_r, setYCnt_r};
+  assign {RG_cnt_set, Y_cnt_set} = {setRGCnt_r<<(isMainRoadPeak&&((RYG_state==RYG_state_group1)||(RYG_state==RYG_state_group2))), setYCnt_r};
 
  
 
   //seg1
-  wire [CNT_WIDTH-1:0] RYGcnt_Display;
-  assign RYGcnt_Display = {0, (RYG_state == RYG_state_group2) ? (RYG_cnt + Y_cnt_set) : (RYG_cnt)};
-  assign seg71_disp_bin = {0, (isSetRGCnt) ? (setRGCnt_r) : ((isSetYCnt) ? (setYCnt_r) : (RYGcnt_Display))};
+  reg [CNT_WIDTH-1:0] RYGcnt_group1_Display;
+  always @(*) begin
+    case(RYG_state)
+      RYG_state_group1      : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set;
+      RYG_state_group1to1L  : RYGcnt_group1_Display = RYG_cnt ;
+      RYG_state_group1L     : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set;
+      RYG_state_group1Lto2  : RYGcnt_group1_Display = RYG_cnt ;
+      RYG_state_group2      : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set+ Y_cnt_set+RG_cnt_set;
+      RYG_state_group2to2L  : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set+RG_cnt_set;
+      RYG_state_group2L     : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set;
+      RYG_state_group2Lto1  : RYGcnt_group1_Display = RYG_cnt;
+      default               : RYGcnt_group1_Display = RYG_cnt;
+    endcase
+  end
+  assign seg71_disp_bin = {0, (isSetRGCnt) ? (setRGCnt_r) : ((isSetYCnt) ? (setYCnt_r) : (RYGcnt_group1_Display))};
+
 
 
   //seg2
   reg [16-1:0] seg72_disp_bin_r;
-  assign seg72_disp_bin = {0, (RYG_state == RYG_state_group1) ? (RYG_cnt + Y_cnt_set) : (RYG_cnt)};
+   reg [CNT_WIDTH-1:0] RYGcnt_group2_Display;
+     always @(*) begin
+    case(RYG_state)
+      RYG_state_group1      : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set+ Y_cnt_set+RG_cnt_set ;
+      RYG_state_group1to1L  : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set+RG_cnt_set            ;
+      RYG_state_group1L     : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set                       ;
+      RYG_state_group1Lto2  : RYGcnt_group2_Display = RYG_cnt                                   ;
+      RYG_state_group2      : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set                       ;
+      RYG_state_group2to2L  : RYGcnt_group2_Display = RYG_cnt                                   ;
+      RYG_state_group2L     : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set                       ;
+      RYG_state_group2Lto1  : RYGcnt_group2_Display = RYG_cnt                                   ;
+      default               : RYGcnt_group2_Display = RYG_cnt;
+    endcase
+  end
+  
+  assign seg72_disp_bin = {0,(isSetRGCnt||isSetYCnt||Key_ACC)?(hour*100+minute):(RYGcnt_group2_Display) };
+  assign seg72_dot=((isSetRGCnt||isSetYCnt||Key_ACC)&&(seg72_sel== ~4'b1101))?(1):(0);
   //assign seg72_disp_bin = {0, (RYG_cnt)};
   // always @(*) begin
   //   case(RYG_state)

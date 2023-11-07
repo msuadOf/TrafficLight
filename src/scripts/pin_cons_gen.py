@@ -100,3 +100,6 @@ Seg2_sel_Pin={
 }
 for i in Seg2_sel_Pin:
     print(f"NET seg72_sel<{Seg2_sel_Pin[i]}>  LOC = {i} | IOSTANDARD = LVTTL;")
+
+print()
+print(f"NET seg72_dot  LOC = P78 | IOSTANDARD = LVTTL;")
