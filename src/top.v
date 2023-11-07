@@ -284,16 +284,6 @@ assign {Key_group1_interrupt_pulse,Key_group2_interrupt_pulse}={Key_sub_pulse,Ke
   end
 
   //SinglePeriod
-  reg SinglePeriod_start_pulse_r=0;
-  always @(posedge clk or negedge rst_n) begin
-    if(!rst_n)
-      begin
-        SinglePeriod_start_pulse_r<=0;
-      end
-      else begin
-        SinglePeriod_start_pulse_r<=SinglePeriod_start_pulse;
-      end
-  end
 
   always @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
@@ -302,7 +292,7 @@ assign {Key_group1_interrupt_pulse,Key_group2_interrupt_pulse}={Key_sub_pulse,Ke
       if (RYG_state == RYG_state_Night) begin
         RYG_cnt <= 0;  //do when Night state
       end else begin
-        if (SinglePeriod_start_pulse_r) begin
+        if (SinglePeriod_start_pulse) begin
           RYG_cnt <= RYG_cnt_set;
         end else begin
           if (clk_1s_pulse && RYG_cnt > 0 && isRun) begin
@@ -400,5 +390,5 @@ assign {Key_group1_interrupt_pulse,Key_group2_interrupt_pulse}={Key_sub_pulse,Ke
   //
  assign SN74HC595_buf={G2_L,Y2_L,Y1,R1,G1,G1_L,Y1_L,R1_L};//{1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1};//
 // assign SN74HC595_buf={1'd0,1'd0,Y1,R1,G1,G2,Y2,R2};
-  assign SIM          = {clk, SinglePeriod_start_pulse_r};
+  assign SIM          = {clk, SinglePeriod_start_pulse};
 endmodule  //top
