@@ -431,7 +431,7 @@ end
       end
     end
   end
-  assign {RG_cnt_set, Y_cnt_set} = {setRGCnt_r<<(isMainRoadPeak&&((RYG_state==RYG_state_group1)||(RYG_state==RYG_state_group2))), setYCnt_r};
+  assign {RG_cnt_set, Y_cnt_set} = {setRGCnt_r<<(isMainRoadPeak&&(RYG_state==RYG_state_group1)), setYCnt_r};
 
  
 
@@ -439,13 +439,13 @@ end
   reg [CNT_WIDTH-1:0] RYGcnt_group1_Display;
   always @(*) begin
     case(RYG_state)
-      RYG_state_group1      : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set;
+      RYG_state_group1      : RYGcnt_group1_Display = RYG_cnt ;
       RYG_state_group1to1L  : RYGcnt_group1_Display = RYG_cnt ;
-      RYG_state_group1L     : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set;
+      RYG_state_group1L     : RYGcnt_group1_Display = RYG_cnt ;
       RYG_state_group1Lto2  : RYGcnt_group1_Display = RYG_cnt ;
-      RYG_state_group2      : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set+ Y_cnt_set+RG_cnt_set;
-      RYG_state_group2to2L  : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set+RG_cnt_set;
-      RYG_state_group2L     : RYGcnt_group1_Display = RYG_cnt + Y_cnt_set;
+      RYG_state_group2      : RYGcnt_group1_Display = RYG_cnt + setYCnt_r+ setYCnt_r+RG_cnt_set;
+      RYG_state_group2to2L  : RYGcnt_group1_Display = RYG_cnt + setYCnt_r+RG_cnt_set;
+      RYG_state_group2L     : RYGcnt_group1_Display = RYG_cnt + setYCnt_r;
       RYG_state_group2Lto1  : RYGcnt_group1_Display = RYG_cnt;
       default               : RYGcnt_group1_Display = RYG_cnt;
     endcase
@@ -459,13 +459,13 @@ end
    reg [CNT_WIDTH-1:0] RYGcnt_group2_Display;
      always @(*) begin
     case(RYG_state)
-      RYG_state_group1      : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set+ Y_cnt_set+RG_cnt_set ;
-      RYG_state_group1to1L  : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set+RG_cnt_set            ;
-      RYG_state_group1L     : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set                       ;
+      RYG_state_group1      : RYGcnt_group2_Display = RYG_cnt + setYCnt_r+ setYCnt_r+RG_cnt_set ;
+      RYG_state_group1to1L  : RYGcnt_group2_Display = RYG_cnt + setYCnt_r+RG_cnt_set            ;
+      RYG_state_group1L     : RYGcnt_group2_Display = RYG_cnt + setYCnt_r                       ;
       RYG_state_group1Lto2  : RYGcnt_group2_Display = RYG_cnt                                   ;
-      RYG_state_group2      : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set                       ;
+      RYG_state_group2      : RYGcnt_group2_Display = RYG_cnt                                   ;
       RYG_state_group2to2L  : RYGcnt_group2_Display = RYG_cnt                                   ;
-      RYG_state_group2L     : RYGcnt_group2_Display = RYG_cnt + Y_cnt_set                       ;
+      RYG_state_group2L     : RYGcnt_group2_Display = RYG_cnt                                   ;
       RYG_state_group2Lto1  : RYGcnt_group2_Display = RYG_cnt                                   ;
       default               : RYGcnt_group2_Display = RYG_cnt;
     endcase

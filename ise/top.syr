@@ -3,14 +3,14 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.25 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.23 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.25 secs
+Total REAL time to Xst completion: 1.00 secs
+Total CPU time to Xst completion: 0.23 secs
  
 --> Reading design: top.prj
 
@@ -530,7 +530,7 @@ WARNING:Xst:1426 - The value init of the FF/Latch seg71/firreg_5 hinder the cons
 Mapping all equations...
 Building and optimizing final netlist ...
 INFO:Xst:2261 - The FF/Latch <seg71/firreg_6> in Unit <top> is equivalent to the following FF/Latch, which will be removed : <seg71/firreg_3> 
-Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 96.
+Found area constraint ratio of 100 (+ 5) on block top, actual ratio is 99.
 
 Final Macro Processing ...
 
@@ -568,20 +568,20 @@ Design Statistics
 # IOs                              : 46
 
 Cell Usage :
-# BELS                             : 2504
+# BELS                             : 2511
 #      GND                         : 1
 #      INV                         : 39
 #      LUT1                        : 121
-#      LUT2                        : 82
+#      LUT2                        : 80
 #      LUT2_L                      : 1
-#      LUT3                        : 472
+#      LUT3                        : 488
 #      LUT3_D                      : 9
 #      LUT3_L                      : 1
-#      LUT4                        : 489
-#      LUT4_D                      : 2
+#      LUT4                        : 484
+#      LUT4_D                      : 3
 #      LUT4_L                      : 3
 #      MUXCY                       : 743
-#      MUXF5                       : 32
+#      MUXF5                       : 29
 #      MUXF6                       : 1
 #      VCC                         : 1
 #      XORCY                       : 507
@@ -609,9 +609,9 @@ Device utilization summary:
 
 Selected Device : 3s50antqg144-4 
 
- Number of Slices:                      651  out of    704    92%  
+ Number of Slices:                      657  out of    704    93%  
  Number of Slice Flip Flops:            570  out of   1408    40%  
- Number of 4 input LUTs:               1219  out of   1408    86%  
+ Number of 4 input LUTs:               1229  out of   1408    87%  
  Number of IOs:                          46
  Number of bonded IOBs:                  46  out of    108    42%  
  Number of MULT18X18SIOs:                 1  out of      3    33%  
@@ -659,9 +659,9 @@ Timing Summary:
 Speed Grade: -4
 
    Minimum period: 12.773ns (Maximum Frequency: 78.293MHz)
-   Minimum input arrival time before clock: 37.373ns
+   Minimum input arrival time before clock: 35.166ns
    Maximum output required time after clock: 8.814ns
-   Maximum combinational path delay: 7.704ns
+   Maximum combinational path delay: 7.707ns
 
 Timing Detail:
 --------------
@@ -670,7 +670,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 12.773ns (frequency: 78.293MHz)
-  Total number of paths / destination ports: 580629 / 693
+  Total number of paths / destination ports: 580431 / 693
 -------------------------------------------------------------------------
 Delay:               12.773ns (Levels of Logic = 86)
   Source:            c10/div_clk_cnt_0 (FF)
@@ -903,7 +903,7 @@ Delay:               12.448ns (Levels of Logic = 81)
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
   Total number of paths / destination ports: 207 / 71
 -------------------------------------------------------------------------
-Offset:              6.795ns (Levels of Logic = 4)
+Offset:              6.798ns (Levels of Logic = 4)
   Source:            Key_state<1> (PAD)
   Destination:       RYG_state_FSM_FFd3 (FF)
   Destination Clock: clk rising
@@ -912,20 +912,20 @@ Offset:              6.795ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            37   0.849   1.344  Key_state_1_IBUF (Key_state_1_IBUF)
+     IBUF:I->O            47   0.849   1.347  Key_state_1_IBUF (Key_state_1_IBUF)
      LUT2:I1->O            6   0.643   0.749  isRun_cmp_eq00001 (isRun)
      LUT4:I1->O            3   0.643   0.674  RYG_state_and00001 (RYG_state_and0000)
      LUT4:I0->O           11   0.648   0.933  RYG_state_not00011 (RYG_state_not0001)
      FDRE:CE                   0.312          RYG_state_FSM_FFd3
     ----------------------------------------
-    Total                      6.795ns (3.095ns logic, 3.700ns route)
+    Total                      6.798ns (3.095ns logic, 3.703ns route)
                                        (45.5% logic, 54.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'c2/div_clk1'
-  Total number of paths / destination ports: 300490861 / 78
+  Total number of paths / destination ports: 193472490 / 78
 -------------------------------------------------------------------------
-Offset:              37.373ns (Levels of Logic = 29)
+Offset:              35.166ns (Levels of Logic = 27)
   Source:            Key_state<1> (PAD)
   Destination:       seg72/firreg_3 (FF)
   Destination Clock: c2/div_clk1 falling
@@ -934,17 +934,15 @@ Offset:              37.373ns (Levels of Logic = 29)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            37   0.849   1.344  Key_state_1_IBUF (Key_state_1_IBUF)
-     LUT2:I1->O           14   0.643   1.143  seg72_disp_bin_or00001 (seg72_disp_bin_or0000)
-     LUT4:I0->O           11   0.648   0.965  seg72_disp_bin_mux0000<0>61 (N12)
-     LUT4:I2->O            1   0.648   0.452  seg72_disp_bin_mux0000<10>32_SW0 (N98)
-     LUT4:I2->O            6   0.648   0.672  seg72_disp_bin_mux0000<10>32 (seg72_disp_bin<10>)
-     LUT4:I3->O            2   0.648   0.479  b2b2/Madd__add0001_cy<1>11 (b2b2/Madd__add0001_cy<1>)
-     LUT4:I2->O           11   0.648   1.076  b2b2/mux0003_cmp_gt00001 (b2b2/mux0003_cmp_gt0000)
-     LUT4:I0->O            4   0.648   0.590  b2b2/_mux00041 (b2b2/Madd__add0002_lut<2>)
+     IBUF:I->O            47   0.849   1.347  Key_state_1_IBUF (Key_state_1_IBUF)
+     LUT2:I1->O            2   0.643   0.590  seg72_disp_bin_or00001 (seg72_disp_bin_or0000)
+     LUT4:I0->O            8   0.648   0.900  b2b2/Madd__add0000_cy<2>1 (b2b2/Madd__add0000_cy<2>)
+     LUT4:I0->O            2   0.648   0.479  b2b2/Madd__add0001_cy<1>11 (b2b2/Madd__add0001_cy<1>)
+     LUT4:I2->O           10   0.648   1.025  b2b2/mux0003_cmp_gt00001 (b2b2/mux0003_cmp_gt0000)
+     LUT4:I0->O            3   0.648   0.534  b2b2/_mux00041 (b2b2/Madd__add0002_lut<2>)
      LUT4:I3->O            9   0.648   0.823  b2b2/_mux001111 (b2b2/N26)
-     LUT4:I3->O            1   0.648   0.000  b2b2/_mux000712 (b2b2/_mux000711)
-     MUXF5:I0->O           4   0.276   0.619  b2b2/_mux00071_f5 (b2b2/Madd__add0003_lut<2>)
+     LUT4:I3->O            1   0.648   0.563  b2b2/_mux00071_SW0 (N144)
+     LUT4:I0->O            4   0.648   0.619  b2b2/_mux00071 (b2b2/Madd__add0003_lut<2>)
      LUT3:I2->O            3   0.648   0.674  b2b2/_mux001811 (b2b2/N27)
      LUT4:I0->O            3   0.648   0.674  b2b2/Madd__add0006_cy<1>11 (b2b2/Madd__add0006_cy<1>)
      LUT2:I0->O            1   0.648   0.000  b2b2/mux0022_cmp_gt00001 (b2b2/mux0022_cmp_gt00001)
@@ -965,14 +963,14 @@ Offset:              37.373ns (Levels of Logic = 29)
      LUT4:I1->O            2   0.643   0.447  seg72/Mrom_firreg_mux000061 (seg72/Mrom_firreg_mux00006)
      FDS_1:S                   0.869          seg72/firreg_3
     ----------------------------------------
-    Total                     37.373ns (18.731ns logic, 18.642ns route)
-                                       (50.1% logic, 49.9% route)
+    Total                     35.166ns (17.807ns logic, 17.359ns route)
+                                       (50.6% logic, 49.4% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'c2/div_clk1'
   Total number of paths / destination ports: 26 / 23
 -------------------------------------------------------------------------
-Offset:              7.869ns (Levels of Logic = 3)
+Offset:              7.912ns (Levels of Logic = 3)
   Source:            seg72/bitchose_2 (FF)
   Destination:       seg72_dot (PAD)
   Source Clock:      c2/div_clk1 rising
@@ -982,12 +980,12 @@ Offset:              7.869ns (Levels of Logic = 3)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      FDR:C->Q              2   0.591   0.590  seg72/bitchose_2 (seg72/bitchose_2)
-     LUT3:I0->O            1   0.648   0.452  seg72_dot_and0000_SW1 (N100)
-     LUT4:I2->O            1   0.648   0.420  seg72_dot_and0000 (seg72_dot_OBUF)
+     LUT3:I0->O            1   0.648   0.500  seg72_dot_and0000_SW1 (N126)
+     LUT4:I1->O            1   0.643   0.420  seg72_dot_and0000 (seg72_dot_OBUF)
      OBUF:I->O                 4.520          seg72_dot_OBUF (seg72_dot)
     ----------------------------------------
-    Total                      7.869ns (6.407ns logic, 1.462ns route)
-                                       (81.4% logic, 18.6% route)
+    Total                      7.912ns (6.402ns logic, 1.510ns route)
+                                       (80.9% logic, 19.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
@@ -1066,7 +1064,7 @@ Offset:              8.664ns (Levels of Logic = 18)
 Timing constraint: Default path analysis
   Total number of paths / destination ports: 3 / 2
 -------------------------------------------------------------------------
-Delay:               7.704ns (Levels of Logic = 3)
+Delay:               7.707ns (Levels of Logic = 3)
   Source:            Key_state<1> (PAD)
   Destination:       seg72_dot (PAD)
 
@@ -1074,18 +1072,18 @@ Delay:               7.704ns (Levels of Logic = 3)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            37   0.849   1.267  Key_state_1_IBUF (Key_state_1_IBUF)
+     IBUF:I->O            47   0.849   1.270  Key_state_1_IBUF (Key_state_1_IBUF)
      LUT4:I3->O            1   0.648   0.420  seg72_dot_and0000 (seg72_dot_OBUF)
      OBUF:I->O                 4.520          seg72_dot_OBUF (seg72_dot)
     ----------------------------------------
-    Total                      7.704ns (6.017ns logic, 1.687ns route)
+    Total                      7.707ns (6.017ns logic, 1.690ns route)
                                        (78.1% logic, 21.9% route)
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 12.00 secs
-Total CPU time to Xst completion: 11.64 secs
+Total REAL time to Xst completion: 11.00 secs
+Total CPU time to Xst completion: 10.64 secs
  
 --> 
 

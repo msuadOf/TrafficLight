@@ -44,11 +44,11 @@ Setup/Hold to clock clk
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-Key_ACC     |    1.787(R)|   -0.614(R)|SIM_1_OBUF        |   0.000|
-Key_plus    |    0.663(R)|    0.292(R)|SIM_1_OBUF        |   0.000|
-Key_state<0>|    8.256(R)|   -0.628(R)|SIM_1_OBUF        |   0.000|
-Key_state<1>|    7.556(R)|   -0.507(R)|SIM_1_OBUF        |   0.000|
-Key_sub     |    0.663(R)|    0.292(R)|SIM_1_OBUF        |   0.000|
+Key_ACC     |    2.075(R)|   -0.847(R)|SIM_1_OBUF        |   0.000|
+Key_plus    |    0.420(R)|    0.435(R)|SIM_1_OBUF        |   0.000|
+Key_state<0>|    7.602(R)|   -0.688(R)|SIM_1_OBUF        |   0.000|
+Key_state<1>|    7.555(R)|   -0.470(R)|SIM_1_OBUF        |   0.000|
+Key_sub     |    0.740(R)|    0.203(R)|SIM_1_OBUF        |   0.000|
 ------------+------------+------------+------------------+--------+
 
 Clock clk to Pad
@@ -56,21 +56,21 @@ Clock clk to Pad
                   | clk (edge) |                  | Clock  |
 Destination       |   to PAD   |Internal Clock(s) | Phase  |
 ------------------+------------+------------------+--------+
-SIM<0>            |    8.516(R)|SIM_1_OBUF        |   0.000|
-SN74HC595_data    |    8.773(R)|SIM_1_OBUF        |   0.000|
-SN74HC595_data_clk|   13.362(R)|SIM_1_OBUF        |   0.000|
-o_G1              |    8.481(R)|SIM_1_OBUF        |   0.000|
-o_G1_L            |    8.583(R)|SIM_1_OBUF        |   0.000|
-o_G2              |    8.630(R)|SIM_1_OBUF        |   0.000|
-o_G2_L            |    8.904(R)|SIM_1_OBUF        |   0.000|
-o_R1              |   11.615(R)|SIM_1_OBUF        |   0.000|
-o_R1_L            |   10.653(R)|SIM_1_OBUF        |   0.000|
-o_R2              |   13.606(R)|SIM_1_OBUF        |   0.000|
-o_R2_L            |   10.353(R)|SIM_1_OBUF        |   0.000|
-o_Y1              |   11.196(R)|SIM_1_OBUF        |   0.000|
-o_Y1_L            |    9.726(R)|SIM_1_OBUF        |   0.000|
-o_Y2              |   11.310(R)|SIM_1_OBUF        |   0.000|
-o_Y2_L            |    9.809(R)|SIM_1_OBUF        |   0.000|
+SIM<0>            |    8.324(R)|SIM_1_OBUF        |   0.000|
+SN74HC595_data    |    8.819(R)|SIM_1_OBUF        |   0.000|
+SN74HC595_data_clk|   14.979(R)|SIM_1_OBUF        |   0.000|
+o_G1              |    9.070(R)|SIM_1_OBUF        |   0.000|
+o_G1_L            |    8.712(R)|SIM_1_OBUF        |   0.000|
+o_G2              |    8.853(R)|SIM_1_OBUF        |   0.000|
+o_G2_L            |    9.317(R)|SIM_1_OBUF        |   0.000|
+o_R1              |   10.688(R)|SIM_1_OBUF        |   0.000|
+o_R1_L            |   10.557(R)|SIM_1_OBUF        |   0.000|
+o_R2              |   11.559(R)|SIM_1_OBUF        |   0.000|
+o_R2_L            |   10.119(R)|SIM_1_OBUF        |   0.000|
+o_Y1              |   10.670(R)|SIM_1_OBUF        |   0.000|
+o_Y1_L            |   10.536(R)|SIM_1_OBUF        |   0.000|
+o_Y2              |   10.842(R)|SIM_1_OBUF        |   0.000|
+o_Y2_L            |   10.707(R)|SIM_1_OBUF        |   0.000|
 ------------------+------------+------------------+--------+
 
 Clock to Setup on destination clock clk
@@ -78,20 +78,20 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |   14.104|         |         |         |
+clk            |   13.094|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-Key_ACC        |seg72_dot      |   10.997|
-Key_state<1>   |seg72_dot      |   10.100|
-clk            |SIM<1>         |    5.947|
+Key_ACC        |seg72_dot      |    9.888|
+Key_state<1>   |seg72_dot      |   10.990|
+clk            |SIM<1>         |    5.989|
 ---------------+---------------+---------+
 
 
-Analysis completed Wed Nov 08 00:31:46 2023 
+Analysis completed Wed Nov 08 15:13:08 2023 
 --------------------------------------------------------------------------------
 
 Trace Settings:
